@@ -3,6 +3,7 @@ from utils.logger import Logger
 class HamiltonianPathFinder:
     """
     Клас для знаходження гамільтонового шляху між двома вершинами у графі.
+
     Гамільтонів шлях — простий шлях, що проходить через усі вершини графа рівно один раз.
     """
 
@@ -25,7 +26,8 @@ class HamiltonianPathFinder:
 
     def find_hamiltonian_path(self, start_id, end_id):
         """
-        Знаходить гамільтонів шлях між start_id та end_id (якщо існує).\n
+        Знаходить гамільтонів шлях між start_id та end_id (якщо існує).
+        
         :param start_id: id початкової вершини
         :param end_id: id кінцевої вершини
         :return: список id вершин гамільтонового шляху або None, якщо шляху не існує

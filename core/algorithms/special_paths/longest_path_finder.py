@@ -3,6 +3,7 @@ from utils.logger import Logger
 class LongestPathFinder:
     """
     Клас для знаходження найдовшого простого шляху між двома вершинами у графі.
+
     Найдовший простий шлях — шлях без повторень вершин з максимальною довжиною.
     """
 
@@ -25,7 +26,8 @@ class LongestPathFinder:
 
     def find_longest_path(self, start_id, end_id):
         """
-        Знаходить найдовший простий шлях між start_id та end_id (якщо існує).\n
+        Знаходить найдовший простий шлях між start_id та end_id (якщо існує).
+        
         :param start_id: id початкової вершини
         :param end_id: id кінцевої вершини
         :return: список id вершин найдовшого шляху або None, якщо шляху не існує

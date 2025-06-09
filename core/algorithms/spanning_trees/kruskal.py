@@ -3,6 +3,7 @@ from utils.logger import Logger
 class Kruskal:
     """
     Клас для знаходження мінімального остовного дерева (алгоритм Краскала).
+
     Працює для зважених НЕСПРЯМОВАНИХ графів без циклів.
     """
 
@@ -46,6 +47,7 @@ class Kruskal:
     def minimum_spanning_tree(self):
         """
         Повертає список ребер MST та його вагу.
+        
         :return: (mst_edges, total_weight)
         """
         self.logger.info("Пошук мінімального остовного дерева розпочато.")

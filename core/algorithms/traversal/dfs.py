@@ -25,6 +25,7 @@ class DFS:
     def traverse(self, start_id):
         """
         Виконує DFS від заданої вершини.
+        
         :param start_id: id початкової вершини
         :return: список id вершин у порядку обходу
         """

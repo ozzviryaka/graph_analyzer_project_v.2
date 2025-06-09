@@ -3,7 +3,9 @@ from utils.logger import Logger
 class EulerianPathFinder:
     """
     Клас для знаходження ейлерового шляху у графі.
+
     Ейлерів шлях — шлях, який проходить кожне ребро графа рівно один раз.
+
     Працює для орієнтованих та неорієнтованих графів.
     """
 
@@ -28,7 +30,9 @@ class EulerianPathFinder:
     def _is_eulerian(self):
         """
         Перевіряє, чи існує ейлерів шлях у графі.
+
         Для неорієнтованого: не більше двох вершин непарного ступеня.
+
         Для орієнтованого: не більше однієї вершини з out-in=1 та однієї з in-out=1.
         """
         if hasattr(self.graph, "is_directed") and self.graph.is_directed():
@@ -60,6 +64,7 @@ class EulerianPathFinder:
     def find_eulerian_path(self):
         """
         Знаходить ейлерів шлях (якщо існує).
+        
         :return: список id вершин у порядку проходження або None, якщо шляху не існує
         """
         self.logger.info("Пошук ейлерового шляху розпочато.")

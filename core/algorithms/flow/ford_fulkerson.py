@@ -4,6 +4,7 @@ from utils.logger import Logger
 class FordFulkerson:
     """
     Клас для знаходження максимальної потужності потоку у графі (алгоритм Форда-Фалкерсона).
+
     Працює для орієнтованих графів з невід'ємними вагами ребер.
     """
 
@@ -56,6 +57,7 @@ class FordFulkerson:
     def max_flow(self, source_id, sink_id):
         """
         Знаходить максимальний потік між source_id та sink_id.
+        
         :param source_id: id початкової вершини
         :param sink_id: id кінцевої вершини
         :return: максимальний потік (int)

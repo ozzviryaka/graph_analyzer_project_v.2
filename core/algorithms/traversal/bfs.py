@@ -26,6 +26,7 @@ class BFS:
     def traverse(self, start_id):
         """
         Виконує BFS від заданої вершини.
+        
         :param start_id: id початкової вершини
         :return: список id вершин у порядку обходу
         """

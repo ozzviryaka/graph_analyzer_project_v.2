@@ -4,6 +4,7 @@ from utils.logger import Logger
 class MinCut:
     """
     Клас для знаходження мінімального розрізу у графі (алгоритм Форда-Фалкерсона).
+
     Працює для орієнтованих графів з невід'ємними вагами ребер.
     """
 
@@ -57,6 +58,7 @@ class MinCut:
     def min_cut(self, source_id, sink_id):
         """
         Знаходить мінімальний розріз між source_id та sink_id.
+        
         :param source_id: id початкової вершини
         :param sink_id: id кінцевої вершини
         :return: (min_cut_value, cut_edges) — вага розрізу та список ребер розрізу

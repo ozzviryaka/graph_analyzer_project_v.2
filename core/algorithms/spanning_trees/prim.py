@@ -4,6 +4,7 @@ from utils.logger import Logger
 class Prim:
     """
     Клас для знаходження мінімального остовного дерева (алгоритм Прима).
+
     Працює для зважених НЕСПРЯМОВАНИХ графів без циклів.
     """
 
@@ -31,6 +32,7 @@ class Prim:
     def minimum_spanning_tree(self):
         """
         Повертає список ребер MST та його вагу.
+        
         :return: (mst_edges, total_weight)
         """
         self.logger.info("Пошук мінімального остовного дерева (MST) розпочато.")

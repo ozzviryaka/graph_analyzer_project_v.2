@@ -3,6 +3,7 @@ from utils.logger import Logger
 class SimplePathFinder:
     """
     Клас для знаходження простого шляху між двома вершинами у графі.
+
     Простий шлях — шлях, у якому жодна вершина не повторюється.
     """
 
@@ -25,7 +26,8 @@ class SimplePathFinder:
 
     def find_simple_path(self, start_id, end_id):
         """
-        Знаходить простий шлях між start_id та end_id (якщо існує).\n
+        Знаходить простий шлях між start_id та end_id (якщо існує).
+        
         :param start_id: id початкової вершини
         :param end_id: id кінцевої вершини
         :return: список id вершин шляху або None, якщо шляху не існує

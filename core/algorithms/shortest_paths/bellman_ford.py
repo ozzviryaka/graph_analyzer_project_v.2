@@ -3,6 +3,7 @@ from utils.logger import Logger
 class BellmanFord:
     """
     Клас для знаходження найкоротших шляхів у графі (алгоритм Беллмана-Форда).
+
     Працює для графів з вагами ребер (можливі від’ємні ваги, але без від’ємних циклів).
     """
 
@@ -25,6 +26,7 @@ class BellmanFord:
     def shortest_path(self, start_id):
         """
         Знаходить найкоротші шляхи від вершини start_id до всіх інших.
+        
         :param start_id: id початкової вершини
         :return: (distances, previous) — словник відстаней та попередників
         """
