@@ -16,7 +16,7 @@ class AdjacencyMatrix:
         for edge in self.graph.edges():
             i = self.node_id_to_index[edge.source.id]
             j = self.node_id_to_index[edge.target.id]
-            value = edge.weight() if hasattr(edge, "weight") else 1
+            value = edge.weight(self.graph.is_weighted())
 
             matrix[i][j] += value
             # Якщо граф неспрямований — симетрично

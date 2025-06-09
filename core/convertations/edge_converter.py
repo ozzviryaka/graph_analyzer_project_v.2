@@ -8,11 +8,12 @@ class EdgeConverter:
     """
 
     @staticmethod
-    def directed_to_undirected(directed_edge):
+    def directed_to_undirected(directed_edge, weighted=True):
         """
         Конвертує спрямоване ребро у неспрямоване.
 
         :param directed_edge: Об'єкт DirectedEdge
+        :param weighted: Чи враховувати вагу (True/False)
         :return: Об'єкт UndirectedEdge
         """
         if not isinstance(directed_edge, DirectedEdge):
@@ -22,7 +23,7 @@ class EdgeConverter:
         undirected_edge = UndirectedEdge(
             directed_edge.source,
             directed_edge.target,
-            weight=directed_edge.weight(),
+            weight=directed_edge.weight(weighted),
             data=directed_edge.data
         )
         Logger().info(
@@ -31,12 +32,13 @@ class EdgeConverter:
         return undirected_edge
 
     @staticmethod
-    def undirected_to_directed(undirected_edge, source_first=True):
+    def undirected_to_directed(undirected_edge, source_first=True, weighted=True):
         """
         Конвертує неспрямоване ребро у спрямоване.
 
         :param undirected_edge: Об'єкт UndirectedEdge
         :param source_first: Якщо True, source=node1, target=node2, інакше навпаки
+        :param weighted: Чи враховувати вагу (True/False)
         :return: Об'єкт DirectedEdge
         """
         if not isinstance(undirected_edge, UndirectedEdge):
@@ -49,7 +51,7 @@ class EdgeConverter:
         directed_edge = DirectedEdge(
             source,
             target,
-            weight=undirected_edge.weight(),
+            weight=undirected_edge.weight(weighted),
             data=undirected_edge.data
         )
         Logger().info(

@@ -22,8 +22,8 @@ class DirectedEdge(BaseEdge):
             f"Створено спрямоване ребро: source={self.source.id}, target={self.target.id}, weight={self._weight}, data={self.data}"
         )
 
-    def weight(self):
+    def weight(self, use_weight=True):
         """
-        Повертає вагу ребра.
+        Повертає вагу ребра, або 1 якщо use_weight=False (граф неваговий).
         """
-        return self._weight
+        return self._weight if use_weight else 1

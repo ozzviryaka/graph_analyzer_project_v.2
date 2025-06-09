@@ -22,11 +22,11 @@ class UndirectedEdge(BaseEdge):
             f"Створено неспрямоване ребро: node1={self.source.id}, node2={self.target.id}, weight={self._weight}, data={self.data}"
         )
 
-    def weight(self):
+    def weight(self, use_weight=True):
         """
-        Повертає вагу ребра.
+        Повертає вагу ребра, або 1 якщо use_weight=False (граф неваговий).
         """
-        return self._weight
+        return self._weight if use_weight else 1
 
     def __eq__(self, other):
         """

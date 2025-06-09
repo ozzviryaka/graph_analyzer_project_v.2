@@ -12,8 +12,8 @@ class BellmanFord:
 
         # Перевірка на наявність ваг у всіх ребер
         for edge in graph.edges():
-            w = edge.weight() if hasattr(edge, "weight") else None
-            if w is None:
+            w = edge.weight(self.graph.is_weighted())
+            if self.graph.is_weighted() is False:
                 self.logger.error("Усі ребра повинні мати вагу для алгоритму Беллмана-Форда.")
                 raise ValueError("Усі ребра повинні мати вагу для алгоритму Беллмана-Форда.")
 
@@ -39,7 +39,7 @@ class BellmanFord:
             for edge in self.graph.edges():
                 u = edge.source.id
                 v = edge.target.id
-                w = edge.weight() if hasattr(edge, "weight") else 1
+                w = edge.weight(self.graph.is_weighted())
                 if distances[u] + w < distances[v]:
                     distances[v] = distances[u] + w
                     previous[v] = u
@@ -59,7 +59,7 @@ class BellmanFord:
         for edge in self.graph.edges():
             u = edge.source.id
             v = edge.target.id
-            w = edge.weight() if hasattr(edge, "weight") else 1
+            w = edge.weight(self.graph.is_weighted())
             if distances[u] + w < distances[v]:
                 self.logger.error("Граф містить від’ємний цикл.")
                 raise ValueError("Граф містить від’ємний цикл.")

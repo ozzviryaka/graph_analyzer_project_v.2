@@ -12,8 +12,8 @@ class FloydWarshall:
 
         # Перевірка на наявність ваг у всіх ребер
         for edge in graph.edges():
-            w = edge.weight() if hasattr(edge, "weight") else None
-            if w is None or w < 0:
+            w = edge.weight(self.graph.is_weighted())
+            if w < 0:
                 self.logger.error("Усі ребра повинні мати невід'ємні ваги для алгоритму Флойда-Уоршелла.")
                 raise ValueError("Усі ребра повинні мати невід'ємні ваги для алгоритму Флойда-Уоршелла.")
 
@@ -40,7 +40,7 @@ class FloydWarshall:
         for edge in self.graph.edges():
             u = self.node_id_to_index[edge.source.id]
             v = self.node_id_to_index[edge.target.id]
-            w = edge.weight() if hasattr(edge, "weight") else 1
+            w = edge.weight(self.graph.is_weighted())
             dist[u][v] = min(dist[u][v], w)
             next_node[u][v] = self.index_to_node_id[v]
             # Для неспрямованого графа — симетрично

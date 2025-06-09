@@ -18,8 +18,8 @@ class MinCut:
 
         # Перевірка на наявність ваг у всіх ребер
         for edge in graph.edges():
-            w = edge.weight() if hasattr(edge, "weight") else None
-            if w is None or w < 0:
+            w = edge.weight(self.graph.is_weighted())
+            if w < 0:
                 self.logger.error("Усі ребра повинні мати невід'ємні ваги для алгоритму мінімального розрізу.")
                 raise ValueError("Усі ребра повинні мати невід'ємні ваги для алгоритму мінімального розрізу.")
 
@@ -35,7 +35,7 @@ class MinCut:
         for edge in self.graph.edges():
             u = edge.source.id
             v = edge.target.id
-            w = edge.weight() if hasattr(edge, "weight") else 1
+            w = edge.weight(self.graph.is_weighted())
             capacity[u][v] += w
         return capacity
 

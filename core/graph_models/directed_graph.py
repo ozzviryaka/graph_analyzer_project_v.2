@@ -7,7 +7,8 @@ class DirectedGraph(BaseGraph):
     Клас для представлення спрямованого графа.
     """
 
-    def __init__(self):
+    def __init__(self, weighted=True):
+        self.weighted = weighted
         self._nodes = {}
         self._edges = set()
         self._adjacency = {}
@@ -48,3 +49,6 @@ class DirectedGraph(BaseGraph):
         if node.id not in self._adjacency:
             return iter([])
         return (self._nodes[n_id] for n_id in self._adjacency[node.id])
+
+    def is_weighted(self):
+        return self.weighted

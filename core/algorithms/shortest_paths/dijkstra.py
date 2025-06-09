@@ -13,8 +13,8 @@ class Dijkstra:
 
         # Перевірка на наявність ваг у всіх ребер
         for edge in graph.edges():
-            w = edge.weight() if hasattr(edge, "weight") else None
-            if w is None or w < 0:
+            w = edge.weight(self.graph.is_weighted())
+            if w < 0:
                 self.logger.error("Усі ребра повинні мати невід'ємні ваги для алгоритму Дейкстри.")
                 raise ValueError("Усі ребра повинні мати невід'ємні ваги для алгоритму Дейкстри.")
 
@@ -49,14 +49,14 @@ class Dijkstra:
                 weight = None
                 for edge in self.graph.edges():
                     if edge.source.id == u_id and edge.target.id == v_id:
-                        weight = edge.weight() if hasattr(edge, "weight") else 1
+                        weight = edge.weight(self.graph.is_weighted())
                         break
                     # Для неспрямованого графа перевіряємо обидва напрямки
                     if hasattr(self.graph, "is_directed") and not self.graph.is_directed():
                         if edge.source.id == v_id and edge.target.id == u_id:
-                            weight = edge.weight() if hasattr(edge, "weight") else 1
+                            weight = edge.weight(self.graph.is_weighted())
                             break
-                if weight is None:
+                if self.graph.is_weighted() is False:
                     continue
                 alt = dist_u + weight
                 if alt < distances[v_id]:

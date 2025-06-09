@@ -18,7 +18,7 @@ class GraphConverter:
         :return: Об'єкт UndirectedGraph
         """
         logger = Logger()
-        undirected_graph = UndirectedGraph()
+        undirected_graph = UndirectedGraph(weighted=directed_graph.is_weighted())
         node_map = {}
 
         # Додаємо всі вузли
@@ -34,15 +34,14 @@ class GraphConverter:
             node2 = node_map[edge.target.id]
             edge_key = frozenset([node1.id, node2.id])
             if edge_key not in added_edges:
-                undirected_edge = EdgeConverter.directed_to_undirected(
-                    type('TmpEdge', (), {
-                        'source': node1,
-                        'target': node2,
-                        'weight': edge.weight,
-                        'data': edge.data,
-                        'weight': lambda self=edge: edge.weight()
-                    })()
-                )
+                # Створюємо тимчасове ребро з правильними вузлами
+                tmp_edge = type('TmpEdge', (), {
+                    'source': node1,
+                    'target': node2,
+                    'weight': lambda self=edge: edge.weight(directed_graph.is_weighted()),
+                    'data': edge.data
+                })()
+                undirected_edge = EdgeConverter.directed_to_undirected(tmp_edge, weighted=directed_graph.is_weighted())
                 undirected_graph.add_edge(undirected_edge)
                 added_edges.add(edge_key)
         logger.info("Спрямований граф конвертовано у неспрямований.")
@@ -57,7 +56,7 @@ class GraphConverter:
         :return: Об'єкт DirectedGraph
         """
         logger = Logger()
-        directed_graph = DirectedGraph()
+        directed_graph = DirectedGraph(weighted=undirected_graph.is_weighted())
         node_map = {}
 
         # Додаємо всі вузли
@@ -70,26 +69,21 @@ class GraphConverter:
         for edge in undirected_graph.edges():
             node1 = node_map[edge.source.id]
             node2 = node_map[edge.target.id]
-            directed_edge1 = EdgeConverter.undirected_to_directed(
-                type('TmpEdge', (), {
-                    'source': node1,
-                    'target': node2,
-                    'weight': edge.weight,
-                    'data': edge.data,
-                    'weight': lambda self=edge: edge.weight()
-                })(),
-                source_first=True
-            )
-            directed_edge2 = EdgeConverter.undirected_to_directed(
-                type('TmpEdge', (), {
-                    'source': node2,
-                    'target': node1,
-                    'weight': edge.weight,
-                    'data': edge.data,
-                    'weight': lambda self=edge: edge.weight()
-                })(),
-                source_first=True
-            )
+            # Створюємо тимчасове ребро для кожного напрямку
+            tmp_edge1 = type('TmpEdge', (), {
+                'source': node1,
+                'target': node2,
+                'weight': lambda self=edge: edge.weight(undirected_graph.is_weighted()),
+                'data': edge.data
+            })()
+            tmp_edge2 = type('TmpEdge', (), {
+                'source': node2,
+                'target': node1,
+                'weight': lambda self=edge: edge.weight(undirected_graph.is_weighted()),
+                'data': edge.data
+            })()
+            directed_edge1 = EdgeConverter.undirected_to_directed(tmp_edge1, source_first=True, weighted=undirected_graph.is_weighted())
+            directed_edge2 = EdgeConverter.undirected_to_directed(tmp_edge2, source_first=True, weighted=undirected_graph.is_weighted())
             directed_graph.add_edge(directed_edge1)
             directed_graph.add_edge(directed_edge2)
         logger.info("Неспрямований граф конвертовано у спрямований.")

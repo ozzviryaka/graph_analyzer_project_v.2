@@ -18,10 +18,7 @@ class IncidenceMatrix:
         for j, edge in enumerate(self.edges):
             source_idx = self.node_id_to_index[edge.source.id]
             target_idx = self.node_id_to_index[edge.target.id]
-            if hasattr(edge, "weight"):
-                value = edge.weight()
-            else:
-                value = 1
+            value = edge.weight(self.graph.is_weighted())
 
             # Для спрямованого графа: -1 для джерела, +1 для цілі
             # Для неспрямованого: +1 для обох

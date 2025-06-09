@@ -17,8 +17,8 @@ class Kruskal:
 
         # Перевірка на наявність ваг у всіх ребер
         for edge in graph.edges():
-            w = edge.weight() if hasattr(edge, "weight") else None
-            if w is None or w < 0:
+            w = edge.weight(self.graph.is_weighted())
+            if w < 0:
                 self.logger.error("Усі ребра повинні мати невід'ємні ваги для алгоритму Краскала.")
                 raise ValueError("Усі ребра повинні мати невід'ємні ваги для алгоритму Краскала.")
 
