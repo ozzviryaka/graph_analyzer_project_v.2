@@ -23,11 +23,11 @@ class IncidenceMatrix:
             # Для спрямованого графа: -1 для джерела, +1 для цілі
             # Для неспрямованого: +1 для обох
             if getattr(self.graph, "is_directed", lambda: False)():
-                matrix[source_idx][j] = -value
-                matrix[target_idx][j] = value
+                matrix[source_idx][j] = -1
+                matrix[target_idx][j] = 1
             else:
-                matrix[source_idx][j] = value
-                matrix[target_idx][j] = value
+                matrix[source_idx][j] = 1
+                matrix[target_idx][j] = 1
 
         return matrix
 

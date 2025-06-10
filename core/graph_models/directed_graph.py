@@ -69,3 +69,6 @@ class DirectedGraph(BaseGraph):
 
     def is_weighted(self):
         return self.weighted
+
+    def is_directed(self):
+        return True

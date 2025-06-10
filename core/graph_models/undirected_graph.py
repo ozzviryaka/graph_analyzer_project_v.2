@@ -71,3 +71,9 @@ class UndirectedGraph(BaseGraph):
         self._edges.clear()
         for adj in self._adjacency.values():
             adj.clear()
+
+    def is_directed(self):
+        """
+        Повертає False, оскільки граф є неспрямованим.
+        """
+        return False
