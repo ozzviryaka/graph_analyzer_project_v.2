@@ -37,7 +37,7 @@ class IncidenceMatrix:
     def print_matrix(self):
         print("   ", end="")
         for j in range(len(self.edges)):
-            print(f"e{j+1:2}", end=" ")
+            print(f"E{j+1:2}", end=" ")
         print()
         for i, node in enumerate(self.nodes):
             print(f"{str(node.id):>3}", end=" ")
