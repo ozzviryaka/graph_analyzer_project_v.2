@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidget, QScrollArea
+from PyQt5.QtGui import QIcon
 
 class EdgeEditDialog(QDialog):
     """
@@ -7,6 +8,7 @@ class EdgeEditDialog(QDialog):
     def __init__(self, weight=None, data=None, editable_weight=True, editable_data=True, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Додавання/Редагування ребра")
+        self.setWindowIcon(QIcon("res/settings_icon.png"))
         layout = QVBoxLayout()
 
         # Вага

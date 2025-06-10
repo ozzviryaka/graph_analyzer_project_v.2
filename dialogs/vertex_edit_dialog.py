@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidget, QScrollArea
+from PyQt5.QtGui import QIcon
 from utils.logger import Logger
 
 class VertexEditDialog(QDialog):
@@ -9,6 +10,7 @@ class VertexEditDialog(QDialog):
         super().__init__(parent)
         self.node_id = node_id
         self.setWindowTitle("Редагування вершини")
+        self.setWindowIcon(QIcon("res/settings_icon.png"))
         layout = QVBoxLayout()
 
         self.data_edits = []

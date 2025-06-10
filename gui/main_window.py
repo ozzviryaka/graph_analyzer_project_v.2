@@ -3,15 +3,16 @@ from gui.tabs.graph_tabs_widget import GraphTabsWidget
 from gui.widgets.graph_settings_widget import GraphSettingsWidget
 from core.graph_models.undirected_graph import UndirectedGraph
 # Add theme imports
-from PyQt5.QtGui import QPalette, QColor
+from PyQt5.QtGui import QPalette, QColor, QIcon
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QStyleFactory
 
 class MainWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.set_dark_theme()
         self.setWindowTitle("Граф-аналізатор")
+        self.setWindowIcon(QIcon("res/icon.png"))
         self.setMinimumSize(1100, 700)
         # Створюємо новий порожній граф для роботи (можна змінити на DirectedGraph за потреби)
         self.graph = UndirectedGraph()
