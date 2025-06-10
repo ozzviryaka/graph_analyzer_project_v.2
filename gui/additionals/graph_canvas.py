@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt, QPointF
 from core.graph_components.node import Node
 from core.graph_components.directed_edge import DirectedEdge
 from core.graph_components.undirected_edge import UndirectedEdge
+from dialogs.edge_edit_dialog import EdgeEditDialog
 
 import math
 
@@ -75,16 +76,14 @@ class GraphCanvas(QWidget):
                     self._mouse_press_node_id = node_id
                     # Додавання ребра — тільки якщо є selected_node, клік по іншій вершині і натиснуто Ctrl
                     if (self.selected_node and self.selected_node.id != node_id and (event.modifiers() & Qt.ControlModifier)):
-                        weight = 1
-                        if self.graph.is_weighted():
-                            w, ok = QInputDialog.getInt(self, "Вага ребра", f"Введіть вагу ребра {self.selected_node.id} → {node_id}", 1, 1, 10000)
-                            if ok:
-                                weight = w
-                            else:
-                                return
-                        self.add_edge(self.selected_node.id, node_id, weight)
-                        self.selected_node = None
-                        self.update()
+                        dlg = EdgeEditDialog(weight=None, data=None, editable_weight=self.graph.is_weighted(), editable_data=True, parent=self)
+                        if dlg.exec_() == dlg.Accepted:
+                            weight, data = dlg.get_values()
+                            if not self.graph.is_weighted() or weight is None:
+                                weight = 1
+                            self.add_edge(self.selected_node.id, node_id, weight, data)
+                            self.selected_node = None
+                            self.update()
                         return
                     # Drag дозволяється завжди по будь-якій вершині
                     self.selected_node = next((n for n in self.graph.nodes() if n.id == node_id), None)
@@ -141,17 +140,28 @@ class GraphCanvas(QWidget):
 
     def mouseDoubleClickEvent(self, event):
         pos = event.pos()
-        # Редагування ваги ребра по дабл-кліку по середині ребра
+        # Редагування ваги/даних ребра по дабл-кліку по середині ребра
         for edge in self.graph.edges():
             src = self.node_positions.get(edge.source.id)
             tgt = self.node_positions.get(edge.target.id)
             if src and tgt:
                 mid = (src + tgt) / 2
                 if (pos - mid).manhattanLength() < self.radius:
-                    if self.graph.is_weighted():
-                        w, ok = QInputDialog.getInt(self, "Редагувати вагу", f"Нова вага ребра {edge.source.id} → {edge.target.id}", edge.weight(self.graph.is_weighted()), 1, 10000)
-                        if ok:
-                            self.edit_edge_weight(edge.source.id, edge.target.id, w)
+                    dlg = EdgeEditDialog(weight=edge.weight(self.graph.is_weighted()), data=edge.data if isinstance(edge.data, dict) else None, editable_weight=self.graph.is_weighted(), editable_data=True, parent=self)
+                    if dlg.exec_() == dlg.Accepted:
+                        weight, data = dlg.get_values()
+                        changed = False
+                        if self.graph.is_weighted() and weight is not None and weight != edge.weight(self.graph.is_weighted()):
+                            self.edit_edge_weight(edge.source.id, edge.target.id, weight)
+                            print(f"[LOG] Змінено вагу ребра {edge.source.id} → {edge.target.id}: {weight}")
+                            changed = True
+                        if data and data != edge.data:
+                            edge.data = data
+                            print(f"[LOG] Змінено дані ребра {edge.source.id} → {edge.target.id}: {data}")
+                            changed = True
+                        if changed:
+                            print(f"[LOG] Редагування ребра {edge.source.id} → {edge.target.id} завершено.")
+                        self.update()
                     return
 
     def paintEvent(self, event):
