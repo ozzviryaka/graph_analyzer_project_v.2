@@ -19,6 +19,7 @@ class GraphTabsWidget(QWidget):
         layout = QVBoxLayout()
         layout.addWidget(self.tabs)
         self.setLayout(layout)
+        self.widgets = [self.analysis_tab]  # Додаємо список для зручного доступу до вкладок з алгоритмами
 
     def update_info(self, graph):
         self.combined_tab.update_info(graph)
@@ -28,3 +29,10 @@ class GraphTabsWidget(QWidget):
 
     def set_on_graph_changed(self, callback):
         self.combined_tab.set_on_graph_changed(callback)
+
+    def update_nodes(self):
+        """
+        Оновлює комбобокси у вкладці аналізу графа (і відповідних віджетах-алгоритмах).
+        """
+        if hasattr(self.analysis_tab, 'update_nodes'):
+            self.analysis_tab.update_nodes()

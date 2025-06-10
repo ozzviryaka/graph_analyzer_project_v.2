@@ -47,3 +47,11 @@ class GraphAnalysisTab(QWidget):
         self.current_widget.setParent(None)
         self.current_widget = self.widgets[idx]
         self.layout().insertWidget(2, self.current_widget)
+
+    def update_nodes(self):
+        """
+        Оновлює комбобокси у всіх віджетах-алгоритмах (Traversal, Flow, Shortest, Special).
+        """
+        for widget in self.widgets:
+            if hasattr(widget, 'update_nodes'):
+                widget.update_nodes()

@@ -43,10 +43,9 @@ class MainWindow(QMainWindow):
         # Оновити матриці
         if hasattr(self.tabs, 'update_matrix'):
             self.tabs.update_matrix(new_graph)
-        # Оновити комбобокси у всіх віджетах, якщо є метод update_nodes
-        for tab in getattr(self.tabs, 'widgets', []):
-            if hasattr(tab, 'update_nodes'):
-                tab.update_nodes()
+        # Оновити комбобокси у всіх віджетах-алгоритмах
+        if hasattr(self.tabs, 'update_nodes'):
+            self.tabs.update_nodes()
 
     def set_dark_theme(self):
         app = QApplication.instance()
