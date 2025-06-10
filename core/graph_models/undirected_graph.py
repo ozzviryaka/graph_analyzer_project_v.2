@@ -10,7 +10,7 @@ class UndirectedGraph(BaseGraph):
     def __init__(self, weighted=True):
         self.weighted = weighted
         self._nodes = {}
-        self._edges = set()
+        self._edges = []  # було set(), тепер list
         self._adjacency = {}
 
     def add_node(self, node):
@@ -27,9 +27,19 @@ class UndirectedGraph(BaseGraph):
         """
         if (edge.source.id not in self._nodes) or (edge.target.id not in self._nodes):
             raise ValueError("Обидва вузли ребра мають бути додані до графа перед додаванням ребра.")
-        self._edges.add(edge)
-        self._adjacency[edge.source.id].add(edge.target.id)
-        self._adjacency[edge.target.id].add(edge.source.id)
+        if edge not in self._edges:
+            self._edges.append(edge)
+            self._adjacency[edge.source.id].add(edge.target.id)
+            self._adjacency[edge.target.id].add(edge.source.id)
+
+    def remove_edge(self, edge):
+        """
+        Видаляє неспрямоване ребро з графа.
+        """
+        if edge in self._edges:
+            self._edges.remove(edge)
+            self._adjacency[edge.source.id].discard(edge.target.id)
+            self._adjacency[edge.target.id].discard(edge.source.id)
 
     def nodes(self):
         """
@@ -53,3 +63,11 @@ class UndirectedGraph(BaseGraph):
 
     def is_weighted(self):
         return self.weighted
+
+    def clear_edges(self):
+        """
+        Очищає всі ребра в графі.
+        """
+        self._edges.clear()
+        for adj in self._adjacency.values():
+            adj.clear()

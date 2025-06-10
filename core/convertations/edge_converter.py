@@ -23,7 +23,7 @@ class EdgeConverter:
         undirected_edge = UndirectedEdge(
             directed_edge.source,
             directed_edge.target,
-            weight=directed_edge.weight(weighted),
+            weight=directed_edge.weight(True),
             data=directed_edge.data
         )
         Logger().info(
@@ -51,7 +51,7 @@ class EdgeConverter:
         directed_edge = DirectedEdge(
             source,
             target,
-            weight=undirected_edge.weight(weighted),
+            weight=undirected_edge.weight(True),
             data=undirected_edge.data
         )
         Logger().info(

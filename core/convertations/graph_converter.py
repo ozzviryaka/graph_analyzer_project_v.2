@@ -35,9 +35,10 @@ class GraphConverter:
             node2 = node_map[edge.target.id]
             edge_key = frozenset([node1.id, node2.id])
             if edge_key not in added_edges:
-                # Створюємо справжній DirectedEdge для конвертації
-                directed_edge = DirectedEdge(node1, node2, weight=edge.weight(directed_graph.is_weighted()), data=edge.data)
-                undirected_edge = EdgeConverter.directed_to_undirected(directed_edge, weighted=directed_graph.is_weighted())
+                # Визначаємо вагу: якщо є _original_weight, беремо її, інакше _weight
+                weight = getattr(edge, '_original_weight', edge._weight)
+                directed_edge = DirectedEdge(node1, node2, weight=weight, data=edge.data)
+                undirected_edge = EdgeConverter.directed_to_undirected(directed_edge, weighted=True)
                 undirected_graph.add_edge(undirected_edge)
                 added_edges.add(edge_key)
         logger.info("Спрямований граф конвертовано у неспрямований.")
@@ -66,12 +67,9 @@ class GraphConverter:
         for edge in undirected_graph.edges():
             node1 = node_map[edge.source.id]
             node2 = node_map[edge.target.id]
-            # Створюємо справжній UndirectedEdge для конвертації
-            undirected_edge1 = UndirectedEdge(node1, node2, weight=edge.weight(undirected_graph.is_weighted()), data=edge.data)
-            undirected_edge2 = UndirectedEdge(node2, node1, weight=edge.weight(undirected_graph.is_weighted()), data=edge.data)
-            directed_edge1 = EdgeConverter.undirected_to_directed(undirected_edge1, source_first=True, weighted=undirected_graph.is_weighted())
-            directed_edge2 = EdgeConverter.undirected_to_directed(undirected_edge2, source_first=True, weighted=undirected_graph.is_weighted())
-            directed_graph.add_edge(directed_edge1)
-            directed_graph.add_edge(directed_edge2)
+            weight = getattr(edge, '_original_weight', edge._weight)
+            undirected_edge = UndirectedEdge(node1, node2, weight=weight, data=edge.data)
+            directed_edge = EdgeConverter.undirected_to_directed(undirected_edge, source_first=True, weighted=True)
+            directed_graph.add_edge(directed_edge)
         logger.info("Неспрямований граф конвертовано у спрямований.")
         return directed_graph

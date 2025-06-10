@@ -262,7 +262,7 @@ class GraphCanvas(QWidget):
                     adj.discard(node_id)
             # Видалити ребра
             if hasattr(self.graph, '_edges'):
-                self.graph._edges = set(e for e in self.graph._edges if e.source.id != node_id and e.target.id != node_id)
+                self.graph._edges = [e for e in self.graph._edges if e.source.id != node_id and e.target.id != node_id]
             self.node_positions.pop(node_id, None)
             self.update()
             if self.on_graph_changed:
@@ -271,7 +271,7 @@ class GraphCanvas(QWidget):
     def remove_edge(self, source_id, target_id):
         # Видаляє ребро між source_id і target_id
         if hasattr(self.graph, '_edges'):
-            self.graph._edges = set(e for e in self.graph._edges if not ((e.source.id == source_id and e.target.id == target_id) or (not hasattr(self.graph, 'is_directed') or not self.graph.is_directed()) and (e.source.id == target_id and e.target.id == source_id)))
+            self.graph._edges = [e for e in self.graph._edges if not ((e.source.id == source_id and e.target.id == target_id) or (not hasattr(self.graph, 'is_directed') or not self.graph.is_directed()) and (e.source.id == target_id and e.target.id == source_id))]
             self.update()
             if self.on_graph_changed:
                 self.on_graph_changed(self.graph)
