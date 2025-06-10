@@ -28,17 +28,19 @@ class GraphCanvas(QWidget):
         self.on_graph_changed = on_graph_changed
 
     def _init_node_positions(self):
-        # Розташування вершин по колу (початково)
+        # Розташування вершин по колу лише для ініціалізації, не для додавання нових
         nodes = list(self.graph.nodes())
         n = len(nodes)
-        if n == 0:
+        # Якщо вже є позиції для всіх вершин — нічого не робимо
+        if n == len(self.node_positions):
             return
         cx, cy, r = 300, 200, 150
         for i, node in enumerate(nodes):
-            angle = 2 * math.pi * i / n
-            x = cx + r * math.cos(angle)
-            y = cy + r * math.sin(angle)
-            self.node_positions[node.id] = QPointF(x, y)
+            if node.id not in self.node_positions:
+                angle = 2 * math.pi * i / n
+                x = cx + r * math.cos(angle)
+                y = cy + r * math.sin(angle)
+                self.node_positions[node.id] = QPointF(x, y)
 
     def add_node(self, node_id=None, data=None, pos=None):
         if node_id is None:
@@ -55,7 +57,9 @@ class GraphCanvas(QWidget):
         self.graph.add_node(node)
         if pos is not None:
             self.node_positions[node_id] = QPointF(pos)
+        # Не викликаємо _init_node_positions() при додаванні вершини з pos
         else:
+            # Якщо це ініціалізація (додавання всіх вершин), тоді розташовуємо по колу
             self._init_node_positions()
         self.update()
         if self.on_graph_changed:
