@@ -6,6 +6,7 @@ from core.graph_components.node import Node
 from core.graph_components.directed_edge import DirectedEdge
 from core.graph_components.undirected_edge import UndirectedEdge
 from dialogs.edge_edit_dialog import EdgeEditDialog
+from dialogs.vertex_edit_dialog import VertexEditDialog
 
 import math
 
@@ -150,19 +151,24 @@ class GraphCanvas(QWidget):
                     dlg = EdgeEditDialog(weight=edge.weight(self.graph.is_weighted()), data=edge.data if isinstance(edge.data, dict) else None, editable_weight=self.graph.is_weighted(), editable_data=True, parent=self)
                     if dlg.exec_() == dlg.Accepted:
                         weight, data = dlg.get_values()
-                        changed = False
-                        if self.graph.is_weighted() and weight is not None and weight != edge.weight(self.graph.is_weighted()):
+                        if self.graph.is_weighted() and weight is not None:
                             self.edit_edge_weight(edge.source.id, edge.target.id, weight)
-                            print(f"[LOG] Змінено вагу ребра {edge.source.id} → {edge.target.id}: {weight}")
-                            changed = True
-                        if data and data != edge.data:
+                        if data:
                             edge.data = data
-                            print(f"[LOG] Змінено дані ребра {edge.source.id} → {edge.target.id}: {data}")
-                            changed = True
-                        if changed:
-                            print(f"[LOG] Редагування ребра {edge.source.id} → {edge.target.id} завершено.")
                         self.update()
                     return
+        # Дабл-клік по вершині — редагування даних вершини
+        for node_id, node_pos in self.node_positions.items():
+            if (pos - node_pos).manhattanLength() < self.radius:
+                node = next((n for n in self.graph.nodes() if n.id == node_id), None)
+                if node is not None:
+                    dlg = VertexEditDialog(data=node.data if isinstance(node.data, dict) else None, editable_data=True, parent=self, node_id=node.id)
+                    if dlg.exec_() == dlg.Accepted:
+                        data = dlg.get_data()
+                        if data:
+                            node.data = data
+                            self.update()
+                return
 
     def paintEvent(self, event):
         painter = QPainter(self)
