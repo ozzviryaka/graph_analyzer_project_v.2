@@ -3,3 +3,6 @@ abc
 json
 datetime
 collections
+PyQt5
+numpy
+math
