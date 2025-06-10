@@ -1,0 +1,30 @@
+from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout
+from gui.tabs.graph_combined_tab import GraphCombinedTab
+from gui.tabs.matrix_tabs_widget import MatrixTabsWidget
+from gui.tabs.graph_analysis_tab import GraphAnalysisTab
+
+class GraphTabsWidget(QWidget):
+    """
+    Віджет з вкладками: граф+інфо, матриці, аналіз графа.
+    """
+    def __init__(self, graph, parent=None):
+        super().__init__(parent)
+        self.tabs = QTabWidget()
+        self.combined_tab = GraphCombinedTab(graph)
+        self.matrix_tab = MatrixTabsWidget(graph)
+        self.analysis_tab = GraphAnalysisTab(graph)
+        self.tabs.addTab(self.combined_tab, "Граф та інформація")
+        self.tabs.addTab(self.matrix_tab, "Матриці")
+        self.tabs.addTab(self.analysis_tab, "Аналіз графа")
+        layout = QVBoxLayout()
+        layout.addWidget(self.tabs)
+        self.setLayout(layout)
+
+    def update_info(self, graph):
+        self.combined_tab.update_info(graph)
+
+    def update_matrix(self, graph):
+        self.matrix_tab.update_matrix(graph)
+
+    def set_on_graph_changed(self, callback):
+        self.combined_tab.set_on_graph_changed(callback)
