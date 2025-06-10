@@ -50,7 +50,7 @@ class MatrixTabsWidget(QWidget):
         inc_matrix_obj = IncidenceMatrix(graph)
         inc_matrix = inc_matrix_obj.get_matrix()
         inc_row_labels = [node.id for node in inc_matrix_obj.nodes]
-        inc_col_labels = [f"e{i+1}" for i in range(len(inc_matrix_obj.edges))] if hasattr(inc_matrix_obj, 'edges') else None
+        inc_col_labels = [f"E{i+1}" for i in range(len(inc_matrix_obj.edges))] if hasattr(inc_matrix_obj, 'edges') else None
         self.inc_widget.table.setRowCount(len(inc_matrix))
         self.inc_widget.table.setColumnCount(len(inc_matrix[0]) if inc_matrix else 0)
         if inc_row_labels:
