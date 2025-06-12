@@ -21,11 +21,17 @@ class GraphTabsWidget(QWidget):
         self.setLayout(layout)
         self.widgets = [self.analysis_tab]  # Додаємо список для зручного доступу до вкладок з алгоритмами
 
+    def update_analysis_graph(self, graph):
+        if hasattr(self.analysis_tab, 'set_graph'):
+            self.analysis_tab.set_graph(graph)
+
     def update_info(self, graph):
         self.combined_tab.update_info(graph)
+        self.update_analysis_graph(graph)
 
     def update_matrix(self, graph):
         self.matrix_tab.update_matrix(graph)
+        self.update_analysis_graph(graph)
 
     def set_on_graph_changed(self, callback):
         self.combined_tab.set_on_graph_changed(callback)

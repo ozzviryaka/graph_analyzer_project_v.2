@@ -49,6 +49,10 @@ class SpecialPathsWidget(QWidget):
         self.start_combo.addItems(node_ids)
         self.end_combo.addItems(node_ids)
 
+    def set_graph(self, graph):
+        self.graph = graph
+        self.update_nodes()
+
     def run_simple(self):
         start = self.start_combo.currentText().strip()
         end = self.end_combo.currentText().strip()

@@ -56,3 +56,7 @@ class TraversalWidget(QWidget):
             self.output_textedit.setPlainText(f"DFS порядок обходу: {' -> '.join(map(str, order))}")
         except Exception as e:
             self.output_textedit.setPlainText(f"Помилка: {e}")
+
+    def set_graph(self, graph):
+        self.graph = graph
+        self.update_nodes()

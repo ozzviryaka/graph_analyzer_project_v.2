@@ -55,3 +55,11 @@ class GraphAnalysisTab(QWidget):
         for widget in self.widgets:
             if hasattr(widget, 'update_nodes'):
                 widget.update_nodes()
+
+    def set_graph(self, graph):
+        """
+        Оновлює граф у всіх віджетах-алгоритмах
+        """
+        for widget in self.widgets:
+            if hasattr(widget, 'set_graph'):
+                widget.set_graph(graph)
