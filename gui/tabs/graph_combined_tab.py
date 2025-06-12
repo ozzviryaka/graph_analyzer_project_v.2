@@ -20,3 +20,7 @@ class GraphCombinedTab(QWidget):
 
     def set_on_graph_changed(self, callback):
         self.canvas_widget.set_on_graph_changed(callback)
+
+    def set_graph(self, graph):
+        self.canvas_widget.import_export_widget.set_graph(graph)
+        self.info_widget.set_graph(graph)

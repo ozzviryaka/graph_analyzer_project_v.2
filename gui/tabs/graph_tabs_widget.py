@@ -26,7 +26,7 @@ class GraphTabsWidget(QWidget):
             self.analysis_tab.set_graph(graph)
 
     def update_info(self, graph):
-        self.combined_tab.update_info(graph)
+        self.combined_tab.set_graph(graph)
         self.update_analysis_graph(graph)
 
     def update_matrix(self, graph):

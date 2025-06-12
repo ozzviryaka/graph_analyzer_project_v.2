@@ -33,3 +33,6 @@ class GraphImportExportWidget(QWidget):
             new_graph = GraphLoader.load(filepath)
             if new_graph:
                 self.graph.__dict__.update(new_graph.__dict__)
+
+    def set_graph(self, graph):
+        self.graph = graph
