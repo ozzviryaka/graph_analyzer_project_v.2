@@ -3,7 +3,7 @@ from gui.additionals.graph_canvas import GraphCanvas
 from data_utils.graph_saver import GraphSaver
 from data_utils.graph_loader import GraphLoader
 from gui.widgets.graph_import_export_widget import GraphImportExportWidget
-from dialogs.graph_select_dialog import GraphSelectDialog
+from gui.dialogs.graph_select_dialog import GraphSelectDialog
 
 class GraphCanvasWidget(QWidget):
     """

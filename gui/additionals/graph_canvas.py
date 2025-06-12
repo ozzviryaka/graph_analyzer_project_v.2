@@ -5,8 +5,8 @@ from PyQt5.QtCore import Qt, QPointF
 from core.graph_components.node import Node
 from core.graph_components.directed_edge import DirectedEdge
 from core.graph_components.undirected_edge import UndirectedEdge
-from dialogs.edge_edit_dialog import EdgeEditDialog
-from dialogs.vertex_edit_dialog import VertexEditDialog
+from gui.dialogs.edge_edit_dialog import EdgeEditDialog
+from gui.dialogs.vertex_edit_dialog import VertexEditDialog
 
 import math
 
