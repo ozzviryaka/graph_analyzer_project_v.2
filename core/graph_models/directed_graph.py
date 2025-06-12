@@ -12,6 +12,7 @@ class DirectedGraph(BaseGraph):
         self._nodes = {}
         self._edges = []  # було set(), тепер list
         self._adjacency = {}
+        self._node_counter = 1  # Для іменування вершин V1, V2, ...
 
     def add_node(self, node):
         """
@@ -72,3 +73,14 @@ class DirectedGraph(BaseGraph):
 
     def is_directed(self):
         return True
+
+    def next_node_name(self):
+        # Пошук найменшого вільного номера
+        used = set()
+        for node_id in self._nodes:
+            if node_id.startswith('V') and node_id[1:].isdigit():
+                used.add(int(node_id[1:]))
+        n = 1
+        while n in used:
+            n += 1
+        return f"V{n}"

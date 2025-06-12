@@ -12,6 +12,7 @@ class UndirectedGraph(BaseGraph):
         self._nodes = {}
         self._edges = []  # було set(), тепер list
         self._adjacency = {}
+        self._node_counter = 1  # Для іменування вершин V1, V2, ...
 
     def add_node(self, node):
         """
@@ -77,3 +78,17 @@ class UndirectedGraph(BaseGraph):
         Повертає False, оскільки граф є неспрямованим.
         """
         return False
+
+    def next_node_name(self):
+        """
+        Генерує наступне ім'я для вузла у форматі Vn, де n - номер вузла.
+        """
+        # Пошук найменшого вільного номера
+        used = set()
+        for node_id in self._nodes:
+            if node_id.startswith('V') and node_id[1:].isdigit():
+                used.add(int(node_id[1:]))
+        n = 1
+        while n in used:
+            n += 1
+        return f"V{n}"

@@ -8,7 +8,8 @@ class GraphSettingsWidget(QWidget):
     def __init__(self, graph, on_graph_changed, parent=None):
         super().__init__(parent)
         self.graph = graph
-        self.on_graph_changed = on_graph_changed  # callback для оновлення інтерфейсу
+        self.on_graph_changed = on_graph_changed
+        self.graphs = None  # буде встановлено з MainWindow
         layout = QHBoxLayout()
         # Тумблер орієнтованості
         self.directed_checkbox = QCheckBox("Орієнтований граф")
@@ -23,6 +24,18 @@ class GraphSettingsWidget(QWidget):
         layout.addStretch()
         self.setLayout(layout)
 
+    def set_graphs_list(self, graphs):
+        self.graphs = graphs
+
+    def set_graph(self, graph):
+        self.graph = graph
+        self.directed_checkbox.blockSignals(True)
+        self.weighted_checkbox.blockSignals(True)
+        self.directed_checkbox.setChecked(hasattr(graph, 'is_directed') and graph.is_directed())
+        self.weighted_checkbox.setChecked(getattr(graph, 'weighted', True))
+        self.directed_checkbox.blockSignals(False)
+        self.weighted_checkbox.blockSignals(False)
+
     def toggle_directed(self, state):
         is_directed = state == 2
         if hasattr(self.graph, 'is_directed') and self.graph.is_directed() == is_directed:
@@ -31,11 +44,25 @@ class GraphSettingsWidget(QWidget):
         if is_directed:
             from core.graph_models.undirected_graph import UndirectedGraph
             if isinstance(self.graph, UndirectedGraph):
-                self.graph = GraphConverter.undirected_to_directed(self.graph)
+                from core.convertations.graph_converter import GraphConverter
+                new_graph = GraphConverter.undirected_to_directed(self.graph)
+                if self.graphs is not None:
+                    for i, g in enumerate(self.graphs):
+                        if g is self.graph:
+                            self.graphs[i] = new_graph
+                            break
+                self.graph = new_graph
         else:
             from core.graph_models.directed_graph import DirectedGraph
             if isinstance(self.graph, DirectedGraph):
-                self.graph = GraphConverter.directed_to_undirected(self.graph)
+                from core.convertations.graph_converter import GraphConverter
+                new_graph = GraphConverter.directed_to_undirected(self.graph)
+                if self.graphs is not None:
+                    for i, g in enumerate(self.graphs):
+                        if g is self.graph:
+                            self.graphs[i] = new_graph
+                            break
+                self.graph = new_graph
         self.on_graph_changed(self.graph)
 
     def toggle_weighted(self, state):

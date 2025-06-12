@@ -30,6 +30,10 @@ class GraphCanvas(QWidget):
         self.on_graph_changed = on_graph_changed
 
     def _init_node_positions(self):
+        # Якщо у графа вже є node_positions — використовуємо їх
+        if hasattr(self.graph, 'node_positions') and self.graph.node_positions:
+            self.node_positions = dict(self.graph.node_positions)
+            return
         # Розташування вершин по колу лише для ініціалізації, не для додавання нових
         nodes = list(self.graph.nodes())
         n = len(nodes)
@@ -46,23 +50,26 @@ class GraphCanvas(QWidget):
 
     def add_node(self, node_id=None, data=None, pos=None):
         if node_id is None:
-            # Знаходимо найменший вільний Vn
-            used = set()
-            for k in self.node_positions:
-                if k.startswith('V') and k[1:].isdigit():
-                    used.add(int(k[1:]))
-            n = 1
-            while n in used:
-                n += 1
-            node_id = f"V{n}"
+            # Якщо граф має next_node_name, використовуємо його для унікального імені
+            if hasattr(self.graph, 'next_node_name'):
+                node_id = self.graph.next_node_name()
+            else:
+                # Знаходимо найменший вільний Vn
+                used = set()
+                for k in self.node_positions:
+                    if k.startswith('V') and k[1:].isdigit():
+                        used.add(int(k[1:]))
+                n = 1
+                while n in used:
+                    n += 1
+                node_id = f"V{n}"
         node = Node(node_id, data)
         self.graph.add_node(node)
         if pos is not None:
             self.node_positions[node_id] = QPointF(pos)
-        # Не викликаємо _init_node_positions() при додаванні вершини з pos
         else:
-            # Якщо це ініціалізація (додавання всіх вершин), тоді розташовуємо по колу
             self._init_node_positions()
+        self.update_graph_positions()
         self.update()
         if self.on_graph_changed:
             self.on_graph_changed(self.graph)
@@ -131,6 +138,7 @@ class GraphCanvas(QWidget):
     def mouseMoveEvent(self, event):
         if self._dragging_node_id is not None:
             self.node_positions[self._dragging_node_id] = event.pos() - self._drag_offset
+            self.update_graph_positions()
             self.update()
 
     def mouseReleaseEvent(self, event):
@@ -280,6 +288,7 @@ class GraphCanvas(QWidget):
             if hasattr(self.graph, '_edges'):
                 self.graph._edges = [e for e in self.graph._edges if e.source.id != node_id and e.target.id != node_id]
             self.node_positions.pop(node_id, None)
+            self.update_graph_positions()
             self.update()
             if self.on_graph_changed:
                 self.on_graph_changed(self.graph)
@@ -334,3 +343,11 @@ class GraphCanvas(QWidget):
         self.update()
         if self.on_graph_changed:
             self.on_graph_changed(self.graph)
+
+    def update_graph_positions(self):
+        # Зберігає позиції вершин у graph.node_positions
+        if hasattr(self.graph, 'node_positions'):
+            self.graph.node_positions.clear()
+            self.graph.node_positions.update(self.node_positions)
+        else:
+            self.graph.node_positions = dict(self.node_positions)

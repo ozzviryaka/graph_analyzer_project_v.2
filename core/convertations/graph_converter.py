@@ -19,6 +19,14 @@ class GraphConverter:
         """
         logger = Logger()
         undirected_graph = UndirectedGraph(weighted=directed_graph.is_weighted())
+        # Зберігаємо ім'я та додаткові атрибути
+        if hasattr(directed_graph, 'name'):
+            undirected_graph.name = directed_graph.name
+        if hasattr(directed_graph, 'directed'):
+            undirected_graph.directed = False
+        # Зберігаємо позиції вершин, якщо вони є
+        if hasattr(directed_graph, 'node_positions'):
+            undirected_graph.node_positions = dict(directed_graph.node_positions)
         node_map = {}
 
         # Додаємо всі вузли
@@ -54,6 +62,14 @@ class GraphConverter:
         """
         logger = Logger()
         directed_graph = DirectedGraph(weighted=undirected_graph.is_weighted())
+        # Зберігаємо ім'я та додаткові атрибути
+        if hasattr(undirected_graph, 'name'):
+            directed_graph.name = undirected_graph.name
+        if hasattr(undirected_graph, 'directed'):
+            directed_graph.directed = True
+        # Зберігаємо позиції вершин, якщо вони є
+        if hasattr(undirected_graph, 'node_positions'):
+            directed_graph.node_positions = dict(undirected_graph.node_positions)
         node_map = {}
 
         # Додаємо всі вузли
