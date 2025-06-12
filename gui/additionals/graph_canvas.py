@@ -31,12 +31,12 @@ class GraphCanvas(QWidget):
 
     def _init_node_positions(self):
         # Якщо у графа вже є node_positions — використовуємо їх
-        if hasattr(self.graph, 'node_positions') and self.graph.node_positions:
-            self.node_positions = dict(self.graph.node_positions)
-            return
-        # Розташування вершин по колу лише для ініціалізації, не для додавання нових
         nodes = list(self.graph.nodes())
         n = len(nodes)
+        # Відновлюємо позиції з node.pos, якщо є
+        for node in nodes:
+            if hasattr(node, 'pos') and node.pos is not None:
+                self.node_positions[node.id] = QPointF(*node.pos)
         # Якщо вже є позиції для всіх вершин — нічого не робимо
         if n == len(self.node_positions):
             return
@@ -47,6 +47,7 @@ class GraphCanvas(QWidget):
                 x = cx + r * math.cos(angle)
                 y = cy + r * math.sin(angle)
                 self.node_positions[node.id] = QPointF(x, y)
+                node.set_pos((x, y))
 
     def add_node(self, node_id=None, data=None, pos=None):
         if node_id is None:
@@ -63,10 +64,11 @@ class GraphCanvas(QWidget):
                 while n in used:
                     n += 1
                 node_id = f"V{n}"
-        node = Node(node_id, data)
+        node = Node(node_id, data, (pos.x(), pos.y()) if pos is not None else None)
         self.graph.add_node(node)
         if pos is not None:
             self.node_positions[node_id] = QPointF(pos)
+            node.set_pos((pos.x(), pos.y()))
         else:
             self._init_node_positions()
         self.update_graph_positions()
@@ -138,6 +140,10 @@ class GraphCanvas(QWidget):
     def mouseMoveEvent(self, event):
         if self._dragging_node_id is not None:
             self.node_positions[self._dragging_node_id] = event.pos() - self._drag_offset
+            # Оновлюємо pos у Node
+            node = next((n for n in self.graph.nodes() if n.id == self._dragging_node_id), None)
+            if node is not None:
+                node.set_pos((self.node_positions[self._dragging_node_id].x(), self.node_positions[self._dragging_node_id].y()))
             self.update_graph_positions()
             self.update()
 
@@ -288,6 +294,10 @@ class GraphCanvas(QWidget):
             if hasattr(self.graph, '_edges'):
                 self.graph._edges = [e for e in self.graph._edges if e.source.id != node_id and e.target.id != node_id]
             self.node_positions.pop(node_id, None)
+            # Видаляємо pos у Node
+            node = next((n for n in self.graph.nodes() if n.id == node_id), None)
+            if node is not None:
+                node.set_pos(None)
             self.update_graph_positions()
             self.update()
             if self.on_graph_changed:
@@ -345,9 +355,8 @@ class GraphCanvas(QWidget):
             self.on_graph_changed(self.graph)
 
     def update_graph_positions(self):
-        # Зберігає позиції вершин у graph.node_positions
-        if hasattr(self.graph, 'node_positions'):
-            self.graph.node_positions.clear()
-            self.graph.node_positions.update(self.node_positions)
-        else:
-            self.graph.node_positions = dict(self.node_positions)
+        # Зберігає позиції вершин у node.pos
+        for node_id, pos in self.node_positions.items():
+            node = next((n for n in self.graph.nodes() if n.id == node_id), None)
+            if node is not None:
+                node.set_pos((pos.x(), pos.y()))

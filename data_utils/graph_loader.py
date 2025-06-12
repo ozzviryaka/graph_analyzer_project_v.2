@@ -38,7 +38,7 @@ class GraphLoader:
 
             node_map = {}
             for node_info in nodes_data:
-                node = Node(node_info["id"], node_info.get("data"))
+                node = Node(node_info["id"], node_info.get("data"), tuple(node_info.get("pos")) if node_info.get("pos") is not None else None)
                 graph.add_node(node)
                 node_map[node.id] = node
 

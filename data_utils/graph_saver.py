@@ -22,7 +22,11 @@ class GraphSaver:
                 "directed": is_directed,
                 "weighted": is_weighted,
                 "nodes": [
-                    {"id": node.id, "data": node.data}
+                    {
+                        "id": node.id,
+                        "data": node.data,
+                        "pos": list(node.pos) if hasattr(node, 'pos') and node.pos is not None else None
+                    }
                     for node in graph.nodes()
                 ],
                 "edges": [
