@@ -1,7 +1,9 @@
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel, QCheckBox
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel, QCheckBox, QPushButton
 from PyQt5.QtCore import Qt
 from gui.additionals.toggle_switch import ToggleSwitch
 from core.convertations.graph_converter import GraphConverter
+from gui.dialogs.graph_select_dialog import GraphSelectDialog
+from gui.dialogs.instruction_dialog import InstructionDialog
 
 class GraphSettingsWidget(QWidget):
     """
@@ -13,6 +15,12 @@ class GraphSettingsWidget(QWidget):
         self.on_graph_changed = on_graph_changed
         self.graphs = None  # буде встановлено з MainWindow
         layout = QHBoxLayout()
+        # Кнопка вибору графа
+        self.select_graph_btn = QPushButton("Вибрати граф")
+        self.select_graph_btn.setCursor(Qt.PointingHandCursor)
+        self.select_graph_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.select_graph_btn.clicked.connect(self.open_graph_select_dialog)
+        layout.addWidget(self.select_graph_btn)
         # Тумблер орієнтованості
         self.directed_switch = ToggleSwitch(checked=hasattr(graph, 'is_directed') and graph.is_directed())
         self.directed_label = QLabel("Орієнтований граф")
@@ -37,6 +45,12 @@ class GraphSettingsWidget(QWidget):
         self.auto_vertex_name_label.mousePressEvent = lambda event: self.auto_vertex_name_switch.setChecked(not self.auto_vertex_name_switch.isChecked())
         layout.addWidget(self.auto_vertex_name_label)
         layout.addWidget(self.auto_vertex_name_switch)
+        # Кнопка інструкції
+        self.instruction_btn = QPushButton("Інструкція")
+        self.instruction_btn.setCursor(Qt.PointingHandCursor)
+        self.instruction_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.instruction_btn.clicked.connect(self.show_instruction_dialog)
+        layout.addWidget(self.instruction_btn)
         layout.addStretch()
         self.setLayout(layout)
 
@@ -107,3 +121,22 @@ class GraphSettingsWidget(QWidget):
                             edge._original_weight = edge._weight
                         edge._weight = 1
         self.on_graph_changed(self.graph)
+
+    def open_graph_select_dialog(self):
+        if hasattr(self.parent(), 'graphs'):
+            graphs = self.parent().graphs
+        else:
+            graphs = self.graphs
+        dialog = GraphSelectDialog(graphs, self.graph, self)
+        if dialog.exec_() == dialog.Accepted:
+            selected = dialog.selected_graph
+            if selected is not self.graph:
+                self.graph = selected
+                if hasattr(self.parent(), 'on_graph_changed'):
+                    self.parent().on_graph_changed(selected)
+                if hasattr(self, 'on_graph_changed'):
+                    self.on_graph_changed(selected)
+
+    def show_instruction_dialog(self):
+        dlg = InstructionDialog(self)
+        dlg.exec_()

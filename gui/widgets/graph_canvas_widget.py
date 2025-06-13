@@ -14,22 +14,10 @@ class GraphCanvasWidget(QWidget):
     def __init__(self, graph, parent=None, on_graph_changed=None):
         super().__init__(parent)
         self.canvas = GraphCanvas(graph, on_graph_changed=on_graph_changed)
-        self.select_graph_btn = QPushButton("Вибрати граф")
-        self.select_graph_btn.setCursor(Qt.PointingHandCursor)
-        self.select_graph_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
-        self.select_graph_btn.clicked.connect(self.open_graph_select_dialog)
-
         self.import_export_widget = GraphImportExportWidget(self.canvas.graph)
-
-        self.instruction_btn = QPushButton("Інструкція")
-        self.instruction_btn.setCursor(Qt.PointingHandCursor)
-        self.instruction_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
-        self.instruction_btn.clicked.connect(self.show_instruction_dialog)
 
         layout = QVBoxLayout()
         layout.addWidget(self.canvas)
-        layout.addWidget(self.select_graph_btn)
-        layout.addWidget(self.instruction_btn)
         layout.addWidget(self.import_export_widget)
         self.setLayout(layout)
 
