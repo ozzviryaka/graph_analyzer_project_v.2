@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QComboBox, QTextEdit, QMessageBox
+from PyQt5.QtCore import Qt
 from core.algorithms.shortest_paths.dijkstra import Dijkstra
 from core.algorithms.shortest_paths.bellman_ford import BellmanFord
 from core.algorithms.shortest_paths.floyd_warshall import FloydWarshall
@@ -15,33 +16,42 @@ class ShortestPathsWidget(QWidget):
         # Вибір вершин
         layout.addWidget(QLabel("ID початкової вершини:"))
         self.start_combo = QComboBox()
+        self.start_combo.setCursor(Qt.PointingHandCursor)
         self.start_combo.setEditable(False)
         layout.addWidget(self.start_combo)
         layout.addWidget(QLabel("ID кінцевої вершини:"))
         self.end_combo = QComboBox()
+        self.end_combo.setCursor(Qt.PointingHandCursor)
         self.end_combo.setEditable(False)
         layout.addWidget(self.end_combo)
         # Кнопки для запуску алгоритмів
         self.dijkstra_btn = QPushButton("Дейкстра (від однієї до всіх)")
         self.dijkstra_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.dijkstra_btn.setCursor(Qt.PointingHandCursor)
         self.dijkstra_btn.clicked.connect(self.run_dijkstra)
         self.bellman_btn = QPushButton("Беллман-Форд (від однієї до всіх)")
         self.bellman_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.bellman_btn.setCursor(Qt.PointingHandCursor)
         self.bellman_btn.clicked.connect(self.run_bellman)
         self.floyd_btn = QPushButton("Флойд-Уоршелл (всі до всіх)")
         self.floyd_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.floyd_btn.setCursor(Qt.PointingHandCursor)
         self.floyd_btn.clicked.connect(self.run_floyd)
         self.dijkstra_path_btn = QPushButton("Дейкстра (шлях між двома)")
         self.dijkstra_path_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.dijkstra_path_btn.setCursor(Qt.PointingHandCursor)
         self.dijkstra_path_btn.clicked.connect(self.run_dijkstra_path)
         self.bellman_path_btn = QPushButton("Беллман-Форд (шлях між двома)")
         self.bellman_path_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.bellman_path_btn.setCursor(Qt.PointingHandCursor)
         self.bellman_path_btn.clicked.connect(self.run_bellman_path)
         self.floyd_path_btn = QPushButton("Флойд-Уоршелл (шлях між двома)")
         self.floyd_path_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.floyd_path_btn.setCursor(Qt.PointingHandCursor)
         self.floyd_path_btn.clicked.connect(self.run_floyd_path)
         self.floyd_all_btn = QPushButton("Флойд-Уоршелл (всі найкоротші шляхи)")
         self.floyd_all_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.floyd_all_btn.setCursor(Qt.PointingHandCursor)
         self.floyd_all_btn.clicked.connect(self.run_floyd_all)
         layout.addWidget(self.dijkstra_btn)
         layout.addWidget(self.bellman_btn)

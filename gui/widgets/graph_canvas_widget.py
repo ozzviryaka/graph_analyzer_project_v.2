@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QFileDialog
+from PyQt5.QtCore import Qt
 from gui.additionals.graph_canvas import GraphCanvas
 from data_utils.graph_saver import GraphSaver
 from data_utils.graph_loader import GraphLoader
@@ -13,6 +14,7 @@ class GraphCanvasWidget(QWidget):
         super().__init__(parent)
         self.canvas = GraphCanvas(graph, on_graph_changed=on_graph_changed)
         self.select_graph_btn = QPushButton("Вибрати граф")
+        self.select_graph_btn.setCursor(Qt.PointingHandCursor)
         self.select_graph_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
         self.select_graph_btn.clicked.connect(self.open_graph_select_dialog)
 

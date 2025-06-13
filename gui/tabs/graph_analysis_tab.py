@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QComboBox, QLabel, QTextEdit
+from PyQt5.QtCore import Qt
 from gui.widgets.traversal_widget import TraversalWidget
 from gui.widgets.spanning_tree_widget import SpanningTreeWidget
 from gui.widgets.flow_algorithms_widget import FlowAlgorithmsWidget
@@ -15,6 +16,7 @@ class GraphAnalysisTab(QWidget):
         layout = QVBoxLayout()
         layout.addWidget(QLabel("<h2>Аналіз графа</h2>"))
         self.alg_combo = QComboBox()
+        self.alg_combo.setCursor(Qt.PointingHandCursor)
         self.alg_combo.addItems([
             "Обхід графа (BFS/DFS)",
             "Остовні дерева (Прим/Краскал)",

@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QPushButton
+from PyQt5.QtCore import Qt
 from utils.txt_exporter import TxtExporter
 
 class AnalysisOutputControls(QWidget):
@@ -11,9 +12,11 @@ class AnalysisOutputControls(QWidget):
         layout = QHBoxLayout()
         self.export_btn = QPushButton("Експортувати у .txt")
         self.export_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.export_btn.setCursor(Qt.PointingHandCursor)
         self.export_btn.clicked.connect(self.export_txt)
         self.clear_btn = QPushButton("Очистити результати")
         self.clear_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.clear_btn.setCursor(Qt.PointingHandCursor)
         self.clear_btn.clicked.connect(self.clear_output)
         layout.addWidget(self.export_btn)
         layout.addWidget(self.clear_btn)

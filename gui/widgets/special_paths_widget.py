@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QComboBox, QTextEdit, QMessageBox
+from PyQt5.QtCore import Qt
 from core.algorithms.special_paths.simple_path_finder import SimplePathFinder
 from core.algorithms.special_paths.longest_path_finder import LongestPathFinder
 from core.algorithms.special_paths.hamiltonian_path_finder import HamiltonianPathFinder
@@ -16,24 +17,30 @@ class SpecialPathsWidget(QWidget):
         # Вибір вершин
         layout.addWidget(QLabel("ID початкової вершини:"))
         self.start_combo = QComboBox()
+        self.start_combo.setCursor(Qt.PointingHandCursor)
         self.start_combo.setEditable(False)
         layout.addWidget(self.start_combo)
         layout.addWidget(QLabel("ID кінцевої вершини:"))
         self.end_combo = QComboBox()
+        self.end_combo.setCursor(Qt.PointingHandCursor)
         self.end_combo.setEditable(False)
         layout.addWidget(self.end_combo)
         # Кнопки для запуску алгоритмів
         self.simple_btn = QPushButton("Простий шлях (DFS)")
         self.simple_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.simple_btn.setCursor(Qt.PointingHandCursor)
         self.simple_btn.clicked.connect(self.run_simple)
         self.longest_btn = QPushButton("Найдовший простий шлях")
         self.longest_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.longest_btn.setCursor(Qt.PointingHandCursor)
         self.longest_btn.clicked.connect(self.run_longest)
         self.hamiltonian_btn = QPushButton("Гамільтонів шлях")
         self.hamiltonian_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.hamiltonian_btn.setCursor(Qt.PointingHandCursor)
         self.hamiltonian_btn.clicked.connect(self.run_hamiltonian)
         self.eulerian_btn = QPushButton("Ейлерів шлях")
         self.eulerian_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.eulerian_btn.setCursor(Qt.PointingHandCursor)
         self.eulerian_btn.clicked.connect(self.run_eulerian)
         layout.addWidget(self.simple_btn)
         layout.addWidget(self.longest_btn)

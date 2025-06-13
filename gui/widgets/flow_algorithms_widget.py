@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QComboBox, QLabel, QTextEdit, QMessageBox
+from PyQt5.QtCore import Qt
 from core.algorithms.flow.ford_fulkerson import FordFulkerson
 from core.algorithms.flow.min_cut import MinCut
 
@@ -13,7 +14,9 @@ class FlowAlgorithmsWidget(QWidget):
         layout = QVBoxLayout()
         # Комбобокси для вибору вершин
         self.source_combo = QComboBox()
+        self.source_combo.setCursor(Qt.PointingHandCursor)
         self.sink_combo = QComboBox()
+        self.sink_combo.setCursor(Qt.PointingHandCursor)
         self.source_combo.setEditable(False)
         self.sink_combo.setEditable(False)
         layout.addWidget(QLabel("ID джерела (source):"))
@@ -22,9 +25,11 @@ class FlowAlgorithmsWidget(QWidget):
         layout.addWidget(self.sink_combo)
         # Дві кнопки для запуску алгоритмів
         self.run_ff_btn = QPushButton("Ford-Fulkerson (max flow)")
+        self.run_ff_btn.setCursor(Qt.PointingHandCursor)
         self.run_ff_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
         self.run_ff_btn.clicked.connect(self.run_ford_fulkerson)
         self.run_mc_btn = QPushButton("Min-Cut")
+        self.run_mc_btn.setCursor(Qt.PointingHandCursor)
         self.run_mc_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
         self.run_mc_btn.clicked.connect(self.run_min_cut)
         layout.addWidget(self.run_ff_btn)
