@@ -101,12 +101,18 @@ class GraphCanvas(QWidget):
                     self._mouse_press_node_id = node_id
                     # Додавання ребра — тільки якщо є selected_node, клік по іншій вершині і натиснуто Ctrl
                     if (self.selected_node and self.selected_node.id != node_id and (event.modifiers() & Qt.ControlModifier)):
-                        dlg = EdgeEditDialog(weight=None, data=None, editable_weight=self.graph.is_weighted(), editable_data=True, parent=self)
-                        if dlg.exec_() == dlg.Accepted:
-                            weight, data = dlg.get_values()
-                            if not self.graph.is_weighted() or weight is None:
-                                weight = 1
-                            self.add_edge(self.selected_node.id, node_id, weight, data)
+                        if self.graph.is_weighted():
+                            dlg = EdgeEditDialog(weight=None, data=None, editable_weight=True, editable_data=True, parent=self)
+                            if dlg.exec_() == dlg.Accepted:
+                                weight, data = dlg.get_values()
+                                if weight is None:
+                                    weight = 1
+                                self.add_edge(self.selected_node.id, node_id, weight, data)
+                                self.selected_node = None
+                                self.update()
+                        else:
+                            # Для невагового графа одразу додаємо ребро з вагою 1 без діалогу
+                            self.add_edge(self.selected_node.id, node_id, 1, None)
                             self.selected_node = None
                             self.update()
                         return
