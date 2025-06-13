@@ -107,8 +107,8 @@ class GraphCanvas(QWidget):
                 src = self.node_positions.get(edge.source.id)
                 tgt = self.node_positions.get(edge.target.id)
                 if src and tgt:
-                    mid = (src + tgt) / 2
-                    if (pos - mid).manhattanLength() < self.radius:
+                    dist = self._distance_point_to_segment(pos, src, tgt)
+                    if dist < self.radius:
                         return
             # Якщо клік не по вершині і не по ребру — додаємо нову вершину
             self.add_node(pos=pos)
@@ -153,15 +153,26 @@ class GraphCanvas(QWidget):
             self._drag_offset = QPointF(0, 0)
             self.update()
 
+    def _distance_point_to_segment(self, p, a, b):
+        # p, a, b — QPointF
+        ap = p - a
+        ab = b - a
+        ab_len_squared = ab.x() ** 2 + ab.y() ** 2
+        if ab_len_squared == 0:
+            return (p - a).manhattanLength()
+        t = max(0, min(1, (ap.x() * ab.x() + ap.y() * ab.y()) / ab_len_squared))
+        proj = a + ab * t
+        return (p - proj).manhattanLength()
+
     def mouseDoubleClickEvent(self, event):
         pos = event.pos()
-        # Редагування ваги/даних ребра по дабл-кліку по середині ребра
+        # Редагування ваги/даних ребра по дабл-кліку по будь-якій частині ребра
         for edge in self.graph.edges():
             src = self.node_positions.get(edge.source.id)
             tgt = self.node_positions.get(edge.target.id)
             if src and tgt:
-                mid = (src + tgt) / 2
-                if (pos - mid).manhattanLength() < self.radius:
+                dist = self._distance_point_to_segment(pos, src, tgt)
+                if dist < self.radius:
                     dlg = EdgeEditDialog(weight=edge.weight(self.graph.is_weighted()), data=edge.data if isinstance(edge.data, dict) else None, editable_weight=self.graph.is_weighted(), editable_data=True, parent=self)
                     if dlg.exec_() == dlg.Accepted:
                         weight, data = dlg.get_values()
