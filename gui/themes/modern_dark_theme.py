@@ -50,7 +50,6 @@ class ModernDarkTheme:
                 border-radius: 8px;
                 padding: 8px 16px;
                 font-weight: 500;
-                transition: background 0.2s;
             }
             QPushButton:hover {
                 background-color: #44475a;
