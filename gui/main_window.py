@@ -41,6 +41,7 @@ class MainWindow(QMainWindow):
         # Передати список графів у вкладки
         if hasattr(self.tabs.combined_tab.canvas_widget, 'set_graphs_list'):
             self.tabs.combined_tab.canvas_widget.set_graphs_list(self.graphs, self)
+        self.settings_widget.auto_vertex_name_switch.toggled.connect(self.on_auto_vertex_name_changed)
 
     def on_graph_changed(self, new_graph):
         # Якщо новий граф є у списку, зробити його активним
@@ -67,6 +68,10 @@ class MainWindow(QMainWindow):
             self.tabs.update_matrix(self.graph)
         if hasattr(self.tabs, 'update_nodes'):
             self.tabs.update_nodes()
+
+    def on_auto_vertex_name_changed(self, checked):
+        if hasattr(self.tabs.combined_tab.canvas_widget, 'set_auto_vertex_name'):
+            self.tabs.combined_tab.canvas_widget.set_auto_vertex_name(checked)
 
     def set_dark_theme(self):
         app = QApplication.instance()

@@ -52,3 +52,6 @@ class GraphCanvasWidget(QWidget):
 
     def set_on_graph_changed(self, callback):
         self.canvas.on_graph_changed = callback
+
+    def set_auto_vertex_name(self, value: bool):
+        self.canvas.set_auto_vertex_name(value)

@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QMessageBox, QInputDialog
-from PyQt5.QtGui import QPainter, QPen, QBrush, QColor
-from PyQt5.QtCore import Qt, QPointF
+from PyQt5.QtGui import QPainter, QPen, QBrush, QColor, QFontMetrics
+from PyQt5.QtCore import Qt, QPointF, QRectF
 
 from core.graph_components.node import Node
 from core.graph_components.directed_edge import DirectedEdge
@@ -28,6 +28,8 @@ class GraphCanvas(QWidget):
         self._dragging_node_id = None
         self._drag_offset = QPointF(0, 0)
         self.on_graph_changed = on_graph_changed
+        self.auto_vertex_name = True  # За замовчуванням автоназва
+        self._hovered_node_id = None  # Для локального tooltip
 
     def _init_node_positions(self):
         # Якщо у графа вже є node_positions — використовуємо їх
@@ -49,7 +51,20 @@ class GraphCanvas(QWidget):
                 self.node_positions[node.id] = QPointF(x, y)
                 node.set_pos((x, y))
 
+    def set_auto_vertex_name(self, value: bool):
+        self.auto_vertex_name = value
+
     def add_node(self, node_id=None, data=None, pos=None):
+        if not self.auto_vertex_name:
+            # Відкрити діалог для введення назви
+            from gui.dialogs.vertex_edit_dialog import VertexEditDialog
+            dlg = VertexEditDialog(data=None, editable_data=False, parent=self)
+            dlg.setWindowTitle("Введіть назву вершини")
+            if dlg.exec_() == dlg.Accepted:
+                node_id = dlg.get_vertex_name()
+                data = dlg.get_data()
+            else:
+                return  # Користувач скасував
         if node_id is None:
             # Якщо граф має next_node_name, використовуємо його для унікального імені
             if hasattr(self.graph, 'next_node_name'):
@@ -138,6 +153,19 @@ class GraphCanvas(QWidget):
         self.update()
 
     def mouseMoveEvent(self, event):
+        pos = event.pos()
+        hovered = None
+        for node_id, node_pos in self.node_positions.items():
+            if (pos - node_pos).manhattanLength() < self.radius:
+                hovered = node_id
+                break
+        if hovered != self._hovered_node_id:
+            self._hovered_node_id = hovered
+            if hovered is not None:
+                self.setToolTip(str(hovered))
+            else:
+                self.setToolTip("")
+        super().mouseMoveEvent(event)
         if self._dragging_node_id is not None:
             self.node_positions[self._dragging_node_id] = event.pos() - self._drag_offset
             # Оновлюємо pos у Node
@@ -277,7 +305,32 @@ class GraphCanvas(QWidget):
             painter.setPen(pen)
             painter.drawEllipse(pos, self.radius, self.radius)
             painter.setPen(QColor(220, 220, 220))
-            painter.drawText(pos + QPointF(-8, 5), str(node.id))
+            # Центрований текст у межах вершини, автоматичне зменшення розміру шрифту
+            text_rect = QRectF(pos.x() - self.radius + 2, pos.y() - self.radius + 2, 2 * self.radius - 4, 2 * self.radius - 4)
+            text = str(node.id)
+            font = painter.font()
+            max_width = int(2 * self.radius - 8)
+            max_height = int(2 * self.radius - 8)
+            min_point_size = 6
+            point_size = font.pointSize()
+            # Зменшуємо розмір шрифту, поки текст не влізе по ширині і висоті, але не менше мінімального
+            while point_size > min_point_size:
+                font.setPointSize(point_size)
+                metrics = QFontMetrics(font)
+                text_width = metrics.horizontalAdvance(text)
+                text_height = metrics.height()
+                if text_width <= max_width and text_height <= max_height:
+                    break
+                point_size -= 1
+            if point_size < min_point_size:
+                point_size = min_point_size
+                font.setPointSize(point_size)
+            painter.setFont(font)
+            # Якщо навіть мінімальний шрифт не допомагає — обрізаємо текст з крапками
+            metrics = QFontMetrics(font)
+            elided = metrics.elidedText(text, Qt.ElideRight, max_width)
+            painter.drawText(text_rect, Qt.AlignCenter, elided)
+            # self.setToolTip(f"{node.id}")  # Видалено, щоб не було глобальної підказки
 
     def add_edge(self, source_id, target_id, weight=1, data=None):
         # Додає ребро відповідного типу

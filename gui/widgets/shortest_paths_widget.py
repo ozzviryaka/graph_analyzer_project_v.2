@@ -49,17 +49,17 @@ class ShortestPathsWidget(QWidget):
         self.floyd_path_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
         self.floyd_path_btn.setCursor(Qt.PointingHandCursor)
         self.floyd_path_btn.clicked.connect(self.run_floyd_path)
-        self.floyd_all_btn = QPushButton("Флойд-Уоршелл (всі найкоротші шляхи)")
-        self.floyd_all_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
-        self.floyd_all_btn.setCursor(Qt.PointingHandCursor)
-        self.floyd_all_btn.clicked.connect(self.run_floyd_all)
-        layout.addWidget(self.dijkstra_btn)
-        layout.addWidget(self.bellman_btn)
-        layout.addWidget(self.floyd_btn)
+        # self.floyd_all_btn = QPushButton("Флойд-Уоршелл (всі найкоротші шляхи)")
+        # self.floyd_all_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        # self.floyd_all_btn.setCursor(Qt.PointingHandCursor)
+        # self.floyd_all_btn.clicked.connect(self.run_floyd_all)
+        # layout.addWidget(self.dijkstra_btn)  # Від однієї до всіх - видалено
+        # layout.addWidget(self.bellman_btn)   # Від однієї до всіх - видалено
+        layout.addWidget(self.floyd_btn)     # Всі до всіх - повернуто
         layout.addWidget(self.dijkstra_path_btn)
         layout.addWidget(self.bellman_path_btn)
         layout.addWidget(self.floyd_path_btn)
-        layout.addWidget(self.floyd_all_btn)
+        # layout.addWidget(self.floyd_all_btn) # Всі найкоротші шляхи - видалено
         self.setLayout(layout)
         self.update_nodes()
 

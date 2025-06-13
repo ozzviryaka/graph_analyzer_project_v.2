@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel, QCheckBox
 from PyQt5.QtCore import Qt
 from gui.additionals.toggle_switch import ToggleSwitch
 from core.convertations.graph_converter import GraphConverter
@@ -29,6 +29,14 @@ class GraphSettingsWidget(QWidget):
         self.weighted_label.mousePressEvent = lambda event: self.weighted_switch.setChecked(not self.weighted_switch.isChecked())
         layout.addWidget(self.weighted_label)
         layout.addWidget(self.weighted_switch)
+        # Тумблер автоматичної назви вершини
+        self.auto_vertex_name_switch = ToggleSwitch(checked=True)
+        self.auto_vertex_name_label = QLabel("Автоматична назва вершини")
+        self.auto_vertex_name_label.setCursor(Qt.PointingHandCursor)
+        self.auto_vertex_name_switch.toggled.connect(self.on_auto_vertex_name_toggled)
+        self.auto_vertex_name_label.mousePressEvent = lambda event: self.auto_vertex_name_switch.setChecked(not self.auto_vertex_name_switch.isChecked())
+        layout.addWidget(self.auto_vertex_name_label)
+        layout.addWidget(self.auto_vertex_name_switch)
         layout.addStretch()
         self.setLayout(layout)
 
@@ -43,6 +51,13 @@ class GraphSettingsWidget(QWidget):
         self.weighted_switch.setChecked(getattr(graph, 'weighted', True))
         self.directed_switch.blockSignals(False)
         self.weighted_switch.blockSignals(False)
+
+    def is_auto_vertex_name(self):
+        return self.auto_vertex_name_switch.isChecked()
+
+    def on_auto_vertex_name_toggled(self, checked):
+        if hasattr(self.parent(), 'on_auto_vertex_name_changed'):
+            self.parent().on_auto_vertex_name_changed(checked)
 
     def toggle_directed(self, checked):
         is_directed = checked

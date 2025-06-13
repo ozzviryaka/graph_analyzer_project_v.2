@@ -13,6 +13,12 @@ class VertexEditDialog(QDialog):
         self.setWindowIcon(QIcon("res/settings_icon.png"))
         layout = QVBoxLayout()
 
+        self.name_edit = QLineEdit()
+        if node_id is not None:
+            self.name_edit.setText(str(node_id))
+        layout.addWidget(QLabel("Назва вершини:"))
+        layout.addWidget(self.name_edit)
+
         self.data_edits = []
         self.data_area = QVBoxLayout()
         self.data_widget = QWidget()
@@ -87,6 +93,9 @@ class VertexEditDialog(QDialog):
             if k:
                 data[k] = v
         return data
+
+    def get_vertex_name(self):
+        return self.name_edit.text().strip()
 
     def accept(self):
         data = self.get_data()
