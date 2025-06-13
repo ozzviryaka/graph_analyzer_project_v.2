@@ -4,6 +4,7 @@ from gui.additionals.toggle_switch import ToggleSwitch
 from core.convertations.graph_converter import GraphConverter
 from gui.dialogs.graph_select_dialog import GraphSelectDialog
 from gui.dialogs.instruction_dialog import InstructionDialog
+from gui.dialogs.theme_select_dialog import ThemeSelectDialog
 
 class GraphSettingsWidget(QWidget):
     """
@@ -51,6 +52,12 @@ class GraphSettingsWidget(QWidget):
         self.instruction_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
         self.instruction_btn.clicked.connect(self.show_instruction_dialog)
         layout.addWidget(self.instruction_btn)
+        # Кнопка вибору теми
+        self.theme_btn = QPushButton("Тема")
+        self.theme_btn.setCursor(Qt.PointingHandCursor)
+        self.theme_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.theme_btn.clicked.connect(self.show_theme_dialog)
+        layout.addWidget(self.theme_btn)
         layout.addStretch()
         self.setLayout(layout)
 
@@ -139,6 +146,10 @@ class GraphSettingsWidget(QWidget):
 
     def show_instruction_dialog(self):
         dlg = InstructionDialog(self)
+        dlg.exec_()
+
+    def show_theme_dialog(self):
+        dlg = ThemeSelectDialog(self)
         dlg.exec_()
 
     def set_auto_vertex_name(self, value: bool):

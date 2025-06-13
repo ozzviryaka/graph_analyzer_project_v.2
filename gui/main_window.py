@@ -14,7 +14,7 @@ from gui.themes.theme_manager import ThemeManager
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        ThemeManager.apply_theme(ModernDarkTheme)
+        ThemeManager.apply_theme(DarkTheme)
         # self.set_dark_theme()  # Видалено старий виклик
         self.setWindowTitle("Граф-аналізатор")
         self.setWindowIcon(QIcon("res/icon.png"))
