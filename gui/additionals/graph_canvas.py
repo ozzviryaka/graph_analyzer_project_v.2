@@ -132,9 +132,10 @@ class GraphCanvas(QWidget):
                     if dist < self.radius:
                         return
             # Якщо клік не по вершині і не по ребру — додаємо нову вершину
-            self.add_node(pos=pos)
-            last_id = max(self.node_positions, key=lambda k: int(k[1:]) if k.startswith('V') and k[1:].isdigit() else -1)
-            self.selected_node = next((n for n in self.graph.nodes() if n.id == last_id), None)
+            result = self.add_node(pos=pos)
+            if result is not None:
+                last_id = max(self.node_positions, key=lambda k: int(k[1:]) if k.startswith('V') and k[1:].isdigit() else -1)
+                self.selected_node = next((n for n in self.graph.nodes() if n.id == last_id), None)
             self.update()
         elif event.button() == Qt.RightButton:
             # Видалення вершини або ребра

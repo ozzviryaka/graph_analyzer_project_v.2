@@ -140,3 +140,8 @@ class GraphSettingsWidget(QWidget):
     def show_instruction_dialog(self):
         dlg = InstructionDialog(self)
         dlg.exec_()
+
+    def set_auto_vertex_name(self, value: bool):
+        self.auto_vertex_name_switch.blockSignals(True)
+        self.auto_vertex_name_switch.setChecked(value)
+        self.auto_vertex_name_switch.blockSignals(False)

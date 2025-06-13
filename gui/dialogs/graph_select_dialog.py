@@ -62,6 +62,9 @@ class GraphSelectDialog(QDialog):
         weighted, ok2 = QInputDialog.getItem(self, "Ваговість", "Граф ваговий?", ["Так", "Ні"], 0, False)
         if not ok2:
             return
+        auto_name, ok4 = QInputDialog.getItem(self, "Автоматична назва вершин", "Використовувати автоназви для вершин?", ["Так", "Ні"], 0, False)
+        if not ok4:
+            return
         name, ok3 = QInputDialog.getText(self, "Назва графа", "Введіть назву графа:")
         if not ok3 or not name.strip():
             return
@@ -74,6 +77,14 @@ class GraphSelectDialog(QDialog):
             g = UndirectedGraph(weighted=(weighted=="Так"))
             g.directed = False
         g.name = name.strip()
+        g.auto_vertex_name = (auto_name == "Так")
+        # Оновити чекбокс у налаштуваннях, якщо є
+        main_window = self.parent()
+        if hasattr(main_window, 'settings_widget'):
+            main_window.settings_widget.set_auto_vertex_name(g.auto_vertex_name)
+            # Також оновити GraphCanvas, якщо потрібно
+            if hasattr(main_window.tabs.combined_tab.canvas_widget, 'set_auto_vertex_name'):
+                main_window.tabs.combined_tab.canvas_widget.set_auto_vertex_name(g.auto_vertex_name)
         self.graph_list.append(g)
         self.refresh_list()
         self.list_widget.setCurrentRow(len(self.graph_list)-1)
