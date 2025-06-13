@@ -247,9 +247,10 @@ class GraphCanvas(QWidget):
                 else:
                     painter.drawLine(src, tgt)
                 # Draw weight
-                mid = (src + tgt) / 2
-                painter.setPen(QColor(180, 180, 255))
-                painter.drawText(mid + QPointF(0, -8), str(edge.weight(self.graph.is_weighted())))
+                if self.graph.is_weighted():
+                    mid = (src + tgt) / 2
+                    painter.setPen(QColor(180, 180, 255))
+                    painter.drawText(mid + QPointF(0, -8), str(edge.weight(self.graph.is_weighted())))
         # Draw nodes
         for node in self.graph.nodes():
             pos = self.node_positions.get(node.id)
