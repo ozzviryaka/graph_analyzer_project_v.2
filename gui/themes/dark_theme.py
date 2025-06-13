@@ -49,11 +49,17 @@ class DarkTheme:
             QTabBar::tab {
                 background: #23252b;
                 color: #f0f0f0;
-                border: 1px solid #393b40;
-                border-bottom: none;
                 border-radius: 6px 6px 0 0;
-                padding: 8px 20px 8px 20px;
+                padding: 8px 20px;
                 margin-right: 2px;
+                min-width: 120px;
+            }
+            QTabBar {
+                qproperty-drawBase: 0;
+                alignment: center;
+            }
+            QTabWidget::tab-bar {
+                alignment: center;
             }
             QTabBar::tab:selected {
                 background: #2d2f36;

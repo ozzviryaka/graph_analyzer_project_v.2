@@ -8,12 +8,13 @@ from PyQt5.QtGui import QPalette, QColor, QIcon
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QStyleFactory
 from gui.themes.dark_theme import DarkTheme
+from gui.themes.modern_dark_theme import ModernDarkTheme
 from gui.themes.theme_manager import ThemeManager
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        ThemeManager.apply_theme(DarkTheme)
+        ThemeManager.apply_theme(ModernDarkTheme)
         # self.set_dark_theme()  # Видалено старий виклик
         self.setWindowTitle("Граф-аналізатор")
         self.setWindowIcon(QIcon("res/icon.png"))
