@@ -28,8 +28,6 @@ class BlueTheme:
             QWidget {
                 font-family: 'Segoe UI', 'Arial', sans-serif;
                 font-size: 13px;
-                background-color: #1c2330;
-                color: #b6cfff;
             }
             QMainWindow, QDialog, QMenu, QMenuBar, QToolBar, QTabWidget, QTabBar, QStatusBar {
                 background-color: #1c2330;
@@ -37,25 +35,24 @@ class BlueTheme:
             QPushButton, QComboBox, QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox, QDoubleSpinBox, QCheckBox, QRadioButton, QGroupBox, QScrollBar, QSlider, QProgressBar, QListWidget, QTreeWidget, QTableWidget, QLabel {
                 background-color: #223355;
                 color: #b6cfff;
-                border-radius: 8px;
+                border-radius: 6px;
                 border: 1px solid #3f7fae;
-                padding: 6px 10px;
-                font-size: 14px;
+                padding: 4px 8px;
             }
-            QPushButton {
-                background-color: #2e3d5d;
-                color: #b6cfff;
-                border: 1px solid #3f7fae;
-                border-radius: 8px;
-                padding: 8px 16px;
-                font-weight: 500;
-            }
-            QPushButton:hover {
+            QPushButton:hover, QComboBox:hover, QLineEdit:hover, QTextEdit:hover, QPlainTextEdit:hover {
                 background-color: #3f7fae;
-                color: #1c2330;
+                border: 1px solid #3f7fae;
             }
             QPushButton:pressed {
                 background-color: #2e3d5d;
+            }
+            QTabBar::tab {
+                background: #223355;
+                color: #b6cfff;
+                border-radius: 6px 6px 0 0;
+                padding: 8px 20px;
+                margin-right: 2px;
+                min-width: 120px;
             }
             QTabBar {
                 qproperty-drawBase: 0;
@@ -63,14 +60,6 @@ class BlueTheme:
             }
             QTabWidget::tab-bar {
                 alignment: center;
-            }
-            QTabBar::tab {
-                background: #223355;
-                color: #b6cfff;
-                border-radius: 8px 8px 0 0;
-                padding: 8px 20px;
-                margin-right: 2px;
-                min-width: 120px;
             }
             QTabBar::tab:selected {
                 background: #3f7fae;
@@ -85,7 +74,51 @@ class BlueTheme:
                 border-radius: 8px 8px 0 0;
             }
             QTabWidget::pane {
-                border-top: 2px solid #3f7fae;
+                border: 1px solid #3f7fae;
+                border-radius: 0 0 6px 6px;
                 top: -1px;
+            }
+            QScrollBar:vertical, QScrollBar:horizontal {
+                background: #1c2330;
+                width: 12px;
+                margin: 0px;
+                border-radius: 6px;
+            }
+            QScrollBar::handle:vertical, QScrollBar::handle:horizontal {
+                background: #3f7fae;
+                min-height: 20px;
+                border-radius: 6px;
+            }
+            QScrollBar::add-line, QScrollBar::sub-line {
+                background: none;
+            }
+            QCheckBox::indicator, QRadioButton::indicator {
+                border-radius: 4px;
+                width: 16px;
+                height: 16px;
+            }
+            QCheckBox::indicator:checked, QRadioButton::indicator:checked {
+                background: #3f7fae;
+                border: 1px solid #3f7fae;
+            }
+            QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
+                background: #223355;
+                border: 1px solid #3f7fae;
+            }
+            QGroupBox {
+                border: 1px solid #3f7fae;
+                border-radius: 8px;
+                margin-top: 10px;
+            }
+            QGroupBox:title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 3px 0 3px;
+            }
+            QToolTip {
+                background-color: #223355;
+                color: #b6cfff;
+                border: 1px solid #3f7fae;
+                border-radius: 6px;
             }
         ''')

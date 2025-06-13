@@ -28,8 +28,6 @@ class LightTheme:
             QWidget {
                 font-family: 'Segoe UI', 'Arial', sans-serif;
                 font-size: 13px;
-                background-color: #f5f5fa;
-                color: #222;
             }
             QMainWindow, QDialog, QMenu, QMenuBar, QToolBar, QTabWidget, QTabBar, QStatusBar {
                 background-color: #f5f5fa;
@@ -37,34 +35,31 @@ class LightTheme:
             QPushButton, QComboBox, QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox, QDoubleSpinBox, QCheckBox, QRadioButton, QGroupBox, QScrollBar, QSlider, QProgressBar, QListWidget, QTreeWidget, QTableWidget, QLabel {
                 background-color: #fff;
                 color: #222;
-                border-radius: 8px;
+                border-radius: 6px;
                 border: 1px solid #d0d0e0;
-                padding: 6px 10px;
-                font-size: 14px;
+                padding: 4px 8px;
             }
-            QPushButton {
-                background-color: #f8f8ff;
-                color: #222;
-                border: 1px solid #b0b0c0;
-                border-radius: 8px;
-                padding: 8px 16px;
-                font-weight: 500;
-            }
-            QPushButton:hover {
+            QPushButton:hover, QComboBox:hover, QLineEdit:hover, QTextEdit:hover, QPlainTextEdit:hover {
                 background-color: #e0e0f0;
-                color: #0078d7;
+                border: 1px solid #1976d2;
             }
             QPushButton:pressed {
                 background-color: #d0d0e0;
-                color: #005fa3;
             }
             QTabBar::tab {
                 background: #f5f5fa;
                 color: #222;
-                border-radius: 8px 8px 0 0;
+                border-radius: 6px 6px 0 0;
                 padding: 8px 20px;
                 margin-right: 2px;
                 min-width: 120px;
+            }
+            QTabBar {
+                qproperty-drawBase: 0;
+                alignment: center;
+            }
+            QTabWidget::tab-bar {
+                alignment: center;
             }
             QTabBar::tab:selected {
                 background: #f0f0f0;
@@ -78,20 +73,52 @@ class LightTheme:
                 border-bottom: none;
                 border-radius: 8px 8px 0 0;
             }
-            QTabBar {
-                qproperty-drawBase: 0;
-                alignment: center;
+            QTabWidget::pane {
+                border: 1px solid #d0d0e0;
+                border-radius: 0 0 6px 6px;
+                top: -1px;
             }
-            QTabWidget::tab-bar {
-                alignment: center;
+            QScrollBar:vertical, QScrollBar:horizontal {
+                background: #f5f5fa;
+                width: 12px;
+                margin: 0px;
+                border-radius: 6px;
             }
-            QMenu {
-                background-color: #fff;
-                color: #222;
+            QScrollBar::handle:vertical, QScrollBar::handle:horizontal {
+                background: #1976d2;
+                min-height: 20px;
+                border-radius: 6px;
+            }
+            QScrollBar::add-line, QScrollBar::sub-line {
+                background: none;
+            }
+            QCheckBox::indicator, QRadioButton::indicator {
+                border-radius: 4px;
+                width: 16px;
+                height: 16px;
+            }
+            QCheckBox::indicator:checked, QRadioButton::indicator:checked {
+                background: #1976d2;
+                border: 1px solid #1976d2;
+            }
+            QCheckBox::indicator:unchecked, QRadioButton::indicator:unchecked {
+                background: #fff;
                 border: 1px solid #d0d0e0;
             }
-            QMenu::item:selected {
-                background-color: #e0e0f0;
-                color: #0078d7;
+            QGroupBox {
+                border: 1px solid #d0d0e0;
+                border-radius: 8px;
+                margin-top: 10px;
+            }
+            QGroupBox:title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 3px 0 3px;
+            }
+            QToolTip {
+                background-color: #fff;
+                color: #222;
+                border: 1px solid #1976d2;
+                border-radius: 6px;
             }
         ''')

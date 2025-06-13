@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QMessageBox, QInputDialog
 from PyQt5.QtGui import QPainter, QPen, QBrush, QColor, QFontMetrics
 from PyQt5.QtCore import Qt, QPointF, QRectF
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QPalette
 
 from core.graph_components.node import Node
 from core.graph_components.directed_edge import DirectedEdge
@@ -233,15 +235,15 @@ class GraphCanvas(QWidget):
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.fillRect(self.rect(), self.palette().color(self.backgroundRole()))  # Use palette background
-        # Draw a visible border around the canvas
-        border_color = QColor(120, 120, 160)
+        # Draw a visible border around the canvas using theme color
+        border_color = self.palette().color(QPalette.Highlight)
         border_pen = QPen(border_color, 2)
         painter.setPen(border_pen)
         painter.setBrush(Qt.NoBrush)
         painter.drawRect(self.rect().adjusted(1, 1, -2, -2))
         painter.setRenderHint(QPainter.Antialiasing)
         if not list(self.graph.nodes()):
-            painter.setPen(QColor(120, 160, 255))
+            painter.setPen(self.palette().color(QPalette.Highlight))
             painter.setFont(self.font())
             # text = (
             #     "\u2139  Інструкція: створення та редагування графа\n"
@@ -264,9 +266,9 @@ class GraphCanvas(QWidget):
             src = self.node_positions.get(edge.source.id)
             tgt = self.node_positions.get(edge.target.id)
             if src and tgt:
-                pen = QPen(QColor(80, 80, 120), 2)
+                pen = QPen(self.palette().color(QPalette.Mid), 2)
                 if edge == self.selected_edge:
-                    pen.setColor(QColor(255, 85, 85))
+                    pen.setColor(self.palette().color(QPalette.BrightText))
                 painter.setPen(pen)
                 # Якщо граф орієнтований — малюємо стрілку
                 is_directed = hasattr(self.graph, 'is_directed') and self.graph.is_directed()
@@ -308,16 +310,17 @@ class GraphCanvas(QWidget):
             pos = self.node_positions.get(node.id)
             if not pos:
                 continue
-            brush = QBrush(QColor(44, 47, 51))  # Завжди один колір
+            node_color = self.palette().color(QPalette.Button)
+            brush = QBrush(node_color)
             if node == self.selected_node:
-                pen = QPen(QColor(255, 0, 0), 3)
-                pen.setStyle(Qt.DashLine)  # Червона штрихована лінія
+                pen = QPen(self.palette().color(QPalette.BrightText), 3)
+                pen.setStyle(Qt.DashLine)
             else:
-                pen = QPen(QColor(120, 120, 160), 2)
+                pen = QPen(self.palette().color(QPalette.Mid), 2)
             painter.setBrush(brush)
             painter.setPen(pen)
             painter.drawEllipse(pos, self.radius, self.radius)
-            painter.setPen(QColor(220, 220, 220))
+            painter.setPen(self.palette().color(QPalette.ButtonText))
             # Центрований текст у межах вершини, автоматичне зменшення розміру шрифту
             text_rect = QRectF(pos.x() - self.radius + 2, pos.y() - self.radius + 2, 2 * self.radius - 4, 2 * self.radius - 4)
             text = str(node.id)

@@ -46,18 +46,18 @@ class GraphSettingsWidget(QWidget):
         self.auto_vertex_name_label.mousePressEvent = lambda event: self.auto_vertex_name_switch.setChecked(not self.auto_vertex_name_switch.isChecked())
         layout.addWidget(self.auto_vertex_name_label)
         layout.addWidget(self.auto_vertex_name_switch)
-        # Кнопка інструкції
-        self.instruction_btn = QPushButton("Інструкція")
-        self.instruction_btn.setCursor(Qt.PointingHandCursor)
-        self.instruction_btn.clicked.connect(self.show_instruction_dialog)
-        layout.addWidget(self.instruction_btn)
         # Кнопка вибору теми
-        self.theme_btn = QPushButton("Тема")
+        self.theme_btn = QPushButton("Вибрати тему")
         self.theme_btn.setCursor(Qt.PointingHandCursor)
         self.theme_btn.clicked.connect(self.show_theme_dialog)
         layout.addWidget(self.theme_btn)
         layout.addStretch()
         self.setLayout(layout)
+        # Кнопка інструкції
+        self.instruction_btn = QPushButton("Інструкція")
+        self.instruction_btn.setCursor(Qt.PointingHandCursor)
+        self.instruction_btn.clicked.connect(self.show_instruction_dialog)
+        layout.addWidget(self.instruction_btn)
 
     def set_graphs_list(self, graphs):
         self.graphs = graphs
