@@ -5,6 +5,7 @@ from data_utils.graph_saver import GraphSaver
 from data_utils.graph_loader import GraphLoader
 from gui.widgets.graph_import_export_widget import GraphImportExportWidget
 from gui.dialogs.graph_select_dialog import GraphSelectDialog
+from gui.dialogs.instruction_dialog import InstructionDialog
 
 class GraphCanvasWidget(QWidget):
     """
@@ -20,11 +21,21 @@ class GraphCanvasWidget(QWidget):
 
         self.import_export_widget = GraphImportExportWidget(self.canvas.graph)
 
+        self.instruction_btn = QPushButton("Інструкція")
+        self.instruction_btn.setCursor(Qt.PointingHandCursor)
+        self.instruction_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        self.instruction_btn.clicked.connect(self.show_instruction_dialog)
+
         layout = QVBoxLayout()
         layout.addWidget(self.canvas)
         layout.addWidget(self.select_graph_btn)
+        layout.addWidget(self.instruction_btn)
         layout.addWidget(self.import_export_widget)
         self.setLayout(layout)
+
+    def show_instruction_dialog(self):
+        dlg = InstructionDialog(self)
+        dlg.exec_()
 
     def set_graphs_list(self, graphs, main_window):
         self.graphs = graphs
