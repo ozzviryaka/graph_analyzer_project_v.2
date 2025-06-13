@@ -232,7 +232,13 @@ class GraphCanvas(QWidget):
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        painter.fillRect(self.rect(), QColor(30, 32, 36))  # Dark background
+        painter.fillRect(self.rect(), self.palette().color(self.backgroundRole()))  # Use palette background
+        # Draw a visible border around the canvas
+        border_color = QColor(120, 120, 160)
+        border_pen = QPen(border_color, 2)
+        painter.setPen(border_pen)
+        painter.setBrush(Qt.NoBrush)
+        painter.drawRect(self.rect().adjusted(1, 1, -2, -2))
         painter.setRenderHint(QPainter.Antialiasing)
         if not list(self.graph.nodes()):
             painter.setPen(QColor(120, 160, 255))

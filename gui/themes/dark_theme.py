@@ -64,8 +64,14 @@ class DarkTheme:
             QTabBar::tab:selected {
                 background: #2d2f36;
                 color: #4a90e2;
-                border: 1px solid #4a90e2;
-                border-bottom: 2px solid #23252b;
+                border: 2px solid #4a90e2;
+                border-bottom: none;
+                border-radius: 8px 8px 0 0;
+            }
+            QTabBar::tab:!selected {
+                border: 1px solid #393b40;
+                border-bottom: none;
+                border-radius: 8px 8px 0 0;
             }
             QTabWidget::pane {
                 border: 1px solid #393b40;

@@ -19,7 +19,7 @@ class GraphSettingsWidget(QWidget):
         # Кнопка вибору графа
         self.select_graph_btn = QPushButton("Вибрати граф")
         self.select_graph_btn.setCursor(Qt.PointingHandCursor)
-        self.select_graph_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        # self.select_graph_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")  # REMOVE custom style
         self.select_graph_btn.clicked.connect(self.open_graph_select_dialog)
         layout.addWidget(self.select_graph_btn)
         # Тумблер орієнтованості
@@ -49,13 +49,11 @@ class GraphSettingsWidget(QWidget):
         # Кнопка інструкції
         self.instruction_btn = QPushButton("Інструкція")
         self.instruction_btn.setCursor(Qt.PointingHandCursor)
-        self.instruction_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
         self.instruction_btn.clicked.connect(self.show_instruction_dialog)
         layout.addWidget(self.instruction_btn)
         # Кнопка вибору теми
         self.theme_btn = QPushButton("Тема")
         self.theme_btn.setCursor(Qt.PointingHandCursor)
-        self.theme_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
         self.theme_btn.clicked.connect(self.show_theme_dialog)
         layout.addWidget(self.theme_btn)
         layout.addStretch()

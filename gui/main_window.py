@@ -8,7 +8,6 @@ from PyQt5.QtGui import QPalette, QColor, QIcon
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QStyleFactory
 from gui.themes.dark_theme import DarkTheme
-from gui.themes.modern_dark_theme import ModernDarkTheme
 from gui.themes.theme_manager import ThemeManager
 
 class MainWindow(QMainWindow):

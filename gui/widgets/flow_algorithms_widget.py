@@ -26,11 +26,9 @@ class FlowAlgorithmsWidget(QWidget):
         # Дві кнопки для запуску алгоритмів
         self.run_ff_btn = QPushButton("Ford-Fulkerson (max flow)")
         self.run_ff_btn.setCursor(Qt.PointingHandCursor)
-        self.run_ff_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
         self.run_ff_btn.clicked.connect(self.run_ford_fulkerson)
         self.run_mc_btn = QPushButton("Min-Cut")
         self.run_mc_btn.setCursor(Qt.PointingHandCursor)
-        self.run_mc_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
         self.run_mc_btn.clicked.connect(self.run_min_cut)
         layout.addWidget(self.run_ff_btn)
         layout.addWidget(self.run_mc_btn)

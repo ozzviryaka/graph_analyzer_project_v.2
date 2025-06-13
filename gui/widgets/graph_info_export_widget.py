@@ -12,10 +12,10 @@ class GraphInfoExportWidget(QWidget):
         self.graph = graph
         self.text_edit = QTextEdit()
         self.text_edit.setReadOnly(True)
-        self.text_edit.setStyleSheet("background-color: #23272e; color: #e0e0e0; font-size: 14px;")
+        self.text_edit.setStyleSheet("")
         self.export_btn = QPushButton("Експортувати у .txt")
         self.export_btn.setCursor(Qt.PointingHandCursor)
-        self.export_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        # self.export_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")  # REMOVE custom style
         self.export_btn.clicked.connect(self.export_txt)
 
         layout = QVBoxLayout()

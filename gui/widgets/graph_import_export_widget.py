@@ -12,12 +12,12 @@ class GraphImportExportWidget(QWidget):
         self.graph = graph
         self.export_btn = QPushButton("Експортувати у .json")
         self.export_btn.setCursor(Qt.PointingHandCursor)
-        self.export_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        # self.export_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")  # REMOVE custom style
         self.export_btn.clicked.connect(self.export_graph)
 
         self.import_btn = QPushButton("Імпортувати з .json")
         self.import_btn.setCursor(Qt.PointingHandCursor)
-        self.import_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")
+        # self.import_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")  # REMOVE custom style
         self.import_btn.clicked.connect(self.import_graph)
 
         layout = QVBoxLayout()

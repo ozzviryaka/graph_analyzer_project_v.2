@@ -1,11 +1,16 @@
+from .dark_theme import DarkTheme
+from .light_theme import LightTheme
+from .green_theme import GreenTheme
+from .blue_theme import BlueTheme
+
 class ThemeManager:
-    _current_theme = None
+    _current_theme = DarkTheme
 
-    @staticmethod
-    def apply_theme(theme_class):
-        ThemeManager._current_theme = theme_class
-        theme_class.apply()
+    @classmethod
+    def apply_theme(cls, theme):
+        cls._current_theme = theme
+        theme.apply()
 
-    @staticmethod
-    def current_theme():
-        return ThemeManager._current_theme
+    @classmethod
+    def current_theme(cls):
+        return cls._current_theme

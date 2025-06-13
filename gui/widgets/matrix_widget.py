@@ -30,6 +30,6 @@ class MatrixWidget(QWidget):
         self.table.resizeColumnsToContents()
         self.table.resizeRowsToContents()
         self.table.setMinimumSize(400, 200)
-        self.table.setStyleSheet("background-color: #23272e; color: #e0e0e0; font-size: 13px;")
+        # self.table.setStyleSheet("")
         layout.addWidget(self.table)
         self.setLayout(layout)

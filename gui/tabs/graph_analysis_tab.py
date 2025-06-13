@@ -27,7 +27,7 @@ class GraphAnalysisTab(QWidget):
         layout.addWidget(self.alg_combo)
         self.output_textedit = QTextEdit()
         self.output_textedit.setReadOnly(True)
-        self.output_textedit.setStyleSheet("background-color: #23272e; color: #e0e0e0; font-size: 13px;")
+        self.output_textedit.setStyleSheet("")
         layout.addWidget(self.output_textedit)
         self.analysis_controls = AnalysisOutputControls(self.output_textedit)
         layout.addWidget(self.analysis_controls)
