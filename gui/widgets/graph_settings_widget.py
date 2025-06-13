@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel, QCheckBox
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QLabel
+from PyQt5.QtCore import Qt
+from gui.additionals.toggle_switch import ToggleSwitch
 from core.convertations.graph_converter import GraphConverter
 
 class GraphSettingsWidget(QWidget):
@@ -12,15 +14,21 @@ class GraphSettingsWidget(QWidget):
         self.graphs = None  # буде встановлено з MainWindow
         layout = QHBoxLayout()
         # Тумблер орієнтованості
-        self.directed_checkbox = QCheckBox("Орієнтований граф")
-        self.directed_checkbox.setChecked(hasattr(graph, 'is_directed') and graph.is_directed())
-        self.directed_checkbox.stateChanged.connect(self.toggle_directed)
-        layout.addWidget(self.directed_checkbox)
+        self.directed_switch = ToggleSwitch(checked=hasattr(graph, 'is_directed') and graph.is_directed())
+        self.directed_label = QLabel("Орієнтований граф")
+        self.directed_label.setCursor(Qt.PointingHandCursor)
+        self.directed_switch.toggled.connect(self.toggle_directed)
+        self.directed_label.mousePressEvent = lambda event: self.directed_switch.setChecked(not self.directed_switch.isChecked())
+        layout.addWidget(self.directed_label)
+        layout.addWidget(self.directed_switch)
         # Тумблер ваговості
-        self.weighted_checkbox = QCheckBox("Ваговий граф")
-        self.weighted_checkbox.setChecked(getattr(graph, 'weighted', True))
-        self.weighted_checkbox.stateChanged.connect(self.toggle_weighted)
-        layout.addWidget(self.weighted_checkbox)
+        self.weighted_switch = ToggleSwitch(checked=getattr(graph, 'weighted', True))
+        self.weighted_label = QLabel("Ваговий граф")
+        self.weighted_label.setCursor(Qt.PointingHandCursor)
+        self.weighted_switch.toggled.connect(self.toggle_weighted)
+        self.weighted_label.mousePressEvent = lambda event: self.weighted_switch.setChecked(not self.weighted_switch.isChecked())
+        layout.addWidget(self.weighted_label)
+        layout.addWidget(self.weighted_switch)
         layout.addStretch()
         self.setLayout(layout)
 
@@ -29,15 +37,15 @@ class GraphSettingsWidget(QWidget):
 
     def set_graph(self, graph):
         self.graph = graph
-        self.directed_checkbox.blockSignals(True)
-        self.weighted_checkbox.blockSignals(True)
-        self.directed_checkbox.setChecked(hasattr(graph, 'is_directed') and graph.is_directed())
-        self.weighted_checkbox.setChecked(getattr(graph, 'weighted', True))
-        self.directed_checkbox.blockSignals(False)
-        self.weighted_checkbox.blockSignals(False)
+        self.directed_switch.blockSignals(True)
+        self.weighted_switch.blockSignals(True)
+        self.directed_switch.setChecked(hasattr(graph, 'is_directed') and graph.is_directed())
+        self.weighted_switch.setChecked(getattr(graph, 'weighted', True))
+        self.directed_switch.blockSignals(False)
+        self.weighted_switch.blockSignals(False)
 
-    def toggle_directed(self, state):
-        is_directed = state == 2
+    def toggle_directed(self, checked):
+        is_directed = checked
         if hasattr(self.graph, 'is_directed') and self.graph.is_directed() == is_directed:
             return
         # Конвертація графа
@@ -65,8 +73,8 @@ class GraphSettingsWidget(QWidget):
                 self.graph = new_graph
         self.on_graph_changed(self.graph)
 
-    def toggle_weighted(self, state):
-        weighted = state == 2
+    def toggle_weighted(self, checked):
+        weighted = checked
         if getattr(self.graph, 'weighted', True) == weighted:
             return
         # Міняємо ваговість у графа
