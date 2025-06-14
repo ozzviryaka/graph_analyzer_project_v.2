@@ -1,11 +1,11 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QComboBox, QLabel, QTextEdit
 from PyQt5.QtCore import Qt
-from gui.widgets.traversal_widget import TraversalWidget
-from gui.widgets.spanning_tree_widget import SpanningTreeWidget
-from gui.widgets.flow_algorithms_widget import FlowAlgorithmsWidget
-from gui.widgets.shortest_paths_widget import ShortestPathsWidget
-from gui.widgets.special_paths_widget import SpecialPathsWidget
-from gui.widgets.analysis_output_controls import AnalysisOutputControls
+from gui.widgets.analysis_tab_widgets.traversal_widget import TraversalWidget
+from gui.widgets.analysis_tab_widgets.spanning_tree_widget import SpanningTreeWidget
+from gui.widgets.analysis_tab_widgets.flow_algorithms_widget import FlowAlgorithmsWidget
+from gui.widgets.analysis_tab_widgets.shortest_paths_widget import ShortestPathsWidget
+from gui.widgets.analysis_tab_widgets.special_paths_widget import SpecialPathsWidget
+from gui.widgets.analysis_tab_widgets.analysis_output_controls import AnalysisOutputControls
 
 class GraphAnalysisTab(QWidget):
     """

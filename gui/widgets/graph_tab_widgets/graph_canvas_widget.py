@@ -3,7 +3,7 @@ from PyQt5.QtCore import Qt
 from gui.additionals.graph_canvas import GraphCanvas
 from data_utils.graph_saver import GraphSaver
 from data_utils.graph_loader import GraphLoader
-from gui.widgets.graph_import_export_widget import GraphImportExportWidget
+from gui.widgets.graph_tab_widgets.graph_import_export_widget import GraphImportExportWidget
 from gui.dialogs.graph_select_dialog import GraphSelectDialog
 from gui.dialogs.instruction_dialog import InstructionDialog
 

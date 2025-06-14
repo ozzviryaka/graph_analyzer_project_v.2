@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout
-from gui.widgets.graph_canvas_widget import GraphCanvasWidget
-from gui.widgets.graph_info_export_widget import GraphInfoExportWidget
+from gui.widgets.graph_tab_widgets.graph_canvas_widget import GraphCanvasWidget
+from gui.widgets.graph_tab_widgets.graph_info_export_widget import GraphInfoExportWidget
 
 class GraphCombinedTab(QWidget):
     """

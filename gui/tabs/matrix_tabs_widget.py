@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QTableWidgetItem
 from core.algorithms.matrices.adjacency_matrix import AdjacencyMatrix
 from core.algorithms.matrices.incidence_matrix import IncidenceMatrix
-from gui.widgets.matrix_widget import MatrixWidget
+from gui.widgets.matrix_tab_widgets.matrix_widget import MatrixWidget
 
 class MatrixTabsWidget(QWidget):
     """
