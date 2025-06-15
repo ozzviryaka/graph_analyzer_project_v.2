@@ -61,6 +61,10 @@ class MatrixTabsWidget(QWidget):
                 item.setText(str(adj_matrix[i][j]))
         self.adj_widget.table.resizeColumnsToContents()
         self.adj_widget.table.resizeRowsToContents()
+        # Оновити дані експорту для матриці суміжності
+        self.adj_export_widget.matrix = adj_matrix
+        self.adj_export_widget.row_names = adj_labels
+        self.adj_export_widget.col_names = adj_labels
         # Оновити матрицю інцидентності
         inc_matrix_obj = IncidenceMatrix(graph)
         inc_matrix = inc_matrix_obj.get_matrix()
@@ -81,3 +85,7 @@ class MatrixTabsWidget(QWidget):
                 item.setText(str(inc_matrix[i][j]))
         self.inc_widget.table.resizeColumnsToContents()
         self.inc_widget.table.resizeRowsToContents()
+        # Оновити дані експорту для матриці інцидентності
+        self.inc_export_widget.matrix = inc_matrix
+        self.inc_export_widget.row_names = inc_row_labels
+        self.inc_export_widget.col_names = inc_col_labels
