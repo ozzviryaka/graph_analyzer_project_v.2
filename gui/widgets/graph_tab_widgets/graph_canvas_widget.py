@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QFileDialog
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QFileDialog
 from PyQt5.QtCore import Qt
 from gui.additionals.graph_canvas import GraphCanvas
 from data_utils.graph_saver import GraphSaver
