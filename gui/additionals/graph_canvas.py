@@ -9,6 +9,7 @@ from core.graph_components.directed_edge import DirectedEdge
 from core.graph_components.undirected_edge import UndirectedEdge
 from gui.dialogs.edge_edit_dialog import EdgeEditDialog
 from gui.dialogs.vertex_edit_dialog import VertexEditDialog
+from utils.undo_redo_manager import UndoRedoManager
 
 import math
 
@@ -32,6 +33,7 @@ class GraphCanvas(QWidget):
         self.on_graph_changed = on_graph_changed
         self.auto_vertex_name = True  # За замовчуванням автоназва
         self._hovered_node_id = None  # Для локального tooltip
+        self.undo_redo_manager = UndoRedoManager()
 
     def _init_node_positions(self):
         # Якщо у графа вже є node_positions — використовуємо їх
@@ -82,6 +84,7 @@ class GraphCanvas(QWidget):
                     n += 1
                 node_id = f"V{n}"
         node = Node(node_id, data, (pos.x(), pos.y()) if pos is not None else None)
+        prev_graph_state = self.graph.copy() if hasattr(self.graph, 'copy') else None
         self.graph.add_node(node)
         if pos is not None:
             self.node_positions[node_id] = QPointF(pos)
@@ -92,6 +95,23 @@ class GraphCanvas(QWidget):
         self.update()
         if self.on_graph_changed:
             self.on_graph_changed(self.graph)
+        def undo():
+            self.graph._nodes.pop(node_id, None)
+            self.node_positions.pop(node_id, None)
+            self.update_graph_positions()
+            self.sanitize_adjacency()
+            self.update()
+            if self.on_graph_changed:
+                self.on_graph_changed(self.graph)
+        def redo():
+            self.graph.add_node(node)
+            self.node_positions[node_id] = QPointF(pos) if pos is not None else self.node_positions[node_id]
+            self.update_graph_positions()
+            self.sanitize_adjacency()
+            self.update()
+            if self.on_graph_changed:
+                self.on_graph_changed(self.graph)
+        self.undo_redo_manager.push(redo, undo)
 
     def mousePressEvent(self, event):
         pos = event.pos()
@@ -362,9 +382,34 @@ class GraphCanvas(QWidget):
         self.update()
         if self.on_graph_changed:
             self.on_graph_changed(self.graph)
+        def undo():
+            self.graph._edges = [e for e in self.graph._edges if not ((e.source.id == source_id and e.target.id == target_id) or (not hasattr(self.graph, 'is_directed') or not self.graph.is_directed()) and (e.source.id == target_id and e.target.id == source_id))]
+            self.sanitize_adjacency()
+            self.update()
+            if self.on_graph_changed:
+                self.on_graph_changed(self.graph)
+        def redo():
+            if hasattr(self.graph, 'is_directed') and self.graph.is_directed():
+                edge = DirectedEdge(src, tgt, weight, data)
+            else:
+                edge = UndirectedEdge(src, tgt, weight, data)
+            self.graph.add_edge(edge)
+            self.sanitize_adjacency()
+            self.update()
+            if self.on_graph_changed:
+                self.on_graph_changed(self.graph)
+        self.undo_redo_manager.push(redo, undo)
 
     def remove_node(self, node_id):
         # Видалення вузла (та всіх інцидентних ребер)
+        import copy
+        node = next((n for n in self.graph.nodes() if n.id == node_id), None)
+        if node is not None:
+            node_copy = copy.deepcopy(node)
+            edges_copy = [copy.deepcopy(e) for e in self.graph.edges() if e.source.id == node_id or e.target.id == node_id]
+        else:
+            node_copy = None
+            edges_copy = []
         if hasattr(self.graph, '_nodes') and node_id in self.graph._nodes:
             del self.graph._nodes[node_id]
             if hasattr(self.graph, '_adjacency'):
@@ -376,13 +421,48 @@ class GraphCanvas(QWidget):
                 self.graph._edges = [e for e in self.graph._edges if e.source.id != node_id and e.target.id != node_id]
             self.node_positions.pop(node_id, None)
             # Видаляємо pos у Node
-            node = next((n for n in self.graph.nodes() if n.id == node_id), None)
             if node is not None:
                 node.set_pos(None)
             self.update_graph_positions()
             self.update()
             if self.on_graph_changed:
                 self.on_graph_changed(self.graph)
+        def undo():
+            if node_copy is not None:
+                self.graph.add_node(node_copy)
+                if hasattr(self.graph, '_adjacency'):
+                    for n_id in self.graph._nodes:
+                        if n_id not in self.graph._adjacency:
+                            self.graph._adjacency[n_id] = set()
+                self.node_positions[node_id] = QPointF(*node_copy.pos) if hasattr(node_copy, 'pos') and node_copy.pos else QPointF(0,0)
+                self.update_graph_positions()
+                for e in edges_copy:
+                    if e.source.id in self.graph._nodes and e.target.id in self.graph._nodes:
+                        if e not in self.graph.edges():
+                            self.graph.add_edge(e)
+                        if hasattr(self.graph, '_adjacency'):
+                            self.graph._adjacency.setdefault(e.source.id, set()).add(e.target.id)
+                            self.graph._adjacency.setdefault(e.target.id, set()).add(e.source.id)
+                self.sanitize_adjacency()
+                self.update()
+                if self.on_graph_changed:
+                    self.on_graph_changed(self.graph)
+        def redo():
+            if hasattr(self.graph, '_nodes') and node_id in self.graph._nodes:
+                del self.graph._nodes[node_id]
+                if hasattr(self.graph, '_adjacency'):
+                    self.graph._adjacency.pop(node_id, None)
+                    for adj in self.graph._adjacency.values():
+                        adj.discard(node_id)
+                if hasattr(self.graph, '_edges'):
+                    self.graph._edges = [e for e in self.graph._edges if e.source.id != node_id and e.target.id != node_id]
+                self.node_positions.pop(node_id, None)
+                self.update_graph_positions()
+                self.sanitize_adjacency()
+                self.update()
+                if self.on_graph_changed:
+                    self.on_graph_changed(self.graph)
+        self.undo_redo_manager.push(undo, redo)
 
     def remove_edge(self, source_id, target_id):
         # Видаляє ребро між source_id і target_id
@@ -391,6 +471,23 @@ class GraphCanvas(QWidget):
             self.update()
             if self.on_graph_changed:
                 self.on_graph_changed(self.graph)
+        edge = next((e for e in self.graph.edges() if (e.source.id == source_id and e.target.id == target_id) or (not hasattr(self.graph, 'is_directed') or not self.graph.is_directed()) and (e.source.id == target_id and e.target.id == source_id)), None)
+        import copy
+        edge_copy = copy.deepcopy(edge) if edge else None
+        def undo():
+            if edge_copy:
+                self.graph.add_edge(edge_copy)
+                self.sanitize_adjacency()
+                self.update()
+                if self.on_graph_changed:
+                    self.on_graph_changed(self.graph)
+        def redo():
+            self.graph._edges = [e for e in self.graph._edges if not ((e.source.id == source_id and e.target.id == target_id) or (not hasattr(self.graph, 'is_directed') or not self.graph.is_directed()) and (e.source.id == target_id and e.target.id == source_id))]
+            self.sanitize_adjacency()
+            self.update()
+            if self.on_graph_changed:
+                self.on_graph_changed(self.graph)
+        self.undo_redo_manager.push(redo, undo)
 
     def edit_edge_weight(self, source_id, target_id, new_weight):
         # Редагує вагу ребра
@@ -400,6 +497,23 @@ class GraphCanvas(QWidget):
         self.update()
         if self.on_graph_changed:
             self.on_graph_changed(self.graph)
+        edge = next((e for e in self.graph.edges() if (e.source.id == source_id and e.target.id == target_id) or (not hasattr(self.graph, 'is_directed') or not self.graph.is_directed()) and (e.source.id == target_id and e.target.id == source_id)), None)
+        old_weight = edge._weight if edge else None
+        def undo():
+            if edge:
+                edge._weight = old_weight
+                self.sanitize_adjacency()
+                self.update()
+                if self.on_graph_changed:
+                    self.on_graph_changed(self.graph)
+        def redo():
+            if edge:
+                edge._weight = new_weight
+                self.sanitize_adjacency()
+                self.update()
+                if self.on_graph_changed:
+                    self.on_graph_changed(self.graph)
+        self.undo_redo_manager.push(redo, undo)
 
     def show_instruction(self):
         msg = QMessageBox(self)
@@ -441,3 +555,8 @@ class GraphCanvas(QWidget):
             node = next((n for n in self.graph.nodes() if n.id == node_id), None)
             if node is not None:
                 node.set_pos((pos.x(), pos.y()))
+
+    def sanitize_adjacency(self):
+        if hasattr(self.graph, '_adjacency'):
+            for n_id, neighbors in self.graph._adjacency.items():
+                self.graph._adjacency[n_id] = {x for x in neighbors if x in self.graph._nodes}
