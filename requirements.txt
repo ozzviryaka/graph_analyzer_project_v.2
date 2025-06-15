@@ -6,3 +6,5 @@ collections
 PyQt5
 numpy
 math
+matplotlib
+typing
