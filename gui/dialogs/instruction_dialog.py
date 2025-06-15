@@ -48,3 +48,12 @@ class InstructionDialog(QDialog):
         ok_btn.clicked.connect(self.accept)
         layout.addWidget(ok_btn)
         self.setLayout(layout)
+
+    def keyPressEvent(self, event):
+        from PyQt5.QtCore import Qt
+        if event.key() in (Qt.Key_Return, Qt.Key_Enter):
+            for btn in self.findChildren(QPushButton):
+                if btn.text().lower() in ["ok", "вибрати"]:
+                    btn.click()
+                    return
+        super().keyPressEvent(event)

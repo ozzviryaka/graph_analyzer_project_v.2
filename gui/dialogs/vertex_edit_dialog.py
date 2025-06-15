@@ -102,3 +102,12 @@ class VertexEditDialog(QDialog):
         node_info = f" (id: {self.node_id})" if self.node_id is not None else ""
         Logger().info(f"Дані вершини{node_info} після редагування: {data}")
         super().accept()
+
+    def keyPressEvent(self, event):
+        from PyQt5.QtCore import Qt
+        if event.key() in (Qt.Key_Return, Qt.Key_Enter):
+            for btn in self.findChildren(QPushButton):
+                if btn.text().lower() in ["ok", "вибрати"]:
+                    btn.click()
+                    return
+        super().keyPressEvent(event)
