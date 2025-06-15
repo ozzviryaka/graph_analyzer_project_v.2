@@ -1,3 +1,4 @@
+from utils.logger import Logger
 from .dark_theme import DarkTheme
 from .light_theme import LightTheme
 from .green_theme import GreenTheme
@@ -10,6 +11,8 @@ class ThemeManager:
 
     @classmethod
     def apply_theme(cls, theme):
+        logger = Logger()
+        logger.info(f"Зміна теми на: {theme.__name__ if hasattr(theme, '__name__') else str(theme)}")
         cls._current_theme = theme
         theme.apply()
 
