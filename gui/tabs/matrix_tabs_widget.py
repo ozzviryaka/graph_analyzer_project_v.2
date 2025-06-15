@@ -22,7 +22,7 @@ class MatrixTabsWidget(QWidget):
         inc_matrix_obj = IncidenceMatrix(graph)
         inc_matrix = inc_matrix_obj.get_matrix()
         inc_row_labels = [node.id for node in inc_matrix_obj.nodes]
-        inc_col_labels = [f"e{i+1}" for i in range(len(inc_matrix_obj.edges))] if hasattr(inc_matrix_obj, 'edges') else None
+        inc_col_labels = [f"E{i+1}" for i in range(len(inc_matrix_obj.edges))] if hasattr(inc_matrix_obj, 'edges') else None
         self.inc_widget = MatrixWidget(inc_matrix, row_labels=inc_row_labels, col_labels=inc_col_labels, title="Матриця інцидентності")
         self.inc_export_widget = IncidenceMatrixExportWidget(inc_matrix, row_names=inc_row_labels, col_names=inc_col_labels)
         # Додаємо віджети у вкладки
