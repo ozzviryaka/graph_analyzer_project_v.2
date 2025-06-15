@@ -24,6 +24,11 @@ class GraphSelectDialog(QDialog):
         btn_layout.addWidget(self.btn_new)
         btn_layout.addWidget(self.btn_delete)
         btn_layout.addWidget(self.btn_select)
+        # Додаємо кнопки для експорту та імпорту сесії
+        self.btn_export_session = QPushButton("Експорт сесії")
+        self.btn_import_session = QPushButton("Імпорт сесії")
+        btn_layout.addWidget(self.btn_export_session)
+        btn_layout.addWidget(self.btn_import_session)
         layout.addLayout(btn_layout)
 
         self.setLayout(layout)
@@ -31,6 +36,8 @@ class GraphSelectDialog(QDialog):
         self.btn_new.clicked.connect(self.create_new_graph)
         self.btn_delete.clicked.connect(self.delete_graph)
         self.btn_select.clicked.connect(self.select_graph)
+        self.btn_export_session.clicked.connect(self.export_session)
+        self.btn_import_session.clicked.connect(self.import_session)
 
         # Встановити поточний граф як вибраний
         self.set_current_graph_selected()
@@ -107,3 +114,29 @@ class GraphSelectDialog(QDialog):
             self.accept()
         else:
             QMessageBox.warning(self, "Вибір", "Оберіть граф зі списку.")
+
+    def export_session(self):
+        from data_utils.session_exporter import SessionExporter
+        from PyQt5.QtWidgets import QFileDialog
+        filepath, _ = QFileDialog.getSaveFileName(self, "Експортувати сесію", "", "Session Files (*.json)")
+        if filepath:
+            SessionExporter.export_session(self.graph_list, filepath)
+
+    def import_session(self):
+        from data_utils.session_importer import SessionImporter
+        from core.graph_models.directed_graph import DirectedGraph
+        from core.graph_models.undirected_graph import UndirectedGraph
+        from PyQt5.QtWidgets import QFileDialog
+        filepath, _ = QFileDialog.getOpenFileName(self, "Імпортувати сесію", "", "Session Files (*.json)")
+        if filepath:
+            graph_class_map = {
+                'DirectedGraph': DirectedGraph,
+                'UndirectedGraph': UndirectedGraph,
+                'Graph': UndirectedGraph  # fallback
+            }
+            imported_graphs = SessionImporter.import_session(filepath, graph_class_map)
+            if imported_graphs:
+                self.graph_list.clear()
+                self.graph_list.extend(imported_graphs)
+                self.refresh_list()
+                self.set_current_graph_selected()

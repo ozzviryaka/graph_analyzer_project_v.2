@@ -1,4 +1,7 @@
 import json
+from core.graph_components.node import Node
+from core.graph_components.directed_edge import DirectedEdge
+from core.graph_components.undirected_edge import UndirectedEdge
 
 class SessionImporter:
     @staticmethod
@@ -18,6 +21,22 @@ class SessionImporter:
             g = cls()
             g.name = gdata.get('name')
             g.directed = gdata.get('directed')
-            # Відновлення вузлів та ребер користувач має реалізувати згідно своєї моделі
+            node_map = {}
+            # Відновлюємо вузли
+            for n in gdata.get('nodes', []):
+                node = Node(n['id'], n.get('data'), n.get('pos'))
+                g.add_node(node)
+                node_map[n['id']] = node
+            # Відновлюємо ребра
+            for e in gdata.get('edges', []):
+                src = node_map.get(e['source'])
+                tgt = node_map.get(e['target'])
+                if not src or not tgt:
+                    continue
+                if g.directed:
+                    edge = DirectedEdge(src, tgt, e.get('weight', 1), e.get('data'))
+                else:
+                    edge = UndirectedEdge(src, tgt, e.get('weight', 1), e.get('data'))
+                g.add_edge(edge)
             graphs.append(g)
         return graphs
