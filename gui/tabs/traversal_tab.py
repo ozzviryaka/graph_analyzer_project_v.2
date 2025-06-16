@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTextEdit
-from gui.widgets.traversal_control_widget import TraversalControlWidget
+from gui.widgets.traversal_tab_widgets.traversal_control_widget import TraversalControlWidget
 from core.algorithms.traversal.traversal_algorithms import GraphTraversal
 from PyQt5.QtCore import QTimer
 
