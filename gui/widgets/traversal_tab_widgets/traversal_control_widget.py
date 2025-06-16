@@ -21,7 +21,7 @@ class TraversalControlWidget(QWidget):
         self.update_vertex_list()
         self.start_btn = QPushButton('Запустити', self)
         self.stop_btn = QPushButton('Стоп', self)
-        self.status_label = QLabel('', self)
+        self.status_label = None  # Видалено статус-лейбл
         self._setup_layout()
         # Тут можна додати підключення сигналів до методів запуску/зупинки
 
@@ -58,5 +58,5 @@ class TraversalControlWidget(QWidget):
         hbox.addWidget(self.stop_btn)
         vbox.addLayout(hbox)
         vbox.addWidget(self.canvas)
-        vbox.addWidget(self.status_label)
+        # vbox.addWidget(self.status_label)  # Видалено статус-лейбл
         self.setLayout(vbox)

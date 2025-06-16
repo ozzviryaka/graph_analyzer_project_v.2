@@ -9,6 +9,10 @@ class ReadOnlyGraphCanvas(GraphCanvas):
     """
     def __init__(self, graph, parent=None):
         super().__init__(graph, parent)
+        self.undo_btn.deleteLater()
+        self.undo_btn = None
+        self.redo_btn.deleteLater()
+        self.redo_btn = None
         # Додаємо кнопки Undo/Redo на саме полотно
         self.undo_btn = QPushButton('↶', self)
         self.redo_btn = QPushButton('↷', self)
