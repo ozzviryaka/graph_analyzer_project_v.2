@@ -18,68 +18,50 @@ class ThemeSelectDialog(QDialog):
         super().__init__(parent)
         self.setWindowTitle("Вибір теми")
         layout = QVBoxLayout()
-        layout.addWidget(QLabel("Оберіть тему інтерфейсу:"))
-        self.combo = QComboBox()
-        self.combo.addItem("Темна")
-        self.combo.addItem("Світла")
-        self.combo.addItem("Зелена")
-        self.combo.addItem("Синя")
-        self.combo.addItem("Червона")
-        self.combo.addItem("Жовта")
-        self.combo.addItem("Сучасна темна")
-        self.combo.addItem("Сучасна світла")
-        self.combo.addItem("Сучасна зелена")
-        self.combo.addItem("Сучасна синя")
-        self.combo.addItem("Сучасна червона")
-        self.combo.addItem("Сучасна жовта")
-        layout.addWidget(self.combo)
+        layout.addWidget(QLabel("Оберіть стиль теми:"))
+        self.style_combo = QComboBox()
+        self.style_combo.addItems(["Сучасна", "Класична"])
+        layout.addWidget(self.style_combo)
+        layout.addWidget(QLabel("Оберіть колір теми:"))
+        self.color_combo = QComboBox()
+        self.color_combo.addItems([
+            "Темна", "Світла", "Зелена", "Синя", "Червона", "Жовта"
+        ])
+        layout.addWidget(self.color_combo)
         ok_btn = QPushButton("OK")
         ok_btn.clicked.connect(self.apply_theme)
         layout.addWidget(ok_btn)
         self.setLayout(layout)
-        # Встановити поточну тему у комбобокс
+        self.style_combo.currentIndexChanged.connect(self.update_color_combo)
+        self.update_color_combo()
+        # Встановити поточну тему у комбобоксах
         current = ThemeManager.current_theme()
-        if current is LightTheme:
-            self.combo.setCurrentIndex(1)
-        elif current is GreenTheme:
-            self.combo.setCurrentIndex(2)
-        elif current is BlueTheme:
-            self.combo.setCurrentIndex(3)
-        elif current is RedTheme:
-            self.combo.setCurrentIndex(4)
-        elif current is YellowTheme:
-            self.combo.setCurrentIndex(5)
-        elif current is ModernDarkTheme:
-            self.combo.setCurrentIndex(6)
-        elif current is ModernLightTheme:
-            self.combo.setCurrentIndex(7)
-        elif current is ModernGreenTheme:
-            self.combo.setCurrentIndex(8)
-        elif current is ModernBlueTheme:
-            self.combo.setCurrentIndex(9)
-        elif current is ModernRedTheme:
-            self.combo.setCurrentIndex(10)
-        elif current is ModernYellowTheme:
-            self.combo.setCurrentIndex(11)
+        modern_map = {
+            ModernDarkTheme: (0, 0), ModernLightTheme: (0, 1), ModernGreenTheme: (0, 2), ModernBlueTheme: (0, 3), ModernRedTheme: (0, 4), ModernYellowTheme: (0, 5)
+        }
+        classic_map = {
+            DarkTheme: (1, 0), LightTheme: (1, 1), GreenTheme: (1, 2), BlueTheme: (1, 3), RedTheme: (1, 4), YellowTheme: (1, 5)
+        }
+        idxs = modern_map.get(current) or classic_map.get(current) or (0, 0)
+        self.style_combo.setCurrentIndex(idxs[0])
+        self.color_combo.setCurrentIndex(idxs[1])
+
+    def update_color_combo(self):
+        style = self.style_combo.currentIndex()
+        self.color_combo.clear()
+        if style == 0:
+            self.color_combo.addItems(["Темна", "Світла", "Зелена", "Синя", "Червона", "Жовта"])
         else:
-            self.combo.setCurrentIndex(0)
+            self.color_combo.addItems(["Темна", "Світла", "Зелена", "Синя", "Червона", "Жовта"])
 
     def apply_theme(self):
-        idx = self.combo.currentIndex()
-        if idx == 0:
-            ThemeManager.apply_theme(ModernDarkTheme)
-        elif idx == 1:
-            ThemeManager.apply_theme(ModernLightTheme)
-        elif idx == 2:
-            ThemeManager.apply_theme(ModernGreenTheme)
-        elif idx == 3:
-            ThemeManager.apply_theme(ModernBlueTheme)
-        elif idx == 4:
-            ThemeManager.apply_theme(ModernRedTheme)
-        elif idx == 5:
-            ThemeManager.apply_theme(ModernYellowTheme)
+        style = self.style_combo.currentIndex()
+        color = self.color_combo.currentIndex()
+        if style == 0:
+            theme_list = [ModernDarkTheme, ModernLightTheme, ModernGreenTheme, ModernBlueTheme, ModernRedTheme, ModernYellowTheme]
         else:
-            ThemeManager.apply_theme(DarkTheme)
+            theme_list = [DarkTheme, LightTheme, GreenTheme, BlueTheme, RedTheme, YellowTheme]
+        ThemeManager.apply_theme(theme_list[color])
         self.accept()
 
     def keyPressEvent(self, event):
