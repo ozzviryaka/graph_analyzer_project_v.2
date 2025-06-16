@@ -16,6 +16,8 @@ class ReadOnlyGraphCanvas(GraphCanvas):
         self.redo_btn.setToolTip('Redo (Ctrl+Y)')
         self.undo_btn.setFixedSize(28, 28)
         self.redo_btn.setFixedSize(28, 28)
+        self.undo_btn.setStyleSheet('color: #f5f5f5; background: #23232a; border-radius: 6px; border: 1.5px solid #23232a; padding: 0 2px; font-size: 14px; min-width: 0; min-height: 0;')
+        self.redo_btn.setStyleSheet('color: #f5f5f5; background: #23232a; border-radius: 6px; border: 1.5px solid #23232a; padding: 0 2px; font-size: 14px; min-width: 0; min-height: 0;')
         self.undo_btn.show()
         self.redo_btn.show()
         self._highlighted_nodes = set()  # Множина id вершин для підсвічування

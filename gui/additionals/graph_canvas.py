@@ -49,6 +49,8 @@ class GraphCanvas(QWidget):
         self.redo_btn.raise_()
         # Викликаємо оновлення кнопок після їх створення
         self._update_undo_redo_buttons()
+        self.undo_btn.setStyleSheet('color: #f5f5f5; background: #23232a; border-radius: 6px; border: 1.5px solid #23232a; padding: 0 2px; font-size: 14px; min-width: 0; min-height: 0;')
+        self.redo_btn.setStyleSheet('color: #f5f5f5; background: #23232a; border-radius: 6px; border: 1.5px solid #23232a; padding: 0 2px; font-size: 14px; min-width: 0; min-height: 0;')
 
     def _init_node_positions(self):
         # Якщо у графа вже є node_positions — використовуємо їх
