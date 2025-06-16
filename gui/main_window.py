@@ -7,7 +7,7 @@ from core.graph_models.undirected_graph import UndirectedGraph
 from PyQt5.QtGui import QPalette, QColor, QIcon
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QStyleFactory
-from gui.themes.dark_theme import DarkTheme
+from gui.themes.classic.dark_theme import DarkTheme
 from gui.themes.theme_manager import ThemeManager
 from gui.additionals.tab_shortcut_event_filter import TabShortcutEventFilter
 

@@ -1,16 +1,16 @@
 from utils.logger import Logger
-from .dark_theme import DarkTheme
-from .light_theme import LightTheme
-from .green_theme import GreenTheme
-from .blue_theme import BlueTheme
-from .red_theme import RedTheme
-from .yellow_theme import YellowTheme
-from .modern_dark_theme import ModernDarkTheme
-from .modern_light_theme import ModernLightTheme
-from .modern_green_theme import ModernGreenTheme
-from .modern_blue_theme import ModernBlueTheme
-from .modern_red_theme import ModernRedTheme
-from .modern_yellow_theme import ModernYellowTheme
+from .classic.dark_theme import DarkTheme
+from .classic.light_theme import LightTheme
+from .classic.green_theme import GreenTheme
+from .classic.blue_theme import BlueTheme
+from .classic.red_theme import RedTheme
+from .classic.yellow_theme import YellowTheme
+from .modern.modern_dark_theme import ModernDarkTheme
+from .modern.modern_light_theme import ModernLightTheme
+from .modern.modern_green_theme import ModernGreenTheme
+from .modern.modern_blue_theme import ModernBlueTheme
+from .modern.modern_red_theme import ModernRedTheme
+from .modern.modern_yellow_theme import ModernYellowTheme
 import os
 import json
 

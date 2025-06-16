@@ -1,17 +1,17 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton
-from gui.themes.dark_theme import DarkTheme
-from gui.themes.light_theme import LightTheme
-from gui.themes.green_theme import GreenTheme
-from gui.themes.blue_theme import BlueTheme
-from gui.themes.red_theme import RedTheme
-from gui.themes.yellow_theme import YellowTheme
+from gui.themes.classic.dark_theme import DarkTheme
+from gui.themes.classic.light_theme import LightTheme
+from gui.themes.classic.green_theme import GreenTheme
+from gui.themes.classic.blue_theme import BlueTheme
+from gui.themes.classic.red_theme import RedTheme
+from gui.themes.classic.yellow_theme import YellowTheme
 from gui.themes.theme_manager import ThemeManager
-from gui.themes.modern_dark_theme import ModernDarkTheme
-from gui.themes.modern_light_theme import ModernLightTheme
-from gui.themes.modern_green_theme import ModernGreenTheme
-from gui.themes.modern_blue_theme import ModernBlueTheme
-from gui.themes.modern_red_theme import ModernRedTheme
-from gui.themes.modern_yellow_theme import ModernYellowTheme
+from gui.themes.modern.modern_dark_theme import ModernDarkTheme
+from gui.themes.modern.modern_light_theme import ModernLightTheme
+from gui.themes.modern.modern_green_theme import ModernGreenTheme
+from gui.themes.modern.modern_blue_theme import ModernBlueTheme
+from gui.themes.modern.modern_red_theme import ModernRedTheme
+from gui.themes.modern.modern_yellow_theme import ModernYellowTheme
 
 class ThemeSelectDialog(QDialog):
     def __init__(self, parent=None):
