@@ -9,6 +9,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QStyleFactory
 from gui.themes.dark_theme import DarkTheme
 from gui.themes.theme_manager import ThemeManager
+from gui.additionals.tab_shortcut_event_filter import TabShortcutEventFilter
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
@@ -45,6 +46,11 @@ class MainWindow(QMainWindow):
         if hasattr(self.tabs.combined_tab.canvas_widget, 'set_graphs_list'):
             self.tabs.combined_tab.canvas_widget.set_graphs_list(self.graphs, self)
         self.settings_widget.auto_vertex_name_switch.toggled.connect(self.on_auto_vertex_name_changed)
+        # Додаємо фільтр для Alt+1..9
+        tab_widget = self.tabs.tabs if hasattr(self.tabs, 'tabs') else None
+        if tab_widget:
+            self.tab_shortcut_filter = TabShortcutEventFilter(self, tab_widget)
+            self.installEventFilter(self.tab_shortcut_filter)
 
     def on_graph_changed(self, new_graph):
         # Якщо новий граф є у списку, зробити його активним
