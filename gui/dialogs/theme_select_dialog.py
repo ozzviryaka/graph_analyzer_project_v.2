@@ -7,6 +7,11 @@ from gui.themes.red_theme import RedTheme
 from gui.themes.yellow_theme import YellowTheme
 from gui.themes.theme_manager import ThemeManager
 from gui.themes.modern_dark_theme import ModernDarkTheme
+from gui.themes.modern_light_theme import ModernLightTheme
+from gui.themes.modern_green_theme import ModernGreenTheme
+from gui.themes.modern_blue_theme import ModernBlueTheme
+from gui.themes.modern_red_theme import ModernRedTheme
+from gui.themes.modern_yellow_theme import ModernYellowTheme
 
 class ThemeSelectDialog(QDialog):
     def __init__(self, parent=None):
@@ -22,6 +27,11 @@ class ThemeSelectDialog(QDialog):
         self.combo.addItem("Червона")
         self.combo.addItem("Жовта")
         self.combo.addItem("Сучасна темна")
+        self.combo.addItem("Сучасна світла")
+        self.combo.addItem("Сучасна зелена")
+        self.combo.addItem("Сучасна синя")
+        self.combo.addItem("Сучасна червона")
+        self.combo.addItem("Сучасна жовта")
         layout.addWidget(self.combo)
         ok_btn = QPushButton("OK")
         ok_btn.clicked.connect(self.apply_theme)
@@ -41,23 +51,33 @@ class ThemeSelectDialog(QDialog):
             self.combo.setCurrentIndex(5)
         elif current is ModernDarkTheme:
             self.combo.setCurrentIndex(6)
+        elif current is ModernLightTheme:
+            self.combo.setCurrentIndex(7)
+        elif current is ModernGreenTheme:
+            self.combo.setCurrentIndex(8)
+        elif current is ModernBlueTheme:
+            self.combo.setCurrentIndex(9)
+        elif current is ModernRedTheme:
+            self.combo.setCurrentIndex(10)
+        elif current is ModernYellowTheme:
+            self.combo.setCurrentIndex(11)
         else:
             self.combo.setCurrentIndex(0)
 
     def apply_theme(self):
         idx = self.combo.currentIndex()
-        if idx == 1:
-            ThemeManager.apply_theme(LightTheme)
-        elif idx == 2:
-            ThemeManager.apply_theme(GreenTheme)
-        elif idx == 3:
-            ThemeManager.apply_theme(BlueTheme)
-        elif idx == 4:
-            ThemeManager.apply_theme(RedTheme)
-        elif idx == 5:
-            ThemeManager.apply_theme(YellowTheme)
-        elif idx == 6:
+        if idx == 0:
             ThemeManager.apply_theme(ModernDarkTheme)
+        elif idx == 1:
+            ThemeManager.apply_theme(ModernLightTheme)
+        elif idx == 2:
+            ThemeManager.apply_theme(ModernGreenTheme)
+        elif idx == 3:
+            ThemeManager.apply_theme(ModernBlueTheme)
+        elif idx == 4:
+            ThemeManager.apply_theme(ModernRedTheme)
+        elif idx == 5:
+            ThemeManager.apply_theme(ModernYellowTheme)
         else:
             ThemeManager.apply_theme(DarkTheme)
         self.accept()

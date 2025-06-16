@@ -6,6 +6,11 @@ from .blue_theme import BlueTheme
 from .red_theme import RedTheme
 from .yellow_theme import YellowTheme
 from .modern_dark_theme import ModernDarkTheme
+from .modern_light_theme import ModernLightTheme
+from .modern_green_theme import ModernGreenTheme
+from .modern_blue_theme import ModernBlueTheme
+from .modern_red_theme import ModernRedTheme
+from .modern_yellow_theme import ModernYellowTheme
 import os
 import json
 
@@ -67,5 +72,10 @@ class ThemeManager:
             'blue': BlueTheme,
             'red': RedTheme,
             'yellow': YellowTheme,
-            'modern_dark': ModernDarkTheme
+            'modern_dark': ModernDarkTheme,
+            'modern_light': ModernLightTheme,
+            'modern_green': ModernGreenTheme,
+            'modern_blue': ModernBlueTheme,
+            'modern_red': ModernRedTheme,
+            'modern_yellow': ModernYellowTheme
         }
