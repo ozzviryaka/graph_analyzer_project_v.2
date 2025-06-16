@@ -14,8 +14,8 @@ from gui.additionals.tab_shortcut_event_filter import TabShortcutEventFilter
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        ThemeManager.apply_theme(DarkTheme)
-        # self.set_dark_theme()  # Видалено старий виклик
+        ThemeManager.load_theme()  # Завантажити тему з settings.json
+        # ThemeManager.apply_theme(DarkTheme)  # Видалено, тепер тема зберігається
         self.setWindowTitle("G_A_P_V.2")
         self.setWindowIcon(QIcon("res/icon.png"))
         self.setMinimumSize(1100, 700)
