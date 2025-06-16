@@ -41,7 +41,6 @@ class ModernDarkTheme:
                 border-radius: 7px;
                 border: 1.5px solid #23232a;
                 padding: 5px 10px;
-                transition: border 0.2s;
             }
             QPushButton:hover, QComboBox:hover, QLineEdit:hover, QTextEdit:hover, QPlainTextEdit:hover {
                 background-color: #232a36;
