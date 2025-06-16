@@ -1,0 +1,418 @@
+{
+  "toggle_switch": {
+    "on": "Увімкнено",
+    "off": "Вимкнено"
+  },
+  "tab_shortcut_event_filter": {
+    "tab_switch_hint": "Перемикання вкладок Alt+1 ... Alt+9"
+  },
+  "readonly_graph_canvas": {
+    "undo": "Скасувати (Ctrl+Z)",
+    "redo": "Повернути (Ctrl+Y)",
+    "undo_tooltip": "Скасувати останню дію (Undo, Ctrl+Z)",
+    "redo_tooltip": "Повернути дію (Redo, Ctrl+Y)"
+  },
+  "graph_canvas": {
+    "undo": "Скасувати (Ctrl+Z)",
+    "redo": "Повернути (Ctrl+Y)",
+    "undo_tooltip": "Скасувати останню дію (Undo, Ctrl+Z)",
+    "redo_tooltip": "Повернути дію (Redo, Ctrl+Y)",
+    "error": "Помилка",
+    "input": "Введення"
+  },
+  "vertex_edit_dialog": {
+    "title": "Редагування вершини",
+    "name": "Назва вершини:",
+    "extra_data": "Додаткові дані вершини (ключ-значення):",
+    "key": "Ключ:",
+    "value": "Значення:",
+    "ok": "OK",
+    "cancel": "Скасувати"
+  },
+  "edge_edit_dialog": {
+    "title": "Додавання/Редагування ребра",
+    "weight": "Вага ребра:",
+    "extra_data": "Додаткові дані (ключ-значення):",
+    "ok": "OK",
+    "cancel": "Скасувати"
+  },
+  "theme_select_dialog": {
+    "title": "Вибір теми",
+    "select_style": "Оберіть стиль теми:",
+    "select_color": "Оберіть колір теми:",
+    "modern": "Сучасна",
+    "classic": "Класична",
+    "dark": "Темна",
+    "light": "Світла",
+    "green": "Зелена",
+    "blue": "Синя",
+    "red": "Червона",
+    "yellow": "Жовта",
+    "ok": "OK"
+  },
+  "instruction_dialog": {
+    "title": "Інструкція",
+    "ok": "OK"
+  },
+  "graph_select_dialog": {
+    "title": "Вибір графа",
+    "select_graph": "Оберіть граф для роботи:",
+    "new_graph": "Новий граф",
+    "delete_graph": "Видалити граф",
+    "select": "Вибрати",
+    "export_session": "Експорт сесії",
+    "import_session": "Імпорт сесії"
+  },
+  "traversal_tab": {
+    "empty_graph": "Граф порожній",
+    "select_start": "Оберіть початкову вершину"
+  },
+  "matrix_tabs_widget": {
+    "adjacency": "Суміжності",
+    "incidence": "Інцидентності",
+    "adj_title": "Матриця суміжності",
+    "inc_title": "Матриця інцидентності"
+  },
+  "graph_tabs_widget": {
+    "tab_graph_info": "Граф та інформація",
+    "tab_matrices": "Матриці",
+    "tab_analysis": "Аналіз графа",
+    "tab_traversal": "Обхід графа"
+  },
+  "graph_combined_tab": {
+    "canvas": "Полотно графа",
+    "info": "Інформація про граф"
+  },
+  "graph_analysis_tab": {
+    "title": "Аналіз графа",
+    "alg_traversal": "Обхід графа (BFS/DFS)",
+    "alg_spanning": "Остовні дерева (Прим/Краскал)",
+    "alg_flow": "Потокові алгоритми (Ford-Fulkerson/Min-Cut)",
+    "alg_shortest": "Найкоротші шляхи (Дейкстра/Беллман-Форд/Флойд-Уоршелл)",
+    "alg_special": "Спеціальні шляхи (простий/найдовший/гамільтонів/ейлерів)"
+  },
+  "theme_manager": {
+    "dark": "Темна",
+    "light": "Світла",
+    "green": "Зелена",
+    "blue": "Синя",
+    "red": "Червона",
+    "yellow": "Жовта",
+    "modern_dark": "Сучасна темна",
+    "modern_light": "Сучасна світла",
+    "modern_green": "Сучасна зелена",
+    "modern_blue": "Сучасна синя",
+    "modern_red": "Сучасна червона",
+    "modern_yellow": "Сучасна жовта",
+    "change_theme": "Зміна теми",
+    "error_save": "Не вдалося зберегти тему"
+  },
+  "graph_settings_widget": {
+    "select_graph": "Вибрати граф",
+    "directed": "Орієнтований граф",
+    "weighted": "Ваговий граф",
+    "auto_vertex_name": "Автоматична назва вершини",
+    "select_theme": "Вибрати тему",
+    "instruction": "Інструкція"
+  },
+  "graph_info_export_widget": {
+    "export_txt": "Експортувати у .txt",
+    "save_as_txt": "Зберегти як .txt"
+  },
+  "graph_import_export_widget": {
+    "export_json": "Експортувати у .json",
+    "import_json": "Імпортувати з .json",
+    "save_graph_json": "Зберегти граф як .json",
+    "open_graph_json": "Відкрити граф з .json"
+  },
+  "matrix_widget": {
+    "title": "Матриця",
+    "row": "Рядок",
+    "col": "Стовпець"
+  },
+  "traversal_widget": {
+    "start_vertex_id": "ID стартової вершини:",
+    "bfs": "Обхід у ширину (BFS)",
+    "dfs": "Обхід у глибину (DFS)",
+    "select_start": "Оберіть стартову вершину.",
+    "bfs_order": "BFS порядок обходу:",
+    "dfs_order": "DFS порядок обходу:",
+    "error": "Помилка"
+  },
+  "special_paths_widget": {
+    "start_vertex_id": "ID початкової вершини:",
+    "end_vertex_id": "ID кінцевої вершини:",
+    "simple_path": "Простий шлях (DFS)",
+    "longest_path": "Найдовший простий шлях",
+    "hamiltonian_path": "Гамільтонів шлях",
+    "eulerian_path": "Ейлерів шлях"
+  },
+  "spanning_tree_widget": {
+    "prim": "Остовне дерево (Прим)",
+    "kruskal": "Остовне дерево (Краскал)",
+    "not_found": "Остовне дерево не знайдено (граф не зв'язний або некоректний)",
+    "total_weight": "Загальна вага"
+  },
+  "shortest_paths_widget": {
+    "start_vertex_id": "ID початкової вершини:",
+    "end_vertex_id": "ID кінцевої вершини:",
+    "dijkstra": "Дейкстра (від однієї до всіх)",
+    "bellman_ford": "Беллман-Форд (від однієї до всіх)",
+    "floyd_warshall": "Флойд-Уоршелл (всі до всіх)",
+    "dijkstra_path": "Дейкстра (шлях між двома)",
+    "bellman_path": "Беллман-Форд (шлях між двома)",
+    "floyd_path": "Флойд-Уоршелл (шлях між двома)"
+  },
+  "flow_algorithms_widget": {
+    "source_id": "ID джерела (source):",
+    "sink_id": "ID стоку (sink):",
+    "ford_fulkerson": "Ford-Fulkerson (max flow)",
+    "min_cut": "Min-Cut",
+    "select_source_sink": "Оберіть ID джерела та стоку.",
+    "max_flow": "Максимальний потік"
+  },
+  "analysis_output_controls": {
+    "export_txt": "Експортувати у .txt",
+    "clear": "Очистити результати",
+    "save_as_txt": "Зберегти як .txt"
+  },
+  "graph_canvas_widget": {
+    "clear_graph": "Очистити граф",
+    "import_export": "Імпорт/Експорт"
+  },
+  "adjacency_matrix_export_widget": {
+    "export_csv": "Експортувати у CSV",
+    "error": "Помилка",
+    "empty_or_invalid": "Матриця порожня або некоректна!",
+    "save_as_csv": "Зберегти як CSV",
+    "success": "Успіх",
+    "saved": "Матриця суміжності збережена у CSV!"
+  },
+  "incidence_matrix_export_widget": {
+    "export_csv": "Експортувати у CSV",
+    "error": "Помилка",
+    "empty_or_invalid": "Матриця порожня або некоректна!",
+    "save_as_csv": "Зберегти як CSV",
+    "success": "Успіх",
+    "saved": "Матриця інцидентності збережена у CSV!"
+  },
+  "traversal_control_widget": {
+    "method": "Метод:",
+    "start_vertex": "Початкова вершина:",
+    "start": "Запустити",
+    "stop": "Стоп",
+    "bfs": "BFS (у ширину)",
+    "dfs": "DFS (у глибину)",
+    "dijkstra": "Dijkstra",
+    "components": "Компоненти зв’язності",
+    "cycles": "Пошук циклів"
+  },
+  "main_window": {
+    "title": "G_A_P_V.2",
+    "graph1": "Граф 1",
+    "start": "Запущено програму"
+  },
+  "adjacency_matrix_exporter": {
+    "export_success": "Матриця суміжності успішно експортована у CSV!",
+    "export_error": "Помилка експорту матриці суміжності у CSV.",
+    "file_write_error": "Помилка запису у файл."
+  },
+  "incidence_matrix_exporter": {
+    "export_success": "Матриця інцидентності успішно експортована у CSV!",
+    "export_error": "Помилка експорту матриці інцидентності у CSV.",
+    "file_write_error": "Помилка запису у файл."
+  },
+  "graph_loader": {
+    "load_success": "Граф успішно завантажено з JSON.",
+    "load_error": "Помилка завантаження графа з JSON.",
+    "file_read_error": "Помилка читання файлу."
+  },
+  "graph_saver": {
+    "save_success": "Граф успішно збережено у JSON.",
+    "save_error": "Помилка збереження графа у JSON.",
+    "file_write_error": "Помилка запису у файл."
+  },
+  "session_exporter": {
+    "export_success": "Сесію успішно експортовано.",
+    "export_error": "Помилка експорту сесії.",
+    "file_write_error": "Помилка запису у файл."
+  },
+  "session_importer": {
+    "import_success": "Сесію успішно імпортовано.",
+    "import_error": "Помилка імпорту сесії.",
+    "file_read_error": "Помилка читання файлу.",
+    "class_not_found": "Клас графа не знайдено у graph_class_map.",
+    "node_not_found": "Не знайдено вузли для ребра."
+  },
+  "ford_fulkerson": {
+    "init_error_directed": "Алгоритм Форда-Фалкерсона працює лише для орієнтованих графів.",
+    "init_error_weights": "Усі ребра повинні мати невід'ємні ваги для алгоритму Форда-Фалкерсона.",
+    "init_success": "Ініціалізація Ford-Fulkerson: граф орієнтований, всі ваги ребер коректні."
+  },
+  "min_cut": {
+    "init_error_directed": "Алгоритм мінімального розрізу працює лише для орієнтованих графів.",
+    "init_error_weights": "Усі ребра повинні мати невід'ємні ваги для алгоритму мінімального розрізу.",
+    "init_success": "Ініціалізація MinCut: граф орієнтований, всі ваги ребер коректні."
+  },
+  "dijkstra": {
+    "init_error_weights": "Усі ребра повинні мати невід'ємні ваги для алгоритму Дейкстри.",
+    "init_success": "Ініціалізація Dijkstra: всі ваги ребер коректні.",
+    "search_start": "Пошук найкоротших шляхів від вершини {start_id} розпочато."
+  },
+  "bellman_ford": {
+    "init_error_weights": "Усі ребра повинні мати вагу для алгоритму Беллмана-Форда.",
+    "init_success": "Ініціалізація Bellman-Ford: всі ваги ребер коректні.",
+    "search_start": "Пошук найкоротших шляхів від вершини {start_id} розпочато."
+  },
+  "floyd_warshall": {
+    "init_error_weights": "Усі ребра повинні мати невід'ємні ваги для алгоритму Флойда-Уоршелла.",
+    "init_success": "Ініціалізація Floyd-Warshall: всі ваги ребер коректні."
+  },
+  "prim": {
+    "init_error_directed": "Алгоритм Прима працює лише для неспрямованих графів.",
+    "init_error_weights": "Усі ребра повинні мати невід'ємні ваги для алгоритму Прима.",
+    "init_success": "Ініціалізація Prim: граф неспрямований, всі ваги ребер коректні.",
+    "search_start": "Пошук мінімального остовного дерева (MST) розпочато."
+  },
+  "kruskal": {
+    "init_error_directed": "Алгоритм Краскала працює лише для неспрямованих графів.",
+    "init_error_weights": "Усі ребра повинні мати невід'ємні ваги для алгоритму Краскала.",
+    "init_success": "Ініціалізація Kruskal: граф неспрямований, всі ваги ребер коректні."
+  },
+  "simple_path_finder": {
+    "init_error_methods": "Граф повинен мати методи nodes, edges та neighbors.",
+    "init_error_empty": "Граф не містить жодної вершини.",
+    "init_success": "Ініціалізація SimplePathFinder: граф коректний.",
+    "search_start": "Пошук простого шляху між {start_id} та {end_id} розпочато.",
+    "error_no_vertex": "Початкова або кінцева вершина відсутня у графі."
+  },
+  "longest_path_finder": {
+    "init_error_methods": "Граф повинен мати методи nodes, edges та neighbors.",
+    "init_error_empty": "Граф не містить жодної вершини.",
+    "init_success": "Ініціалізація LongestPathFinder: граф коректний.",
+    "search_start": "Пошук найдовшого простого шляху між {start_id} та {end_id} розпочато.",
+    "error_no_vertex": "Початкова або кінцева вершина відсутня у графі."
+  },
+  "hamiltonian_path_finder": {
+    "init_error_methods": "Граф повинен мати методи nodes, edges та neighbors.",
+    "init_error_empty": "Граф не містить жодної вершини.",
+    "init_success": "Ініціалізація HamiltonianPathFinder: граф коректний.",
+    "search_start": "Пошук гамільтонового шляху між {start_id} та {end_id} розпочато.",
+    "error_no_vertex": "Початкова або кінцева вершина відсутня у графі."
+  },
+  "eulerian_path_finder": {
+    "init_error_methods": "Граф повинен мати методи nodes, edges та neighbors.",
+    "init_error_empty": "Граф повинен містити хоча б одну вершину та ребро.",
+    "init_success": "Ініціалізація EulerianPathFinder: граф коректний."
+  },
+  "bfs": {
+    "init_error_methods": "Граф повинен мати методи nodes та neighbors.",
+    "init_error_empty": "Граф не містить жодної вершини.",
+    "init_success": "Ініціалізація BFS: граф коректний.",
+    "traverse_start": "Початок BFS з вершини {start_id}.",
+    "error_no_vertex": "Початкова вершина відсутня у графі."
+  },
+  "dfs": {
+    "init_error_methods": "Граф повинен мати методи nodes та neighbors.",
+    "init_error_empty": "Граф не містить жодної вершини.",
+    "init_success": "Ініціалізація DFS: граф коректний.",
+    "traverse_start": "Початок DFS з вершини {start_id}.",
+    "error_no_vertex": "Початкова вершина відсутня у графі."
+  },
+  "traversal_algorithms": {
+    "bfs": "Обхід у ширину (BFS)",
+    "dfs": "Обхід у глибину (DFS)",
+    "dijkstra": "Дейкстра",
+    "components": "Компоненти зв’язності",
+    "cycles": "Пошук циклів"
+  },
+  "graph_info": {
+    "num_nodes": "Кількість вершин",
+    "num_edges": "Кількість ребер",
+    "min_degree": "Мінімальний ступінь",
+    "max_degree": "Максимальний ступінь",
+    "avg_degree": "Середній ступінь",
+    "is_connected": "Зв'язний граф",
+    "connected_yes": "Так",
+    "connected_no": "Ні",
+    "structural_redundancy": "Структурна надмірність",
+    "degree_inequality": "Нерівномірність розподілу зв'язків",
+    "structural_compactness": "Структурна компактність",
+    "relative_compactness": "Відносний показник компактності",
+    "degree_centralization": "Ступінь централізації"
+  },
+  "graph_converter": {
+    "convert_to_undirected": "Конвертація спрямованого графа у неспрямований",
+    "convert_to_directed": "Конвертація неспрямованого графа у спрямований"
+  },
+  "edge_converter": {
+    "convert_to_undirected": "Конвертація спрямованого ребра у неспрямоване",
+    "convert_to_directed": "Конвертація неспрямованого ребра у спрямоване",
+    "error_not_directed": "Передане ребро не є спрямованим.",
+    "error_not_undirected": "Передане ребро не є неспрямованим.",
+    "info_converted_to_undirected": "Конвертовано спрямоване ребро у неспрямоване.",
+    "info_converted_to_directed": "Конвертовано неспрямоване ребро у спрямоване."
+  },
+  "node": {
+    "created": "Створено вузол: id={id}, data={data}, pos={pos}",
+    "set_pos": "Встановлено координати вузла"
+  },
+  "base_edge": {
+    "init": "Ініціалізація ребра між двома вузлами",
+    "weight": "Вага ребра"
+  },
+  "directed_edge": {
+    "created": "Створено спрямоване ребро: source={source}, target={target}, weight={weight}, data={data}",
+    "weight": "Вага спрямованого ребра"
+  },
+  "undirected_edge": {
+    "created": "Створено неспрямоване ребро: node1={node1}, node2={node2}, weight={weight}, data={data}",
+    "weight": "Вага неспрямованого ребра",
+    "equals": "Перевірка рівності ребер незалежно від порядку вузлів"
+  },
+  "base_graph": {
+    "add_node": "Додати вузол до графа",
+    "add_edge": "Додати ребро до графа",
+    "nodes": "Отримати всі вузли графа",
+    "edges": "Отримати всі ребра графа",
+    "neighbors": "Отримати сусідів вузла"
+  },
+  "directed_graph": {
+    "created": "Створено спрямований граф",
+    "add_node": "Додано вузол до спрямованого графа",
+    "add_edge": "Додано спрямоване ребро до графа",
+    "remove_edge": "Видалено спрямоване ребро з графа",
+    "error_missing_nodes": "Обидва вузли ребра мають бути додані до графа перед додаванням ребра."
+  },
+  "undirected_graph": {
+    "created": "Створено неспрямований граф",
+    "add_node": "Додано вузол до неспрямованого графа",
+    "add_edge": "Додано неспрямоване ребро до графа",
+    "remove_edge": "Видалено неспрямоване ребро з графа",
+    "error_missing_nodes": "Обидва вузли ребра мають бути додані до графа перед додаванням ребра."
+  },
+  "undo_redo_manager": {
+    "undo": "Скасувати дію",
+    "redo": "Повернути дію",
+    "can_undo": "Можна скасувати",
+    "can_redo": "Можна повернути"
+  },
+  "undo_redo_event_filter": {
+    "ctrl_z": "Ctrl+Z — скасувати",
+    "ctrl_y": "Ctrl+Y — повернути"
+  },
+  "txt_exporter": {
+    "export_success": "Дані успішно експортовано у .txt",
+    "export_error": "Помилка при експорті у .txt"
+  },
+  "logger": {
+    "info": "INFO",
+    "warning": "WARNING",
+    "error": "ERROR",
+    "log_message": "[{timestamp}] [{level}] {message}"
+  },
+  "main": {
+    "app_start": "Запуск програми почато",
+    "app_exit": "Завершення роботи програми"
+  }
+}

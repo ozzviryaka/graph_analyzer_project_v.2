@@ -10,10 +10,12 @@ from PyQt5.QtWidgets import QStyleFactory
 from gui.themes.classic.dark_theme import DarkTheme
 from gui.themes.theme_manager import ThemeManager
 from gui.additionals.tab_shortcut_event_filter import TabShortcutEventFilter
+from utils.logger import Logger
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        Logger().info("Запущено програму")
         ThemeManager.load_theme()  # Завантажити тему з settings.json
         # ThemeManager.apply_theme(DarkTheme)  # Видалено, тепер тема зберігається
         self.setWindowTitle("G_A_P_V.2")
