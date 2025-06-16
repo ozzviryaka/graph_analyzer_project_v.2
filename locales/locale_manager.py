@@ -23,8 +23,8 @@ class LocaleManager:
         cls.load_locale(path)
 
     @classmethod
-    def get_locale(cls, section: str, key: str, default: Any = "", **kwargs) -> str:
-        value = cls._locale.get(section, {}).get(key, default)
+    def get_locale(cls, section: str, key: str, **kwargs) -> str:
+        value = cls._locale.get(section, {}).get(key, [key])
         if isinstance(value, str) and kwargs:
             try:
                 return value.format(**kwargs)

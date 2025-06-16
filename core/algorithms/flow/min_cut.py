@@ -1,5 +1,6 @@
 from collections import deque, defaultdict
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class MinCut:
     """
@@ -14,17 +15,17 @@ class MinCut:
 
         # Перевірка на орієнтованість графа
         if not hasattr(graph, "is_directed") or not graph.is_directed():
-            self.logger.error("Алгоритм мінімального розрізу працює лише для орієнтованих графів.")
-            raise ValueError("Алгоритм мінімального розрізу працює лише для орієнтованих графів.")
+            self.logger.error(LocaleManager.get_locale("min_cut", "directed_error"))
+            raise ValueError(LocaleManager.get_locale("min_cut", "directed_error"))
 
         # Перевірка на наявність ваг у всіх ребер
         for edge in graph.edges():
             w = edge.weight(self.graph.is_weighted())
             if w < 0:
-                self.logger.error("Усі ребра повинні мати невід'ємні ваги для алгоритму мінімального розрізу.")
-                raise ValueError("Усі ребра повинні мати невід'ємні ваги для алгоритму мінімального розрізу.")
+                self.logger.error(LocaleManager.get_locale("min_cut", "weight_error"))
+                raise ValueError(LocaleManager.get_locale("min_cut", "weight_error"))
 
-        self.logger.info("Ініціалізація MinCut: граф орієнтований, всі ваги ребер коректні.")
+        self.logger.info(LocaleManager.get_locale("min_cut", "init_info"))
 
         self.nodes = list(graph.nodes())
         self.node_ids = [node.id for node in self.nodes]
@@ -63,7 +64,7 @@ class MinCut:
         :param sink_id: id кінцевої вершини
         :return: (min_cut_value, cut_edges) — вага розрізу та список ребер розрізу
         """
-        self.logger.info(f"Пошук мінімального розрізу між {source_id} та {sink_id} розпочато.")
+        self.logger.info(LocaleManager.get_locale("min_cut", "min_cut_start").format(source_id=source_id, sink_id=sink_id))
         residual = defaultdict(lambda: defaultdict(int))
         for u in self.capacity:
             for v in self.capacity[u]:
@@ -87,7 +88,7 @@ class MinCut:
                 residual[v][u] += path_flow
                 v = u
             max_flow += path_flow
-            self.logger.info(f"Знайдено шлях з потоком {path_flow}. Поточний max_flow: {max_flow}")
+            self.logger.info(LocaleManager.get_locale("min_cut", "min_cut_found_path").format(path_flow=path_flow, max_flow=max_flow))
 
         # Визначаємо розріз
         visited = set()
@@ -105,5 +106,7 @@ class MinCut:
                 if u in visited and v not in visited and self.capacity[u][v] > 0:
                     cut_edges.append((u, v, self.capacity[u][v]))
 
-        self.logger.info(f"Мінімальний розріз: {max_flow}, кількість ребер у розрізі: {len(cut_edges)}")
+        len_cut_edges = len(cut_edges)
+
+        self.logger.info(LocaleManager.get_locale("min_cut", "min_cut_end").format(max_flow=max_flow, len_cut_edges=len_cut_edges))
         return max_flow, cut_edges

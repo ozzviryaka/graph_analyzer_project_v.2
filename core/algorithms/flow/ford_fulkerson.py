@@ -1,5 +1,6 @@
 from collections import deque, defaultdict
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class FordFulkerson:
     """
@@ -14,17 +15,17 @@ class FordFulkerson:
 
         # Перевірка на орієнтованість графа
         if not hasattr(graph, "is_directed") or not graph.is_directed():
-            self.logger.error("Алгоритм Форда-Фалкерсона працює лише для орієнтованих графів.")
-            raise ValueError("Алгоритм Форда-Фалкерсона працює лише для орієнтованих графів.")
+            self.logger.error(LocaleManager.get_locale("ford_fulkerson", "directed_error"))
+            raise ValueError(LocaleManager.get_locale("ford_fulkerson", "directed_error"))
 
         # Перевірка на наявність ваг у всіх ребер
         for edge in graph.edges():
             w = edge.weight(self.graph.is_weighted())
             if w < 0:
-                self.logger.error("Усі ребра повинні мати невід'ємні ваги для алгоритму Форда-Фалкерсона.")
-                raise ValueError("Усі ребра повинні мати невід'ємні ваги для алгоритму Форда-Фалкерсона.")
+                self.logger.error(LocaleManager.get_locale("ford_fulkerson", "weight_error"))
+                raise ValueError(LocaleManager.get_locale("ford_fulkerson", "weight_error"))
 
-        self.logger.info("Ініціалізація FordFulkerson: граф орієнтований, всі ваги ребер коректні.")
+        self.logger.info(LocaleManager.get_locale("ford_fulkerson", "init_info"))
 
         self.nodes = list(graph.nodes())
         self.node_ids = [node.id for node in self.nodes]
@@ -86,5 +87,5 @@ class FordFulkerson:
                 v = u
             max_flow += path_flow
 
-        self.logger.info(f"Максимальний потік між {source_id} та {sink_id}: {max_flow}")
+        self.logger.info(LocaleManager.get_locale("ford_fulkerson", "max_flow_log_info").format(source_id=source_id, sink_id=sink_id, max_flow=max_flow))
         return max_flow
