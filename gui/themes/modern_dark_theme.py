@@ -35,7 +35,19 @@ class ModernDarkTheme:
             QMainWindow, QDialog, QMenu, QMenuBar, QToolBar, QTabWidget, QTabBar, QStatusBar {
                 background-color: #18181c;
             }
-            QPushButton, QComboBox, QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox, QDoubleSpinBox, QCheckBox, QRadioButton, QGroupBox, QScrollBar, QSlider, QProgressBar, QListWidget, QTreeWidget, QTableWidget, QLabel {
+            QPushButton {
+                background-color: #23232a;
+                color: #f5f5f5;
+                border-radius: 7px;
+                border: 1.5px solid #23232a;
+                padding: 5px 10px;
+            }
+            QPushButton:flat {
+                background: transparent;
+                color: #f5f5f5;
+                border: none;
+            }
+            QComboBox, QLineEdit, QTextEdit, QPlainTextEdit, QSpinBox, QDoubleSpinBox, QCheckBox, QRadioButton, QGroupBox, QScrollBar, QSlider, QProgressBar, QListWidget, QTreeWidget, QTableWidget, QLabel {
                 background-color: #23232a;
                 color: #f5f5f5;
                 border-radius: 7px;
