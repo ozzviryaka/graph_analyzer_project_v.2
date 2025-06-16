@@ -5,6 +5,7 @@ from .green_theme import GreenTheme
 from .blue_theme import BlueTheme
 from .red_theme import RedTheme
 from .yellow_theme import YellowTheme
+from .modern_dark_theme import ModernDarkTheme
 
 class ThemeManager:
     _current_theme = DarkTheme
@@ -19,3 +20,15 @@ class ThemeManager:
     @classmethod
     def current_theme(cls):
         return cls._current_theme
+
+    @classmethod
+    def available_themes(cls):
+        return {
+            'dark': DarkTheme,
+            'light': LightTheme,
+            'green': GreenTheme,
+            'blue': BlueTheme,
+            'red': RedTheme,
+            'yellow': YellowTheme,
+            'modern_dark': ModernDarkTheme
+        }

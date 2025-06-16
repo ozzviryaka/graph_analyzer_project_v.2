@@ -6,6 +6,7 @@ from gui.themes.blue_theme import BlueTheme
 from gui.themes.red_theme import RedTheme
 from gui.themes.yellow_theme import YellowTheme
 from gui.themes.theme_manager import ThemeManager
+from gui.themes.modern_dark_theme import ModernDarkTheme
 
 class ThemeSelectDialog(QDialog):
     def __init__(self, parent=None):
@@ -20,6 +21,7 @@ class ThemeSelectDialog(QDialog):
         self.combo.addItem("Синя")
         self.combo.addItem("Червона")
         self.combo.addItem("Жовта")
+        self.combo.addItem("Сучасна темна")
         layout.addWidget(self.combo)
         ok_btn = QPushButton("OK")
         ok_btn.clicked.connect(self.apply_theme)
@@ -37,6 +39,8 @@ class ThemeSelectDialog(QDialog):
             self.combo.setCurrentIndex(4)
         elif current is YellowTheme:
             self.combo.setCurrentIndex(5)
+        elif current is ModernDarkTheme:
+            self.combo.setCurrentIndex(6)
         else:
             self.combo.setCurrentIndex(0)
 
@@ -52,6 +56,8 @@ class ThemeSelectDialog(QDialog):
             ThemeManager.apply_theme(RedTheme)
         elif idx == 5:
             ThemeManager.apply_theme(YellowTheme)
+        elif idx == 6:
+            ThemeManager.apply_theme(ModernDarkTheme)
         else:
             ThemeManager.apply_theme(DarkTheme)
         self.accept()
