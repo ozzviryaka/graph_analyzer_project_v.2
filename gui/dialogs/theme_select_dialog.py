@@ -17,6 +17,7 @@ class ThemeSelectDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Вибір теми")
+        self.setFixedSize(250, 200)
         layout = QVBoxLayout()
         layout.addWidget(QLabel("Оберіть стиль теми:"))
         self.style_combo = QComboBox()
