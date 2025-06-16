@@ -35,16 +35,12 @@ class GraphCanvas(QWidget):
         self._hovered_node_id = None  # Для локального tooltip
         self.undo_redo_manager = UndoRedoManager()
         # Додаємо кнопки безпосередньо на полотно
-        self.undo_btn = QPushButton('', self)
-        self.redo_btn = QPushButton('', self)
+        self.undo_btn = QPushButton('↶', self)
+        self.redo_btn = QPushButton('↷', self)
         self.undo_btn.setToolTip('Undo (Ctrl+Z)')
         self.redo_btn.setToolTip('Redo (Ctrl+Y)')
         self.undo_btn.setFixedSize(24, 24)
         self.redo_btn.setFixedSize(24, 24)
-        self.undo_btn.setStyleSheet('QPushButton { border-radius: 12px; background: #eee; font-size: 16px; color: #1565c0; font-weight: bold; border: 1px solid #bbb; } QPushButton:hover { background: #d0eaff; color: #003366; }')
-        self.redo_btn.setStyleSheet('QPushButton { border-radius: 12px; background: #eee; font-size: 16px; color: #1565c0; font-weight: bold; border: 1px solid #bbb; } QPushButton:hover { background: #d0eaff; color: #003366; }')
-        self.undo_btn.setText('↶')
-        self.redo_btn.setText('↷')
         self.undo_btn.setToolTip('Скасувати останню дію (Undo, Ctrl+Z)')
         self.redo_btn.setToolTip('Повернути дію (Redo, Ctrl+Y)')
         self.undo_btn.clicked.connect(lambda: (self.undo_redo_manager.undo(), self.update(), self._update_undo_redo_buttons()))

@@ -60,13 +60,15 @@ class DirectedGraph(BaseGraph):
         """
         return iter(self._edges)
 
-    def neighbors(self, node):
+    def neighbors(self, node_or_id):
         """
         Повертає сусідів заданого вузла (тільки ті, до яких є напрямлене ребро).
+        Можна передавати або Node, або id (str).
         """
-        if node.id not in self._adjacency:
+        node_id = node_or_id.id if hasattr(node_or_id, 'id') else node_or_id
+        if node_id not in self._adjacency:
             return iter([])
-        return (self._nodes[n_id] for n_id in self._adjacency[node.id])
+        return (self._nodes[n_id] for n_id in self._adjacency[node_id])
 
     def is_weighted(self):
         return self.weighted
@@ -84,3 +86,13 @@ class DirectedGraph(BaseGraph):
         while n in used:
             n += 1
         return f"V{n}"
+
+    def get_edge_weight(self, source_id, target_id):
+        """
+        Повертає вагу ребра між source_id і target_id, або 1, якщо граф неваговий.
+        Якщо ребра немає — повертає float('inf').
+        """
+        for edge in self._edges:
+            if edge.source.id == source_id and edge.target.id == target_id:
+                return getattr(edge, 'weight', lambda: 1)() if self.is_weighted() else 1
+        return float('inf')
