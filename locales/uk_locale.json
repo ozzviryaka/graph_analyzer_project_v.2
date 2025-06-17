@@ -56,5 +56,41 @@
     "update_path": "Додано ребро ({edge_source_id}, {edge_target_id}) з вагою {weight} до MST.",
     "connected_warn": "Граф не є зв'язним — MST не існує для всіх вершин.",
     "prim_end": "Завершено. MST вага: {total_weight}, кількість ребер: {len_mst_edges}"
+  },
+  "eulerian_path_finder": {
+    "methods_error": "Граф повинен мати методи nodes, edges та neighbors.",
+    "components_error": "Граф повинен містити хоча б одну вершину та ребро.",
+    "init_info": "Ініціалізація EulerianPathFinder: граф коректний.",
+    "eulerian_start": "Пошук ейлерового шляху розпочато.",
+    "enable_eulerian_warn": "Ейлерового шляху у графі не існує.",
+    "enable_eulerian_not_all_edges_used_warn": "Не всі ребра використані — ейлерового шляху не існує.",
+    "eulerian_end": "Знайдено ейлерів шлях: {path_str}"
+  },
+  "hamiltonian_path_finder": {
+    "methods_error": "Граф повинен мати методи nodes, edges та neighbors.",
+    "enable_node_error": "Граф не містить жодної вершини.",
+    "init_info": "Ініціалізація HamiltonianPathFinder: граф коректний.",
+    "hamiltonian_start": "Пошук гамільтонового шляху між {start_id} та {end_id} розпочато.",
+    "start_end_error": "Початкова або кінцева вершина відсутня у графі.",
+    "hamiltonian_end": "Знайдено гамільтонів шлях: {path_str}",
+    "enable_path_warn": "Гамільтонового шляху між {start_id} та {end_id} не існує."
+  },
+  "longest_path_finder": {
+    "methods_error": "Граф повинен мати методи nodes, edges та neighbors.",
+    "enable_node_error": "Граф не містить жодної вершини.",
+    "init_info": "Ініціалізація LongestPathFinder: граф коректний.",
+    "longest_start": "Пошук найдовшого простого шляху між {start_id} та {end_id} розпочато.",
+    "start_end_error": "Початкова або кінцева вершина відсутня у графі.",
+    "longest_end": "Знайдено найдовший простий шлях: {path_str} (довжина {len_longest_path})",
+    "enable_path_warn": "Найдовшого простого шляху між {start_id} та {end_id} не існує."
+  },
+  "simple_path_finder": {
+    "methods_error": "Граф повинен мати методи nodes, edges та neighbors.",
+    "enable_node_error": "Граф не містить жодної вершини.",
+    "init_info": "Ініціалізація SimplePathFinder: граф коректний.",
+    "simple_start": "Пошук простого шляху між {start_id} та {end_id} розпочато.",
+    "start_end_error": "Початкова або кінцева вершина відсутня у графі.",
+    "simple_end": "Знайдено простий шлях: {path_str}",
+    "enable_path_warn": "Простого шляху між {start_id} та {end_id} не існує."
   }
 }

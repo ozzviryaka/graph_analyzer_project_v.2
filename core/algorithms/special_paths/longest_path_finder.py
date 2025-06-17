@@ -1,4 +1,5 @@
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class LongestPathFinder:
     """
@@ -13,16 +14,16 @@ class LongestPathFinder:
 
         # Перевірка на наявність вузлів та ребер
         if not hasattr(graph, "nodes") or not hasattr(graph, "edges") or not hasattr(graph, "neighbors"):
-            self.logger.error("Граф повинен мати методи nodes, edges та neighbors.")
-            raise ValueError("Граф повинен мати методи nodes, edges та neighbors.")
+            self.logger.error(LocaleManager.get_locale("longest_path_finder", "methods_error"))
+            raise ValueError(LocaleManager.get_locale("longest_path_finder", "methods_error"))
 
         self.nodes = list(graph.nodes())
         if not self.nodes:
-            self.logger.error("Граф не містить жодної вершини.")
-            raise ValueError("Граф не містить жодної вершини.")
+            self.logger.error(LocaleManager.get_locale("longest_path_finder", "enable_node_error"))
+            raise ValueError(LocaleManager.get_locale("longest_path_finder", "enable_node_error"))
 
         self.node_id_to_node = {node.id: node for node in self.nodes}
-        self.logger.info("Ініціалізація LongestPathFinder: граф коректний.")
+        self.logger.info(LocaleManager.get_locale("longest_path_finder", "init_info"))
 
     def find_longest_path(self, start_id, end_id):
         """
@@ -32,9 +33,9 @@ class LongestPathFinder:
         :param end_id: id кінцевої вершини
         :return: список id вершин найдовшого шляху або None, якщо шляху не існує
         """
-        self.logger.info(f"Пошук найдовшого простого шляху між {start_id} та {end_id} розпочато.")
+        self.logger.info(LocaleManager.get_locale("longest_path_finder", "longest_start").format(start_id=start_id, end_id=end_id))
         if start_id not in self.node_id_to_node or end_id not in self.node_id_to_node:
-            self.logger.error("Початкова або кінцева вершина відсутня у графі.")
+            self.logger.error(LocaleManager.get_locale("longest_path_finder", "start_end_error"))
             return None
 
         longest_path = []
@@ -57,8 +58,8 @@ class LongestPathFinder:
 
         dfs(start_id)
         if longest_path:
-            self.logger.info(f"Знайдено найдовший простий шлях: {' -> '.join(map(str, longest_path))} (довжина {len(longest_path)})")
+            self.logger.info(LocaleManager.get_locale("longest_path_finder", "longest_end").format(path_str=' -> '.join(map(str, longest_path)), len_longest_path=len(longest_path)))
             return longest_path
         else:
-            self.logger.warning(f"Найдовшого простого шляху між {start_id} та {end_id} не існує.")
+            self.logger.warning(LocaleManager.get_locale("longest_path_finder", "enable_path_warn").format(start_id=start_id, end_id=end_id))
             return None

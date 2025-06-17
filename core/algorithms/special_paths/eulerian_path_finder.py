@@ -1,4 +1,5 @@
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class EulerianPathFinder:
     """
@@ -15,17 +16,17 @@ class EulerianPathFinder:
 
         # Перевірка на наявність вузлів та ребер
         if not hasattr(graph, "nodes") or not hasattr(graph, "edges") or not hasattr(graph, "neighbors"):
-            self.logger.error("Граф повинен мати методи nodes, edges та neighbors.")
-            raise ValueError("Граф повинен мати методи nodes, edges та neighbors.")
+            self.logger.error(LocaleManager.get_locale("eulerian_path_finder", "methods_error"))
+            raise ValueError(LocaleManager.get_locale("eulerian_path_finder", "methods_error"))
 
         self.nodes = list(graph.nodes())
         self.edges = list(graph.edges())
         if not self.nodes or not self.edges:
-            self.logger.error("Граф повинен містити хоча б одну вершину та ребро.")
-            raise ValueError("Граф повинен містити хоча б одну вершину та ребро.")
+            self.logger.error(LocaleManager.get_locale("eulerian_path_finder", "components_error"))
+            raise ValueError(LocaleManager.get_locale("eulerian_path_finder", "components_error"))
 
         self.node_id_to_node = {node.id: node for node in self.nodes}
-        self.logger.info("Ініціалізація EulerianPathFinder: граф коректний.")
+        self.logger.info(LocaleManager.get_locale("eulerian_path_finder", "init_info"))
 
     def _is_eulerian(self):
         """
@@ -67,9 +68,9 @@ class EulerianPathFinder:
         
         :return: список id вершин у порядку проходження або None, якщо шляху не існує
         """
-        self.logger.info("Пошук ейлерового шляху розпочато.")
+        self.logger.info(LocaleManager.get_locale("eulerian_path_finder", "eulerian_start"))
         if not self._is_eulerian():
-            self.logger.warning("Ейлерового шляху у графі не існує.")
+            self.logger.warning(LocaleManager.get_locale("eulerian_path_finder", "enable_eulerian_warn"))
             return None
 
         # Копія списку ребер для обходу
@@ -129,8 +130,8 @@ class EulerianPathFinder:
             path.reverse()
 
         if len(used) != len(edge_list):
-            self.logger.warning("Не всі ребра використані — ейлерового шляху не існує.")
+            self.logger.warning(LocaleManager.get_locale("eulerian_path_finder", "enable_eulerian_not_all_edges_used_warn"))
             return None
 
-        self.logger.info(f"Знайдено ейлерів шлях: {' -> '.join(map(str, path))}")
+        self.logger.info(LocaleManager.get_locale("eulerian_path_finder", "eulerian_end").format(path_str=' -> '.join(map(str, path))))
         return path
