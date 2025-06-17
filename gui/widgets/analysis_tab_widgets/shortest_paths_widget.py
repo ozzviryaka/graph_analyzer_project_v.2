@@ -158,20 +158,25 @@ class ShortestPathsWidget(QWidget):
         try:
             algo = FloydWarshall(self.graph)
             dist, next_node = algo.shortest_paths()
-            node_ids = [node.id for node in self.graph.nodes()]
+            node_ids = [str(node.id) for node in self.graph.nodes()]
             idx_map = {str(node.id): i for i, node in enumerate(self.graph.nodes())}
+            if start not in idx_map or end not in idx_map:
+                self.output_textedit.setPlainText("Помилка: обрана вершина відсутня у графі.")
+                return
             i, j = idx_map[start], idx_map[end]
             if dist[i][j] == float('inf'):
                 self.output_textedit.setPlainText("Шлях не знайдено.")
                 return
             # Відновлення шляху
             path = [start]
-            while start != end:
-                start = next_node[idx_map[path[-1]]][j]
-                if start is None:
+            current = start
+            while current != end:
+                next_step = next_node[idx_map[current]][j]
+                if next_step is None or next_step == current:
                     self.output_textedit.setPlainText("Шлях не знайдено.")
                     return
-                path.append(start)
+                path.append(next_step)
+                current = next_step
             self.output_textedit.setPlainText(f"Шлях (Флойд-Уоршелл): {' -> '.join(path)}\nДовжина: {dist[i][j]}")
         except Exception as e:
             self.output_textedit.setPlainText(f"Помилка: {e}")

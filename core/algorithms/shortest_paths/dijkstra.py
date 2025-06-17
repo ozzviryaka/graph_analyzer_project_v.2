@@ -1,5 +1,6 @@
 import heapq
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class Dijkstra:
     """
@@ -16,10 +17,10 @@ class Dijkstra:
         for edge in graph.edges():
             w = edge.weight(self.graph.is_weighted())
             if w < 0:
-                self.logger.error("Усі ребра повинні мати невід'ємні ваги для алгоритму Дейкстри.")
-                raise ValueError("Усі ребра повинні мати невід'ємні ваги для алгоритму Дейкстри.")
+                self.logger.error(LocaleManager.get_locale("dijkstra", "weight_error"))
+                raise ValueError(LocaleManager.get_locale("dijkstra", "weight_error"))
 
-        self.logger.info("Ініціалізація Dijkstra: всі ваги ребер коректні.")
+        self.logger.info(LocaleManager.get_locale("dijkstra", "init_info"))
 
         self.nodes = list(graph.nodes())
         self.node_id_to_node = {node.id: node for node in self.nodes}
@@ -31,7 +32,7 @@ class Dijkstra:
         :param start_id: id початкової вершини
         :return: словник {id_вершини: (відстань, попередник)}
         """
-        self.logger.info(f"Пошук найкоротших шляхів від вершини {start_id} розпочато.")
+        self.logger.info(LocaleManager.get_locale("dijkstra", "dijkstra_start").format(start_id=start_id))
         distances = {node.id: float('inf') for node in self.nodes}
         previous = {node.id: None for node in self.nodes}
         distances[start_id] = 0
@@ -65,7 +66,7 @@ class Dijkstra:
                     distances[v_id] = alt
                     previous[v_id] = u_id
                     heapq.heappush(queue, (alt, v_id))
-                    self.logger.info(f"Оновлено шлях до {v_id}: відстань {alt}, попередник {u_id}")
+                    self.logger.info(LocaleManager.get_locale("dijkstra", "update_path").format(v_id=v_id, alt=alt, u_id=u_id))
 
-        self.logger.info("Пошук найкоротших шляхів завершено.")
+        self.logger.info(LocaleManager.get_locale("dijkstra", "dijkstra_end"))
         return {node_id: (distances[node_id], previous[node_id]) for node_id in distances}

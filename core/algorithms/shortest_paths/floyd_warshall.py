@@ -1,4 +1,5 @@
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class FloydWarshall:
     """
@@ -15,10 +16,10 @@ class FloydWarshall:
         for edge in graph.edges():
             w = edge.weight(self.graph.is_weighted())
             if w < 0:
-                self.logger.error("Усі ребра повинні мати невід'ємні ваги для алгоритму Флойда-Уоршелла.")
-                raise ValueError("Усі ребра повинні мати невід'ємні ваги для алгоритму Флойда-Уоршелла.")
+                self.logger.error(LocaleManager.get_locale("floyd_warshall", "weight_error"))
+                raise ValueError(LocaleManager.get_locale("floyd_warshall", "weight_error"))
 
-        self.logger.info("Ініціалізація FloydWarshall: всі ваги ребер коректні.")
+        self.logger.info(LocaleManager.get_locale("floyd_warshall", "init_info"))
 
         self.nodes = list(graph.nodes())
         self.node_id_to_index = {node.id: idx for idx, node in enumerate(self.nodes)}
@@ -51,15 +52,19 @@ class FloydWarshall:
                 next_node[v][u] = self.index_to_node_id[u]
 
         # Основний цикл алгоритму
-        self.logger.info("Початок виконання алгоритму Флойда-Уоршелла.")
+        self.logger.info(LocaleManager.get_locale("floyd_warshall", "floyd_warshall_start"))
         for k in range(n):
             for i in range(n):
                 for j in range(n):
                     if dist[i][k] + dist[k][j] < dist[i][j]:
                         dist[i][j] = dist[i][k] + dist[k][j]
                         next_node[i][j] = next_node[i][k]
-                        self.logger.info(
-                            f"Оновлено шлях {self.index_to_node_id[i]} → {self.index_to_node_id[j]} через {self.index_to_node_id[k]}: відстань {dist[i][j]}"
-                        )
-        self.logger.info("Алгоритм Флойда-Уоршелла завершено.")
+                        self.logger.info(LocaleManager.get_locale(
+                            "floyd_warshall", "update_path").format(
+                            from_node=self.index_to_node_id[i],
+                            to_node=self.index_to_node_id[j],
+                            via_node=self.index_to_node_id[k],
+                            distance=dist[i][j]
+                        ))
+        self.logger.info(LocaleManager.get_locale("floyd_warshall", "floyd_warshall_end"))
         return dist, next_node

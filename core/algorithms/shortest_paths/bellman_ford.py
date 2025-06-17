@@ -1,4 +1,5 @@
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class BellmanFord:
     """
@@ -15,10 +16,10 @@ class BellmanFord:
         for edge in graph.edges():
             w = edge.weight(self.graph.is_weighted())
             if self.graph.is_weighted() is False:
-                self.logger.error("Усі ребра повинні мати вагу для алгоритму Беллмана-Форда.")
-                raise ValueError("Усі ребра повинні мати вагу для алгоритму Беллмана-Форда.")
+                self.logger.error(LocaleManager.get_locale("bellman_ford", "weight_error"))
+                raise ValueError(LocaleManager.get_locale("bellman_ford", "weight_error"))
 
-        self.logger.info("Ініціалізація BellmanFord: всі ваги ребер коректні.")
+        self.logger.info(LocaleManager.get_locale("bellman_ford", "init_info"))
 
         self.nodes = list(graph.nodes())
         self.node_id_to_node = {node.id: node for node in self.nodes}
@@ -30,7 +31,7 @@ class BellmanFord:
         :param start_id: id початкової вершини
         :return: (distances, previous) — словник відстаней та попередників
         """
-        self.logger.info(f"Пошук найкоротших шляхів від вершини {start_id} розпочато.")
+        self.logger.info(LocaleManager.get_locale("bellman_ford", "bellman_ford_start").format(start_id=start_id))
         distances = {node.id: float('inf') for node in self.nodes}
         previous = {node.id: None for node in self.nodes}
         distances[start_id] = 0
@@ -46,14 +47,14 @@ class BellmanFord:
                     distances[v] = distances[u] + w
                     previous[v] = u
                     updated = True
-                    self.logger.info(f"Оновлено шлях до {v}: відстань {distances[v]}, попередник {u}")
+                    self.logger.info(LocaleManager.get_locale("bellman_ford", "update_path").format(v=v, d=distances[v], u=u))
                 # Для неспрямованого графа — перевіряємо обидва напрямки
                 if hasattr(self.graph, "is_directed") and not self.graph.is_directed():
                     if distances[v] + w < distances[u]:
                         distances[u] = distances[v] + w
                         previous[u] = v
                         updated = True
-                        self.logger.info(f"Оновлено шлях до {u}: відстань {distances[u]}, попередник {v}")
+                        self.logger.info(LocaleManager.get_locale("bellman_ford", "update_path").format(v=u, d=distances[u], u=v))
             if not updated:
                 break
 
@@ -63,12 +64,12 @@ class BellmanFord:
             v = edge.target.id
             w = edge.weight(self.graph.is_weighted())
             if distances[u] + w < distances[v]:
-                self.logger.error("Граф містить від’ємний цикл.")
-                raise ValueError("Граф містить від’ємний цикл.")
+                self.logger.error(LocaleManager.get_locale("bellman_ford", "enable_negative_cycles"))
+                raise ValueError(LocaleManager.get_locale("bellman_ford", "enable_negative_cycles"))
             if hasattr(self.graph, "is_directed") and not self.graph.is_directed():
                 if distances[v] + w < distances[u]:
-                    self.logger.error("Граф містить від’ємний цикл.")
-                    raise ValueError("Граф містить від’ємний цикл.")
+                    self.logger.error(LocaleManager.get_locale("bellman_ford", "enable_negative_cycles"))
+                    raise ValueError(LocaleManager.get_locale("bellman_ford", "enable_negative_cycles"))
 
-        self.logger.info("Пошук найкоротших шляхів завершено.")
+        self.logger.info(LocaleManager.get_locale("bellman_ford", "bellman_ford_end"))
         return distances, previous
