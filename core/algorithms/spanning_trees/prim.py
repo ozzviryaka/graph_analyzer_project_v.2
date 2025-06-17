@@ -1,5 +1,6 @@
 import heapq
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class Prim:
     """
@@ -14,17 +15,17 @@ class Prim:
 
         # Перевірка на неспрямованість графа
         if hasattr(graph, "is_directed") and graph.is_directed():
-            self.logger.error("Алгоритм Прима працює лише для неспрямованих графів.")
-            raise ValueError("Алгоритм Прима працює лише для неспрямованих графів.")
+            self.logger.error(LocaleManager.get_locale("prim", "directed_error"))
+            raise ValueError(LocaleManager.get_locale("prim", "directed_error"))
 
         # Перевірка на наявність ваг у всіх ребер
         for edge in graph.edges():
             w = edge.weight(self.graph.is_weighted())
             if w < 0:
-                self.logger.error("Усі ребра повинні мати невід'ємні ваги для алгоритму Прима.")
-                raise ValueError("Усі ребра повинні мати невід'ємні ваги для алгоритму Прима.")
+                self.logger.error(LocaleManager.get_locale("prim", "weight_error"))
+                raise ValueError(LocaleManager.get_locale("prim", "weight_error"))
 
-        self.logger.info("Ініціалізація Prim: граф неспрямований, всі ваги ребер коректні.")
+        self.logger.info(LocaleManager.get_locale("prim", "init_info"))
 
         self.nodes = list(graph.nodes())
         self.node_id_to_node = {node.id: node for node in self.nodes}
@@ -35,7 +36,7 @@ class Prim:
         
         :return: (mst_edges, total_weight)
         """
-        self.logger.info("Пошук мінімального остовного дерева (MST) розпочато.")
+        self.logger.info(LocaleManager.get_locale("prim", "prim_start"))
         if not self.nodes:
             return [], 0
 
@@ -65,7 +66,7 @@ class Prim:
             mst_edges.append(edge)
             total_weight += weight
             visited.add(new_node_id)
-            self.logger.info(f"Додано ребро ({edge.source.id}, {edge.target.id}) з вагою {weight} до MST.")
+            self.logger.info(LocaleManager.get_locale("prim", "update_path").format(edge_source_id=edge.source.id, edge_target_id=edge.target.id, weight=weight))
             # Додаємо нові ребра, що виходять з нової вершини
             for neighbor in self.graph.neighbors(self.node_id_to_node[new_node_id]):
                 if neighbor.id not in visited:
@@ -76,7 +77,7 @@ class Prim:
                             break
 
         if len(mst_edges) != len(self.nodes) - 1:
-            self.logger.warning("Граф не є зв'язним — MST не існує для всіх вершин.")
+            self.logger.warning(LocaleManager.get_locale("prim", "connected_warn"))
 
-        self.logger.info(f"Завершено. MST вага: {total_weight}, кількість ребер: {len(mst_edges)}")
+        self.logger.info(LocaleManager.get_locale("prim", "prim_end").format(total_weight=total_weight, len_mst_edges=len(mst_edges)))
         return mst_edges, total_weight

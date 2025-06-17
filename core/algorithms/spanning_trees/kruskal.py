@@ -1,4 +1,5 @@
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class Kruskal:
     """
@@ -13,17 +14,17 @@ class Kruskal:
 
         # Перевірка на неспрямованість графа
         if hasattr(graph, "is_directed") and graph.is_directed():
-            self.logger.error("Алгоритм Краскала працює лише для неспрямованих графів.")
-            raise ValueError("Алгоритм Краскала працює лише для неспрямованих графів.")
+            self.logger.error(LocaleManager.get_locale("kruskal", "directed_error"))
+            raise ValueError(LocaleManager.get_locale("kruskal", "directed_error"))
 
         # Перевірка на наявність ваг у всіх ребер
         for edge in graph.edges():
             w = edge.weight(self.graph.is_weighted())
             if w < 0:
-                self.logger.error("Усі ребра повинні мати невід'ємні ваги для алгоритму Краскала.")
-                raise ValueError("Усі ребра повинні мати невід'ємні ваги для алгоритму Краскала.")
+                self.logger.error(LocaleManager.get_locale("kruskal", "weight_error"))
+                raise ValueError(LocaleManager.get_locale("kruskal", "weight_error"))
 
-        self.logger.info("Ініціалізація Kruskal: граф неспрямований, всі ваги ребер коректні.")
+        self.logger.info(LocaleManager.get_locale("kruskal", "init_info"))
 
         self.nodes = list(graph.nodes())
         self.node_id_to_node = {node.id: node for node in self.nodes}
@@ -50,7 +51,7 @@ class Kruskal:
         
         :return: (mst_edges, total_weight)
         """
-        self.logger.info("Пошук мінімального остовного дерева розпочато.")
+        self.logger.info(LocaleManager.get_locale("kruskal", "kruskal_start"))
         edges = sorted(self.graph.edges(), key=lambda e: e.weight())
         parent = {node.id: node.id for node in self.nodes}
         rank = {node.id: 0 for node in self.nodes}
@@ -65,13 +66,15 @@ class Kruskal:
             if set_u != set_v:
                 mst_edges.append(edge)
                 total_weight += edge.weight()
-                self.logger.info(f"Додано ребро ({u}, {v}) з вагою {edge.weight()} до MST.")
+                self.logger.info(LocaleManager.get_locale("kruskal", "update_path").format(u=u, v=v, edge_weight=edge.weight()))
                 self.union(parent, rank, set_u, set_v)
             if len(mst_edges) == len(self.nodes) - 1:
                 break
 
         if len(mst_edges) != len(self.nodes) - 1:
-            self.logger.warning("Граф не є зв'язним — MST не існує для всіх вершин.")
+            self.logger.warning(LocaleManager.get_locale("kruskal", "connected_warn"))
 
-        self.logger.info(f"Завершено. MST вага: {total_weight}, кількість ребер: {len(mst_edges)}")
+        len_mst_edges = len(mst_edges)
+
+        self.logger.info(LocaleManager.get_locale("kruskal", "kruskal_end").format(total_weight=total_weight, len_mst_edges=len_mst_edges))
         return mst_edges, total_weight
