@@ -1,4 +1,5 @@
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class DFS:
     """
@@ -11,16 +12,16 @@ class DFS:
 
         # Перевірка на наявність вузлів та neighbors
         if not hasattr(graph, "nodes") or not hasattr(graph, "neighbors"):
-            self.logger.error("Граф повинен мати методи nodes та neighbors.")
-            raise ValueError("Граф повинен мати методи nodes та neighbors.")
+            self.logger.error(LocaleManager.get_locale("dfs", "methods_error"))
+            raise ValueError(LocaleManager.get_locale("dfs", "methods_error"))
 
         self.nodes = list(graph.nodes())
         if not self.nodes:
-            self.logger.error("Граф не містить жодної вершини.")
-            raise ValueError("Граф не містить жодної вершини.")
+            self.logger.error(LocaleManager.get_locale("dfs", "nodes_error"))
+            raise ValueError(LocaleManager.get_locale("dfs", "nodes_error"))
 
         self.node_id_to_node = {node.id: node for node in self.nodes}
-        self.logger.info("Ініціалізація DFS: граф коректний.")
+        self.logger.info(LocaleManager.get_locale("dfs", "init_info"))
 
     def traverse(self, start_id):
         """
@@ -29,9 +30,9 @@ class DFS:
         :param start_id: id початкової вершини
         :return: список id вершин у порядку обходу
         """
-        self.logger.info(f"Початок DFS з вершини {start_id}.")
+        self.logger.info(LocaleManager.get_locale("dfs", "dfs_start").format(start_id=start_id))
         if start_id not in self.node_id_to_node:
-            self.logger.error("Початкова вершина відсутня у графі.")
+            self.logger.error(LocaleManager.get_locale("dfs", "start_error"))
             return []
 
         visited = set()
@@ -45,5 +46,5 @@ class DFS:
                     dfs(neighbor.id)
 
         dfs(start_id)
-        self.logger.info(f"DFS завершено. Порядок обходу: {' -> '.join(map(str, order))}")
+        self.logger.info(LocaleManager.get_locale("dfs", "dfs_end").format(path_str=' -> '.join(map(str, order))))
         return order

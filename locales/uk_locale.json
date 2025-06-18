@@ -92,5 +92,38 @@
     "start_end_error": "Початкова або кінцева вершина відсутня у графі.",
     "simple_end": "Знайдено простий шлях: {path_str}",
     "enable_path_warn": "Простого шляху між {start_id} та {end_id} не існує."
+  },
+  "bfs": {
+    "methods_error": "Граф повинен мати методи nodes та neighbors.",
+    "nodes_error": "Граф не містить жодної вершини.",
+    "init_info": "Ініціалізація BFS: граф коректний.",
+    "bfs_start": "Початок BFS з вершини {start_id}.",
+    "start_error": "Початкова вершина відсутня у графі.",
+    "bfs_end": "BFS завершено. Порядок обходу: {path_str}"
+  },
+  "dfs": {
+    "methods_error": "Граф повинен мати методи nodes та neighbors.",
+    "nodes_error": "Граф не містить жодної вершини.",
+    "init_info": "Ініціалізація DFS: граф коректний.",
+    "dfs_start": "Початок DFS з вершини {start_id}.",
+    "start_error": "Початкова вершина відсутня у графі.",
+    "dfs_end": "DFS завершено. Порядок обходу: {path_str}"
+  },
+  "traversal_algorithms": {
+    "bfs_start": "BFS стартує з вершини {start_id}",
+    "bfs_update": "BFS відвідав вершину {node_id}",
+    "bfs_end": "BFS завершено. Порядок: {order}",
+    "dfs_start": "DFS стартує з вершини {start_id}",
+    "dfs_update": "DFS відвідав вершину {node_id}",
+    "dfs_end": "DFS завершено. Порядок: {order}",
+    "dijkstra_start": "Dijkstra стартує з вершини {start_id}",
+    "dijkstra_update": "Dijkstra відвідав вершину {node_id} (відстань {dist})",
+    "dijkstra_end": "Dijkstra завершено. Порядок: {order}",
+    "comp_start": "Пошук компонентів зв'язності стартує",
+    "comp_update": "Знайдено компоненту: {comp}",
+    "comp_end": "Пошук компонент завершено. Всього компонент: {len_components}",
+    "cycle_start": "Пошук циклів стартує",
+    "cycle_update": "Знайдено цикл: {cycle}",
+    "cycle_end": "Пошук циклів завершено. Порядок: {order}, Кількість циклів: {len_cycles}"
   }
 }
