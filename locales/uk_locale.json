@@ -125,5 +125,20 @@
     "cycle_start": "Пошук циклів стартує",
     "cycle_update": "Знайдено цикл: {cycle}",
     "cycle_end": "Пошук циклів завершено. Порядок: {order}, Кількість циклів: {len_cycles}"
+  },
+  "graph_info": {
+    "num_nodes": "Кількість вершин",
+    "num_edges": "Кількість ребер",
+    "min_degree": "Мінімальний ступінь",
+    "max_degree": "Максимальний ступінь",
+    "avg_degree": "Середній ступінь",
+    "is_connected": "Зв'язний граф",
+    "structural_redundancy": "Структурна надмірність",
+    "degree_inequality": "Нерівномірність розподілу зв'язків",
+    "structural_compactness": "Структурна компактність",
+    "relative_compactness": "Відносний показник компактності",
+    "degree_centralization": "Ступінь централізації",
+    "yes": "Так",
+    "no": "Ні"
   }
 }

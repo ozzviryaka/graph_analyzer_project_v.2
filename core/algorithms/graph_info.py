@@ -1,3 +1,5 @@
+from locales.locale_manager import LocaleManager
+
 class GraphInfo:
     """
     Клас для отримання характеристик графа.
@@ -88,15 +90,15 @@ class GraphInfo:
 
     def get_all_info(self):
         return {
-            "Кількість вершин": self.num_nodes(),
-            "Кількість ребер": self.num_edges(),
-            "Мінімальний ступінь": self.min_degree(),
-            "Максимальний ступінь": self.max_degree(),
-            "Середній ступінь": self.avg_degree(),
-            "Зв'язний граф": "Так" if self.is_connected() else "Ні",
-            "Структурна надмірність": self.structural_redundancy(),
-            "Нерівномірність розподілу зв'язків": self.degree_inequality(),
-            "Структурна компактність": self.structural_compactness(),
-            "Відносний показник компактності": self.relative_compactness(),
-            "Ступінь централізації": self.degree_centralization()
+            LocaleManager.get_locale("graph_info", "num_nodes"): self.num_nodes(),
+            LocaleManager.get_locale("graph_info", "num_edges"): self.num_edges(),
+            LocaleManager.get_locale("graph_info", "min_degree"): self.min_degree(),
+            LocaleManager.get_locale("graph_info", "max_degree"): self.max_degree(),
+            LocaleManager.get_locale("graph_info", "avg_degree"): self.avg_degree(),
+            LocaleManager.get_locale("graph_info", "is_connected"): LocaleManager.get_locale("graph_info", "yes") if self.is_connected() else LocaleManager.get_locale("graph_info", "no"),
+            LocaleManager.get_locale("graph_info", "structural_redundancy"): self.structural_redundancy(),
+            LocaleManager.get_locale("graph_info", "degree_inequality"): self.degree_inequality(),
+            LocaleManager.get_locale("graph_info", "structural_compactness"): self.structural_compactness(),
+            LocaleManager.get_locale("graph_info", "relative_compactness"): self.relative_compactness(),
+            LocaleManager.get_locale("graph_info", "degree_centralization"): self.degree_centralization()
         }
