@@ -1,50 +1,16 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
+from locales.locale_manager import LocaleManager
 
 class InstructionDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Інструкція")
+        self.setWindowTitle(LocaleManager.get_locale("instruction_dialog", "window_title"))
         layout = QVBoxLayout()
-        text = (
-            "\u2139  Інструкція: створення та редагування графа\n"
-            "\n"
-            "--- ОСНОВНІ ДІЇ ---\n"
-            "- Додати вершину: ЛКМ по порожньому місцю на полі\n"
-            "- Видалити вершину: ПКМ по вершині\n"
-            "- Перемістити вершину: ЛКМ по вершині та тягнути мишею\n"
-            "- Вибір вершини: ЛКМ по вершині (виділяється для додавання ребра)\n"
-            "\n"
-            "- Додати ребро: виділіть вершину, потім ЛКМ+Ctrl по іншій вершині\n"
-            "- Видалити ребро: ПКМ по середині ребра\n"
-            "- Редагувати вагу/дані ребра: подвійний ЛКМ по середині ребра (лише для вагового графа)\n"
-            "- Вибір ребра: ЛКМ по середині ребра (для деяких дій)\n"
-            "\n"
-            "--- НАЛАШТУВАННЯ ---\n"
-            "- Орієнтованість, ваговість, автоназва вершини: тумблери над полотном\n"
-            "- Автоматична назва: якщо вимкнено — при створенні вершини з’явиться діалог для введення назви\n"
-            "\n"
-            "--- ІМПОРТ/ЕКСПОРТ ---\n"
-            "- Експорт у .json/.txt: відповідні кнопки під полотном\n"
-            "- Імпорт з .json: кнопка під полотном\n"
-            "\n"
-            "--- ВИБІР ГРАФА ---\n"
-            "- Кнопка 'Вибрати граф' під полотном відкриває вікно для вибору, створення, перейменування, видалення або копіювання графів.\n"
-            "- Можна працювати з кількома графами у межах однієї сесії.\n"
-            "\n"
-            "--- АНАЛІЗ ---\n"
-            "- Вкладки під полотном: найкоротші шляхи, остовні дерева, спеціальні шляхи, обхід, потоки\n"
-            "- Для алгоритмів обирайте вершини зі списків\n"
-            "\n"
-            "--- ДОДАТКОВО ---\n"
-            "- Інструкція: ця кнопка\n"
-            "- Всі дії супроводжуються підказками та повідомленнями про помилки\n"
-            "\n"
-            "Почніть з додавання вершин!"
-        )
+        text = LocaleManager.get_locale("instruction_dialog", "instruction_text")
         label = QLabel(text)
         label.setWordWrap(True)
         layout.addWidget(label)
-        ok_btn = QPushButton("OK")
+        ok_btn = QPushButton(LocaleManager.get_locale("instruction_dialog", "ok_button"))
         ok_btn.clicked.connect(self.accept)
         layout.addWidget(ok_btn)
         self.setLayout(layout)
@@ -53,7 +19,7 @@ class InstructionDialog(QDialog):
         from PyQt5.QtCore import Qt
         if event.key() in (Qt.Key_Return, Qt.Key_Enter):
             for btn in self.findChildren(QPushButton):
-                if btn.text().lower() in ["ok", "вибрати"]:
+                if btn.text().lower() in [LocaleManager.get_locale("common_dialogs", "ok_text"), LocaleManager.get_locale("common_dialogs", "select_text")]:
                     btn.click()
                     return
         super().keyPressEvent(event)

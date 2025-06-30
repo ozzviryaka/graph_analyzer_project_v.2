@@ -1,10 +1,11 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QListWidget, QPushButton, QHBoxLayout, QLabel, QMessageBox, QInputDialog, QComboBox
 from PyQt5.QtCore import Qt
+from locales.locale_manager import LocaleManager
 
 class GraphSelectDialog(QDialog):
     def __init__(self, graph_list, current_graph, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Вибір графа")
+        self.setWindowTitle(LocaleManager.get_locale("graph_select_dialog", "window_title"))
         self.selected_graph = None
         self.graph_list = graph_list  # список об'єктів графів
         self.current_graph = current_graph
@@ -14,19 +15,19 @@ class GraphSelectDialog(QDialog):
         layout = QVBoxLayout()
         self.list_widget = QListWidget()
         self.refresh_list()
-        layout.addWidget(QLabel("Оберіть граф для роботи:"))
+        layout.addWidget(QLabel(LocaleManager.get_locale("graph_select_dialog", "select_graph_label")))
         layout.addWidget(self.list_widget)
 
         btn_layout = QHBoxLayout()
-        self.btn_new = QPushButton("Новий граф")
-        self.btn_delete = QPushButton("Видалити граф")
-        self.btn_select = QPushButton("Вибрати")
+        self.btn_new = QPushButton(LocaleManager.get_locale("graph_select_dialog", "new_graph_button"))
+        self.btn_delete = QPushButton(LocaleManager.get_locale("graph_select_dialog", "delete_graph_button"))
+        self.btn_select = QPushButton(LocaleManager.get_locale("graph_select_dialog", "select_button"))
         btn_layout.addWidget(self.btn_new)
         btn_layout.addWidget(self.btn_delete)
         btn_layout.addWidget(self.btn_select)
         # Додаємо кнопки для експорту та імпорту сесії
-        self.btn_export_session = QPushButton("Експорт сесії")
-        self.btn_import_session = QPushButton("Імпорт сесії")
+        self.btn_export_session = QPushButton(LocaleManager.get_locale("graph_select_dialog", "export_session_button"))
+        self.btn_import_session = QPushButton(LocaleManager.get_locale("graph_select_dialog", "import_session_button"))
         btn_layout.addWidget(self.btn_export_session)
         btn_layout.addWidget(self.btn_import_session)
         layout.addLayout(btn_layout)
@@ -52,7 +53,9 @@ class GraphSelectDialog(QDialog):
         name = getattr(g, 'name', str(id(g)))
         directed = getattr(g, 'directed', hasattr(g, 'is_directed') and g.is_directed())
         weighted = getattr(g, 'weighted', False)
-        return f"{name} | {'Орієнтований' if directed else 'Неорієнтований'} | {'Ваговий' if weighted else 'Неваговий'}"
+        directed_text = LocaleManager.get_locale("graph_select_dialog", "directed") if directed else LocaleManager.get_locale("graph_select_dialog", "undirected")
+        weighted_text = LocaleManager.get_locale("graph_select_dialog", "weighted") if weighted else LocaleManager.get_locale("graph_select_dialog", "unweighted")
+        return f"{name} | {directed_text} | {weighted_text}"
 
     def set_current_graph_selected(self):
         for i, g in enumerate(self.graph_list):
@@ -62,29 +65,29 @@ class GraphSelectDialog(QDialog):
 
     def create_new_graph(self):
         # Діалог для вибору типу графа
-        types = ["Орієнтований", "Неорієнтований"]
-        type_idx, ok = QInputDialog.getItem(self, "Тип графа", "Оберіть тип графа:", types, 0, False)
+        types = [LocaleManager.get_locale("graph_select_dialog", "directed"), LocaleManager.get_locale("graph_select_dialog", "undirected")]
+        type_idx, ok = QInputDialog.getItem(self, LocaleManager.get_locale("graph_select_dialog", "graph_type_title"), LocaleManager.get_locale("graph_select_dialog", "graph_type_label"), types, 0, False)
         if not ok:
             return
-        weighted, ok2 = QInputDialog.getItem(self, "Ваговість", "Граф ваговий?", ["Так", "Ні"], 0, False)
+        weighted, ok2 = QInputDialog.getItem(self, LocaleManager.get_locale("graph_select_dialog", "weight_title"), LocaleManager.get_locale("graph_select_dialog", "weight_label"), [LocaleManager.get_locale("graph_select_dialog", "yes"), LocaleManager.get_locale("graph_select_dialog", "no")], 0, False)
         if not ok2:
             return
-        auto_name, ok4 = QInputDialog.getItem(self, "Автоматична назва вершин", "Використовувати автоназви для вершин?", ["Так", "Ні"], 0, False)
+        auto_name, ok4 = QInputDialog.getItem(self, LocaleManager.get_locale("graph_select_dialog", "auto_name_title"), LocaleManager.get_locale("graph_select_dialog", "auto_name_label"), [LocaleManager.get_locale("graph_select_dialog", "yes"), LocaleManager.get_locale("graph_select_dialog", "no")], 0, False)
         if not ok4:
             return
-        name, ok3 = QInputDialog.getText(self, "Назва графа", "Введіть назву графа:")
+        name, ok3 = QInputDialog.getText(self, LocaleManager.get_locale("graph_select_dialog", "graph_name_title"), LocaleManager.get_locale("graph_select_dialog", "graph_name_label"))
         if not ok3 or not name.strip():
             return
         from core.graph_models.directed_graph import DirectedGraph
         from core.graph_models.undirected_graph import UndirectedGraph
-        if type_idx == "Орієнтований":
-            g = DirectedGraph(weighted=(weighted=="Так"))
+        if type_idx == LocaleManager.get_locale("graph_select_dialog", "directed"):
+            g = DirectedGraph(weighted=(weighted==LocaleManager.get_locale("graph_select_dialog", "yes")))
             g.directed = True
         else:
-            g = UndirectedGraph(weighted=(weighted=="Так"))
+            g = UndirectedGraph(weighted=(weighted==LocaleManager.get_locale("graph_select_dialog", "yes")))
             g.directed = False
         g.name = name.strip()
-        g.auto_vertex_name = (auto_name == "Так")
+        g.auto_vertex_name = (auto_name == LocaleManager.get_locale("graph_select_dialog", "yes"))
         # Оновити чекбокс у налаштуваннях, якщо є
         main_window = self.parent()
         if hasattr(main_window, 'settings_widget'):
@@ -100,12 +103,12 @@ class GraphSelectDialog(QDialog):
         row = self.list_widget.currentRow()
         if row >= 0:
             if self.graph_list[row] is self.current_graph:
-                QMessageBox.warning(self, "Видалення", "Неможливо видалити активний граф. Спочатку виберіть інший.")
+                QMessageBox.warning(self, LocaleManager.get_locale("graph_select_dialog", "delete_warning_title"), LocaleManager.get_locale("graph_select_dialog", "delete_active_graph"))
                 return
             del self.graph_list[row]
             self.refresh_list()
         else:
-            QMessageBox.warning(self, "Видалення", "Оберіть граф для видалення.")
+            QMessageBox.warning(self, LocaleManager.get_locale("graph_select_dialog", "delete_warning_title"), LocaleManager.get_locale("graph_select_dialog", "delete_no_selection"))
 
     def select_graph(self):
         row = self.list_widget.currentRow()
@@ -113,12 +116,12 @@ class GraphSelectDialog(QDialog):
             self.selected_graph = self.graph_list[row]
             self.accept()
         else:
-            QMessageBox.warning(self, "Вибір", "Оберіть граф зі списку.")
+            QMessageBox.warning(self, LocaleManager.get_locale("graph_select_dialog", "select_warning_title"), LocaleManager.get_locale("graph_select_dialog", "select_no_selection"))
 
     def export_session(self):
         from data_utils.session_exporter import SessionExporter
         from PyQt5.QtWidgets import QFileDialog
-        filepath, _ = QFileDialog.getSaveFileName(self, "Експортувати сесію", "", "Session Files (*.json)")
+        filepath, _ = QFileDialog.getSaveFileName(self, LocaleManager.get_locale("graph_select_dialog", "export_session_title"), "", LocaleManager.get_locale("graph_select_dialog", "session_files"))
         if filepath:
             SessionExporter.export_session(self.graph_list, filepath)
 
@@ -127,7 +130,7 @@ class GraphSelectDialog(QDialog):
         from core.graph_models.directed_graph import DirectedGraph
         from core.graph_models.undirected_graph import UndirectedGraph
         from PyQt5.QtWidgets import QFileDialog
-        filepath, _ = QFileDialog.getOpenFileName(self, "Імпортувати сесію", "", "Session Files (*.json)")
+        filepath, _ = QFileDialog.getOpenFileName(self, LocaleManager.get_locale("graph_select_dialog", "import_session_title"), "", LocaleManager.get_locale("graph_select_dialog", "session_files"))
         if filepath:
             graph_class_map = {
                 'DirectedGraph': DirectedGraph,
@@ -145,7 +148,7 @@ class GraphSelectDialog(QDialog):
         from PyQt5.QtCore import Qt
         if event.key() in (Qt.Key_Return, Qt.Key_Enter):
             for btn in self.findChildren(QPushButton):
-                if btn.text().lower() in ["ok", "вибрати"]:
+                if btn.text().lower() in [LocaleManager.get_locale("common_dialogs", "ok_text"), LocaleManager.get_locale("common_dialogs", "select_text")]:
                     btn.click()
                     return
         super().keyPressEvent(event)

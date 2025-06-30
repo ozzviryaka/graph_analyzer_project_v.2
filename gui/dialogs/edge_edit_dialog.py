@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidget, QScrollArea
 from PyQt5.QtGui import QIcon
+from locales.locale_manager import LocaleManager
 
 class EdgeEditDialog(QDialog):
     """
@@ -7,14 +8,14 @@ class EdgeEditDialog(QDialog):
     """
     def __init__(self, weight=None, data=None, editable_weight=True, editable_data=True, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Додавання/Редагування ребра")
+        self.setWindowTitle(LocaleManager.get_locale("edge_edit_dialog", "window_title"))
         self.setWindowIcon(QIcon("res/settings_icon.png"))
         layout = QVBoxLayout()
 
         # Вага
         if editable_weight:
             hlayout = QHBoxLayout()
-            hlayout.addWidget(QLabel("Вага ребра:"))
+            hlayout.addWidget(QLabel(LocaleManager.get_locale("edge_edit_dialog", "weight_label")))
             self.weight_edit = QLineEdit(str(weight) if weight is not None else "")
             hlayout.addWidget(self.weight_edit)
             layout.addLayout(hlayout)
@@ -29,7 +30,7 @@ class EdgeEditDialog(QDialog):
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setWidget(self.data_widget)
-        layout.addWidget(QLabel("Додаткові дані (ключ-значення):"))
+        layout.addWidget(QLabel(LocaleManager.get_locale("edge_edit_dialog", "additional_data_label")))
         layout.addWidget(scroll)
 
         if editable_data:
@@ -42,8 +43,8 @@ class EdgeEditDialog(QDialog):
 
         # btn_layout, OK/Cancel як було
         btn_layout = QHBoxLayout()
-        ok_btn = QPushButton("OK")
-        cancel_btn = QPushButton("Скасувати")
+        ok_btn = QPushButton(LocaleManager.get_locale("edge_edit_dialog", "ok_button"))
+        cancel_btn = QPushButton(LocaleManager.get_locale("edge_edit_dialog", "cancel_button"))
         ok_btn.clicked.connect(self.accept)
         cancel_btn.clicked.connect(self.reject)
         btn_layout.addWidget(ok_btn)
@@ -61,9 +62,9 @@ class EdgeEditDialog(QDialog):
         value_edit = QLineEdit(value)
         remove_btn = QPushButton("-")
         remove_btn.setFixedWidth(24)
-        hlayout.addWidget(QLabel("Ключ:"))
+        hlayout.addWidget(QLabel(LocaleManager.get_locale("edge_edit_dialog", "key_label")))
         hlayout.addWidget(key_edit)
-        hlayout.addWidget(QLabel("Значення:"))
+        hlayout.addWidget(QLabel(LocaleManager.get_locale("edge_edit_dialog", "value_label")))
         hlayout.addWidget(value_edit)
         hlayout.addWidget(remove_btn)
         self.data_area.addLayout(hlayout)
@@ -112,7 +113,7 @@ class EdgeEditDialog(QDialog):
         from PyQt5.QtCore import Qt
         if event.key() in (Qt.Key_Return, Qt.Key_Enter):
             for btn in self.findChildren(QPushButton):
-                if btn.text().lower() in ["ok", "вибрати"]:
+                if btn.text().lower() in [LocaleManager.get_locale("common_dialogs", "ok_text"), LocaleManager.get_locale("common_dialogs", "select_text")]:
                     btn.click()
                     return
         super().keyPressEvent(event)

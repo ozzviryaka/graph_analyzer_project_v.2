@@ -12,24 +12,25 @@ from gui.themes.modern.modern_green_theme import ModernGreenTheme
 from gui.themes.modern.modern_blue_theme import ModernBlueTheme
 from gui.themes.modern.modern_red_theme import ModernRedTheme
 from gui.themes.modern.modern_yellow_theme import ModernYellowTheme
+from locales.locale_manager import LocaleManager
 
 class ThemeSelectDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Вибір теми")
+        self.setWindowTitle(LocaleManager.get_locale("theme_select_dialog", "window_title"))
         self.setFixedSize(250, 200)
         layout = QVBoxLayout()
-        layout.addWidget(QLabel("Оберіть стиль теми:"))
+        layout.addWidget(QLabel(LocaleManager.get_locale("theme_select_dialog", "style_label")))
         self.style_combo = QComboBox()
-        self.style_combo.addItems(["Сучасна", "Класична"])
+        self.style_combo.addItems([LocaleManager.get_locale("theme_select_dialog", "modern"), LocaleManager.get_locale("theme_select_dialog", "classic")])
         layout.addWidget(self.style_combo)
-        layout.addWidget(QLabel("Оберіть колір теми:"))
+        layout.addWidget(QLabel(LocaleManager.get_locale("theme_select_dialog", "color_label")))
         self.color_combo = QComboBox()
         self.color_combo.addItems([
-            "Темна", "Світла", "Зелена", "Синя", "Червона", "Жовта"
+            LocaleManager.get_locale("theme_select_dialog", "dark"), LocaleManager.get_locale("theme_select_dialog", "light"), LocaleManager.get_locale("theme_select_dialog", "green"), LocaleManager.get_locale("theme_select_dialog", "blue"), LocaleManager.get_locale("theme_select_dialog", "red"), LocaleManager.get_locale("theme_select_dialog", "yellow")
         ])
         layout.addWidget(self.color_combo)
-        ok_btn = QPushButton("OK")
+        ok_btn = QPushButton(LocaleManager.get_locale("theme_select_dialog", "ok_button"))
         ok_btn.clicked.connect(self.apply_theme)
         layout.addWidget(ok_btn)
         self.setLayout(layout)
@@ -51,9 +52,9 @@ class ThemeSelectDialog(QDialog):
         style = self.style_combo.currentIndex()
         self.color_combo.clear()
         if style == 0:
-            self.color_combo.addItems(["Темна", "Світла", "Зелена", "Синя", "Червона", "Жовта"])
+            self.color_combo.addItems([LocaleManager.get_locale("theme_select_dialog", "dark"), LocaleManager.get_locale("theme_select_dialog", "light"), LocaleManager.get_locale("theme_select_dialog", "green"), LocaleManager.get_locale("theme_select_dialog", "blue"), LocaleManager.get_locale("theme_select_dialog", "red"), LocaleManager.get_locale("theme_select_dialog", "yellow")])
         else:
-            self.color_combo.addItems(["Темна", "Світла", "Зелена", "Синя", "Червона", "Жовта"])
+            self.color_combo.addItems([LocaleManager.get_locale("theme_select_dialog", "dark"), LocaleManager.get_locale("theme_select_dialog", "light"), LocaleManager.get_locale("theme_select_dialog", "green"), LocaleManager.get_locale("theme_select_dialog", "blue"), LocaleManager.get_locale("theme_select_dialog", "red"), LocaleManager.get_locale("theme_select_dialog", "yellow")])
 
     def apply_theme(self):
         style = self.style_combo.currentIndex()
@@ -69,7 +70,7 @@ class ThemeSelectDialog(QDialog):
         from PyQt5.QtCore import Qt
         if event.key() in (Qt.Key_Return, Qt.Key_Enter):
             for btn in self.findChildren(QPushButton):
-                if btn.text().lower() in ["ok", "вибрати"]:
+                if btn.text().lower() in [LocaleManager.get_locale("common_dialogs", "ok_text"), LocaleManager.get_locale("common_dialogs", "select_text")]:
                     btn.click()
                     return
         super().keyPressEvent(event)
