@@ -169,5 +169,25 @@
   },
   "undirected_graph": {
     "nodes_not_in_graph_error": "Обидва вузли ребра мають бути додані до графа перед додаванням ребра."
+  },
+  "graph_loader": {
+    "success_load": "Граф успішно завантажено з файлу {filepath}",
+    "error_load": "Помилка при завантаженні графа: {error}"
+  },
+  "graph_saver": {
+    "success_save": "Граф успішно збережено у файл {filepath}",
+    "error_save": "Помилка при збереженні графа: {error}"
+  },
+  "session_exporter": {
+    "export_start": "Початок експорту сесії у файл: {filepath}",
+    "export_success": "Сесію успішно експортовано у файл: {filepath}",
+    "export_error": "Помилка при експорті сесії: {error}"
+  },
+  "session_importer": {
+    "import_start": "Початок імпорту сесії з файлу: {filepath}",
+    "class_not_found_warning": "Клас графа {class_name} не знайдено у graph_class_map",
+    "edge_nodes_not_found_warning": "Не знайдено вузли для ребра: {edge_info}",
+    "import_success": "Сесію успішно імпортовано з файлу: {filepath}",
+    "import_error": "Помилка при імпорті сесії: {error}"
   }
 }

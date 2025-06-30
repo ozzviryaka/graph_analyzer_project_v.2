@@ -1,5 +1,6 @@
 import json
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class GraphSaver:
     """
@@ -41,6 +42,6 @@ class GraphSaver:
             }
             with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False, indent=4)
-            logger.info(f"Граф успішно збережено у файл {filepath}")
+            logger.info(LocaleManager.get_locale("graph_saver", "success_save").format(filepath=filepath))
         except Exception as e:
-            logger.error(f"Помилка при збереженні графа: {e}")
+            logger.error(LocaleManager.get_locale("graph_saver", "error_save").format(error=e))

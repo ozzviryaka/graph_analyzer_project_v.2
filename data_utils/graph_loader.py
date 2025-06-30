@@ -5,6 +5,7 @@ from core.graph_components.undirected_edge import UndirectedEdge
 from core.graph_models.directed_graph import DirectedGraph
 from core.graph_models.undirected_graph import UndirectedGraph
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class GraphLoader:
     """
@@ -50,8 +51,8 @@ class GraphLoader:
                 edge = edge_class(source, target, weight, data_field)
                 graph.add_edge(edge)
 
-            logger.info(f"Граф успішно завантажено з файлу {filepath}")
+            logger.info(LocaleManager.get_locale("graph_loader", "success_load").format(filepath=filepath))
             return graph
         except Exception as e:
-            logger.error(f"Помилка при завантаженні графа: {e}")
+            logger.error(LocaleManager.get_locale("graph_loader", "error_load").format(error=e))
             return None

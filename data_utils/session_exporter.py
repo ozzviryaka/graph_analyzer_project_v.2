@@ -1,6 +1,7 @@
 import json
 from utils.logger import Logger
 from copy import deepcopy
+from locales.locale_manager import LocaleManager
 
 class SessionExporter:
     @staticmethod
@@ -10,7 +11,7 @@ class SessionExporter:
         filepath: шлях до файлу для збереження сесії
         """
         logger = Logger()
-        logger.info(f"Початок експорту сесії у файл: {filepath}")
+        logger.info(LocaleManager.get_locale("session_exporter", "export_start").format(filepath=filepath))
         try:
             session_data = []
             for g in graphs:
@@ -39,6 +40,6 @@ class SessionExporter:
                 })
             with open(filepath, 'w', encoding='utf-8') as f:
                 json.dump(session_data, f, ensure_ascii=False, indent=2)
-            logger.info(f"Сесію успішно експортовано у файл: {filepath}")
+            logger.info(LocaleManager.get_locale("session_exporter", "export_success").format(filepath=filepath))
         except Exception as e:
-            logger.error(f"Помилка при експорті сесії: {e}")
+            logger.error(LocaleManager.get_locale("session_exporter", "export_error").format(error=e))
