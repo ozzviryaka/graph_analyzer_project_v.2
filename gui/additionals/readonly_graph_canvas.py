@@ -2,6 +2,7 @@ from gui.additionals.graph_canvas import GraphCanvas
 from PyQt5.QtWidgets import QWidget, QPushButton
 from PyQt5.QtGui import QPainter, QPen, QBrush, QColor, QFontMetrics
 from PyQt5.QtCore import QRectF, Qt
+from locales.locale_manager import LocaleManager
 
 class ReadOnlyGraphCanvas(GraphCanvas):
     """
@@ -16,8 +17,8 @@ class ReadOnlyGraphCanvas(GraphCanvas):
         # Додаємо кнопки Undo/Redo на саме полотно
         self.undo_btn = QPushButton('↶', self)
         self.redo_btn = QPushButton('↷', self)
-        self.undo_btn.setToolTip('Undo (Ctrl+Z)')
-        self.redo_btn.setToolTip('Redo (Ctrl+Y)')
+        self.undo_btn.setToolTip(LocaleManager.get_locale("graph_canvas", "undo_tooltip"))
+        self.redo_btn.setToolTip(LocaleManager.get_locale("graph_canvas", "redo_tooltip"))
         self.undo_btn.setFixedSize(28, 28)
         self.redo_btn.setFixedSize(28, 28)
         self.undo_btn.setStyleSheet('color: #f5f5f5; background: #23232a; border-radius: 6px; border: 1.5px solid #23232a; padding: 0 2px; font-size: 14px; min-width: 0; min-height: 0;')

@@ -189,5 +189,9 @@
     "edge_nodes_not_found_warning": "Не знайдено вузли для ребра: {edge_info}",
     "import_success": "Сесію успішно імпортовано з файлу: {filepath}",
     "import_error": "Помилка при імпорті сесії: {error}"
+  },
+  "graph_canvas": {
+    "undo_tooltip": "Скасувати останню дію (Undo, Ctrl+Z)",
+    "redo_tooltip": "Повернути дію (Redo, Ctrl+Y)"
   }
 }

@@ -10,6 +10,7 @@ from core.graph_components.undirected_edge import UndirectedEdge
 from gui.dialogs.edge_edit_dialog import EdgeEditDialog
 from gui.dialogs.vertex_edit_dialog import VertexEditDialog
 from utils.undo_redo_manager import UndoRedoManager
+from locales.locale_manager import LocaleManager
 
 import math
 
@@ -41,8 +42,8 @@ class GraphCanvas(QWidget):
         self.redo_btn.setToolTip('Redo (Ctrl+Y)')
         self.undo_btn.setFixedSize(24, 24)
         self.redo_btn.setFixedSize(24, 24)
-        self.undo_btn.setToolTip('Скасувати останню дію (Undo, Ctrl+Z)')
-        self.redo_btn.setToolTip('Повернути дію (Redo, Ctrl+Y)')
+        self.undo_btn.setToolTip(LocaleManager.get_locale("graph_canvas", "undo_tooltip"))
+        self.redo_btn.setToolTip(LocaleManager.get_locale("graph_canvas", "redo_tooltip"))
         self.undo_btn.clicked.connect(lambda: (self.undo_redo_manager.undo(), self.update(), self._update_undo_redo_buttons()))
         self.redo_btn.clicked.connect(lambda: (self.undo_redo_manager.redo(), self.update(), self._update_undo_redo_buttons()))
         self.undo_btn.raise_()
