@@ -163,5 +163,11 @@
   },
   "undirected_edge": {
     "created_info": "Створено неспрямоване ребро: вузол1={node1_id}, вузол2={node2_id}, вага={weight}, дані={data}"
+  },
+  "directed_graph": {
+    "nodes_not_in_graph_error": "Обидва вузли ребра мають бути додані до графа перед додаванням ребра."
+  },
+  "undirected_graph": {
+    "nodes_not_in_graph_error": "Обидва вузли ребра мають бути додані до графа перед додаванням ребра."
   }
 }

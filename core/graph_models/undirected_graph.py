@@ -1,6 +1,8 @@
 from .graph import BaseGraph
 from core.graph_components.node import Node
 from core.graph_components.undirected_edge import UndirectedEdge
+from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class UndirectedGraph(BaseGraph):
     """
@@ -27,7 +29,9 @@ class UndirectedGraph(BaseGraph):
         Додає неспрямоване ребро до графа.
         """
         if (edge.source.id not in self._nodes) or (edge.target.id not in self._nodes):
-            raise ValueError("Обидва вузли ребра мають бути додані до графа перед додаванням ребра.")
+            error_msg = LocaleManager.get_locale("undirected_graph", "nodes_not_in_graph_error")
+            Logger().error(error_msg)
+            raise ValueError(error_msg)
         if edge not in self._edges:
             self._edges.append(edge)
             self._adjacency[edge.source.id].add(edge.target.id)
