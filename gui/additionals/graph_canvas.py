@@ -825,23 +825,6 @@ class GraphCanvas(QWidget):
         self.undo_redo_manager.push(redo, undo)
         self._update_undo_redo_buttons()
 
-    def show_instruction(self):
-        msg = QMessageBox(self)
-        msg.setWindowTitle("Інструкція")
-        msg.setText(
-            """
-            Інструкція з використання графового полотна:
-            - Клік по вершині: вибір вершини
-            - Додавання вершини: add_node(node_id)
-            - Видалення вершини: remove_node(node_id)
-            - Додавання ребра: add_edge(source_id, target_id, weight)
-            - Видалення ребра: remove_edge(source_id, target_id)
-            - Редагування ваги ребра: edit_edge_weight(source_id, target_id, new_weight)
-            - Відображення графа: автоматично
-            """
-        )
-        msg.exec_()
-
     def clear_graph(self):
         """
         Очищає граф: видаляє всі вершини, ребра та позиції.
