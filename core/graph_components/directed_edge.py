@@ -1,5 +1,6 @@
 from .base_edge import BaseEdge
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class DirectedEdge(BaseEdge):
     """
@@ -19,7 +20,9 @@ class DirectedEdge(BaseEdge):
         self._weight = weight
 
         Logger().info(
-            f"Створено спрямоване ребро: source={self.source.id}, target={self.target.id}, weight={self._weight}, data={self.data}"
+            LocaleManager.get_locale("directed_edge", "created_info").format(
+                source_id=self.source.id, target_id=self.target.id, weight=self._weight, data=self.data
+            )
         )
 
     def weight(self, use_weight=True):

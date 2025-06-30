@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from locales.locale_manager import LocaleManager
 
 class BaseEdge(ABC):
     """
@@ -26,4 +27,9 @@ class BaseEdge(ABC):
         pass
 
     def __repr__(self):
-        return f"{self.__class__.__name__}(source={self.source}, target={self.target}, data={self.data})"
+        return LocaleManager.get_locale("base_edge", "repr_format").format(
+            class_name=self.__class__.__name__,
+            source=self.source,
+            target=self.target,
+            data=self.data
+        )

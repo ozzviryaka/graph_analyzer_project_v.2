@@ -150,5 +150,18 @@
   "graph_converter": {
     "directed_to_undirected_info": "Спрямований граф конвертовано у неспрямований.",
     "undirected_to_directed_info": "Неспрямований граф конвертовано у спрямований."
+  },
+  "base_edge": {
+    "repr_format": "{class_name}(джерело={source}, призначення={target}, дані={data})"
+  },
+  "node": {
+    "created_info": "Створено вузол: id={node_id}, дані={data}, позиція={pos}",
+    "repr_format": "Вузол(id={node_id}, дані={data}, позиція={pos})"
+  },
+  "directed_edge": {
+    "created_info": "Створено спрямоване ребро: джерело={source_id}, призначення={target_id}, вага={weight}, дані={data}"
+  },
+  "undirected_edge": {
+    "created_info": "Створено неспрямоване ребро: вузол1={node1_id}, вузол2={node2_id}, вага={weight}, дані={data}"
   }
 }

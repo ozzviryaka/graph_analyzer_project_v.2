@@ -1,4 +1,5 @@
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class Node:
     """
@@ -16,10 +17,14 @@ class Node:
         self.data = data if data is not None else {}
         self.pos = pos  # координати (x, y) або None
 
-        Logger().info(f"Створено вузол: id={self.id}, data={self.data}, pos={self.pos}")
+        Logger().info(LocaleManager.get_locale("node", "created_info").format(
+            node_id=self.id, data=self.data, pos=self.pos
+        ))
 
     def __repr__(self):
-        return f"Node(id={self.id}, data={self.data}, pos={self.pos})"
+        return LocaleManager.get_locale("node", "repr_format").format(
+            node_id=self.id, data=self.data, pos=self.pos
+        )
 
     def set_pos(self, pos):
         self.pos = pos

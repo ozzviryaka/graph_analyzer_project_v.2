@@ -1,5 +1,6 @@
 from .base_edge import BaseEdge
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class UndirectedEdge(BaseEdge):
     """
@@ -19,7 +20,9 @@ class UndirectedEdge(BaseEdge):
         self._weight = weight
 
         Logger().info(
-            f"Створено неспрямоване ребро: node1={self.source.id}, node2={self.target.id}, weight={self._weight}, data={self.data}"
+            LocaleManager.get_locale("undirected_edge", "created_info").format(
+                node1_id=self.source.id, node2_id=self.target.id, weight=self._weight, data=self.data
+            )
         )
 
     def weight(self, use_weight=True):
