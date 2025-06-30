@@ -303,5 +303,9 @@
     "component_result": "Компонента {index}: {vertices}",
     "cycle_result": "Цикл {index}: {vertices}",
     "traversal_completed": "Обхід завершено"
+  },
+  "theme_manager": {
+    "theme_change_info": "Зміна теми на: {theme_name}",
+    "theme_save_error": "Не вдалося зберегти тему: {error}"
   }
 }

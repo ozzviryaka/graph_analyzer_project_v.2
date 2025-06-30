@@ -1,4 +1,5 @@
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 from .classic.dark_theme import DarkTheme
 from .classic.light_theme import LightTheme
 from .classic.green_theme import GreenTheme
@@ -21,7 +22,8 @@ class ThemeManager:
     @classmethod
     def apply_theme(cls, theme):
         logger = Logger()
-        logger.info(f"Зміна теми на: {theme.__name__ if hasattr(theme, '__name__') else str(theme)}")
+        theme_name = theme.__name__ if hasattr(theme, '__name__') else str(theme)
+        logger.info(LocaleManager.get_locale("theme_manager", "theme_change_info").format(theme_name=theme_name))
         cls._current_theme = theme
         theme.apply()
         cls._save_theme_name(theme)
@@ -33,7 +35,7 @@ class ThemeManager:
             with open(cls._settings_path, 'w', encoding='utf-8') as f:
                 json.dump({'theme': theme_name}, f)
         except Exception as e:
-            Logger().error(f"Не вдалося зберегти тему: {e}")
+            Logger().error(LocaleManager.get_locale("theme_manager", "theme_save_error").format(error=str(e)))
 
     @classmethod
     def load_theme(cls):
