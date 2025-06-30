@@ -4,6 +4,7 @@ from core.algorithms.matrices.incidence_matrix import IncidenceMatrix
 from gui.widgets.matrix_tab_widgets.matrix_widget import MatrixWidget
 from gui.widgets.matrix_tab_widgets.adjacency_matrix_export_widget import AdjacencyMatrixExportWidget
 from gui.widgets.matrix_tab_widgets.incidence_matrix_export_widget import IncidenceMatrixExportWidget
+from locales.locale_manager import LocaleManager
 
 class MatrixTabsWidget(QWidget):
     """
@@ -16,14 +17,14 @@ class MatrixTabsWidget(QWidget):
         adj_matrix_obj = AdjacencyMatrix(graph)
         adj_matrix = adj_matrix_obj.get_matrix()
         adj_labels = [node.id for node in adj_matrix_obj.nodes]
-        self.adj_widget = MatrixWidget(adj_matrix, row_labels=adj_labels, col_labels=adj_labels, title="Матриця суміжності")
+        self.adj_widget = MatrixWidget(adj_matrix, row_labels=adj_labels, col_labels=adj_labels, title=LocaleManager.get_locale("matrix_tabs_widget", "adjacency_matrix_title"))
         self.adj_export_widget = AdjacencyMatrixExportWidget(adj_matrix, row_names=adj_labels, col_names=adj_labels)
         # Матриця інцидентності
         inc_matrix_obj = IncidenceMatrix(graph)
         inc_matrix = inc_matrix_obj.get_matrix()
         inc_row_labels = [node.id for node in inc_matrix_obj.nodes]
-        inc_col_labels = [f"E{i+1}" for i in range(len(inc_matrix_obj.edges))] if hasattr(inc_matrix_obj, 'edges') else None
-        self.inc_widget = MatrixWidget(inc_matrix, row_labels=inc_row_labels, col_labels=inc_col_labels, title="Матриця інцидентності")
+        inc_col_labels = [LocaleManager.get_locale("matrix_tabs_widget", "edge_label").format(index=i+1) for i in range(len(inc_matrix_obj.edges))] if hasattr(inc_matrix_obj, 'edges') else None
+        self.inc_widget = MatrixWidget(inc_matrix, row_labels=inc_row_labels, col_labels=inc_col_labels, title=LocaleManager.get_locale("matrix_tabs_widget", "incidence_matrix_title"))
         self.inc_export_widget = IncidenceMatrixExportWidget(inc_matrix, row_names=inc_row_labels, col_names=inc_col_labels)
         # Додаємо віджети у вкладки
         adj_tab = QWidget()
@@ -36,8 +37,8 @@ class MatrixTabsWidget(QWidget):
         inc_layout.addWidget(self.inc_widget)
         inc_layout.addWidget(self.inc_export_widget)
         inc_tab.setLayout(inc_layout)
-        self.tabs.addTab(adj_tab, "Суміжності")
-        self.tabs.addTab(inc_tab, "Інцидентності")
+        self.tabs.addTab(adj_tab, LocaleManager.get_locale("matrix_tabs_widget", "adjacency_tab"))
+        self.tabs.addTab(inc_tab, LocaleManager.get_locale("matrix_tabs_widget", "incidence_tab"))
         layout = QVBoxLayout()
         layout.addWidget(self.tabs)
         self.setLayout(layout)
@@ -69,7 +70,7 @@ class MatrixTabsWidget(QWidget):
         inc_matrix_obj = IncidenceMatrix(graph)
         inc_matrix = inc_matrix_obj.get_matrix()
         inc_row_labels = [node.id for node in inc_matrix_obj.nodes]
-        inc_col_labels = [f"E{i+1}" for i in range(len(inc_matrix_obj.edges))] if hasattr(inc_matrix_obj, 'edges') else None
+        inc_col_labels = [LocaleManager.get_locale("matrix_tabs_widget", "edge_label").format(index=i+1) for i in range(len(inc_matrix_obj.edges))] if hasattr(inc_matrix_obj, 'edges') else None
         self.inc_widget.table.setRowCount(len(inc_matrix))
         self.inc_widget.table.setColumnCount(len(inc_matrix[0]) if inc_matrix else 0)
         if inc_row_labels:

@@ -4,6 +4,7 @@ from gui.tabs.graph_combined_tab import GraphCombinedTab
 from gui.tabs.matrix_tabs_widget import MatrixTabsWidget
 from gui.tabs.graph_analysis_tab import GraphAnalysisTab
 from gui.tabs.traversal_tab import TraversalTab
+from locales.locale_manager import LocaleManager
 
 class GraphTabsWidget(QWidget):
     """
@@ -16,10 +17,10 @@ class GraphTabsWidget(QWidget):
         self.matrix_tab = MatrixTabsWidget(graph)
         self.analysis_tab = GraphAnalysisTab(graph)
         self.traversal_tab = TraversalTab(graph)
-        self.tabs.addTab(self.combined_tab, "Граф та інформація")
-        self.tabs.addTab(self.matrix_tab, "Матриці")
-        self.tabs.addTab(self.analysis_tab, "Аналіз графа")
-        self.tabs.addTab(self.traversal_tab, "Обхід графа")
+        self.tabs.addTab(self.combined_tab, LocaleManager.get_locale("graph_tabs_widget", "graph_info_tab"))
+        self.tabs.addTab(self.matrix_tab, LocaleManager.get_locale("graph_tabs_widget", "matrices_tab"))
+        self.tabs.addTab(self.analysis_tab, LocaleManager.get_locale("graph_tabs_widget", "analysis_tab"))
+        self.tabs.addTab(self.traversal_tab, LocaleManager.get_locale("graph_tabs_widget", "traversal_tab"))
         layout = QVBoxLayout()
         layout.addWidget(self.tabs)
         self.setLayout(layout)

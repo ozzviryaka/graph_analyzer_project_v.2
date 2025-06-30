@@ -6,6 +6,7 @@ from gui.widgets.analysis_tab_widgets.flow_algorithms_widget import FlowAlgorith
 from gui.widgets.analysis_tab_widgets.shortest_paths_widget import ShortestPathsWidget
 from gui.widgets.analysis_tab_widgets.special_paths_widget import SpecialPathsWidget
 from gui.widgets.analysis_tab_widgets.analysis_output_controls import AnalysisOutputControls
+from locales.locale_manager import LocaleManager
 
 class GraphAnalysisTab(QWidget):
     """
@@ -14,15 +15,15 @@ class GraphAnalysisTab(QWidget):
     def __init__(self, graph, parent=None):
         super().__init__(parent)
         layout = QVBoxLayout()
-        layout.addWidget(QLabel("<h2>Аналіз графа</h2>"))
+        layout.addWidget(QLabel(LocaleManager.get_locale("graph_analysis_tab", "title")))
         self.alg_combo = QComboBox()
         self.alg_combo.setCursor(Qt.PointingHandCursor)
         self.alg_combo.addItems([
-            "Обхід графа (BFS/DFS)",
-            "Остовні дерева (Прим/Краскал)",
-            "Потокові алгоритми (Ford-Fulkerson/Min-Cut)",
-            "Найкоротші шляхи (Дейкстра/Беллман-Форд/Флойд-Уоршелл)",
-            "Спеціальні шляхи (простий/найдовший/гамільтонів/ейлерів)"
+            LocaleManager.get_locale("graph_analysis_tab", "traversal_option"),
+            LocaleManager.get_locale("graph_analysis_tab", "spanning_tree_option"),
+            LocaleManager.get_locale("graph_analysis_tab", "flow_algorithms_option"),
+            LocaleManager.get_locale("graph_analysis_tab", "shortest_paths_option"),
+            LocaleManager.get_locale("graph_analysis_tab", "special_paths_option")
         ])
         layout.addWidget(self.alg_combo)
         self.output_textedit = QTextEdit()

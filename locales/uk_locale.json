@@ -266,5 +266,42 @@
   "common_dialogs": {
     "ok_text": "ok",
     "select_text": "вибрати"
+  },
+  "graph_analysis_tab": {
+    "title": "<h2>Аналіз графа</h2>",
+    "traversal_option": "Обхід графа (BFS/DFS)",
+    "spanning_tree_option": "Остовні дерева (Прим/Краскал)",
+    "flow_algorithms_option": "Потокові алгоритми (Ford-Fulkerson/Min-Cut)",
+    "shortest_paths_option": "Найкоротші шляхи (Дейкстра/Беллман-Форд/Флойд-Уоршелл)",
+    "special_paths_option": "Спеціальні шляхи (простий/найдовший/гамільтонів/ейлерів)"
+  },
+  "graph_tabs_widget": {
+    "graph_info_tab": "Граф та інформація",
+    "matrices_tab": "Матриці",
+    "analysis_tab": "Аналіз графа",
+    "traversal_tab": "Обхід графа"
+  },
+  "matrix_tabs_widget": {
+    "adjacency_matrix_title": "Матриця суміжності",
+    "incidence_matrix_title": "Матриця інцидентності",
+    "adjacency_tab": "Суміжності",
+    "incidence_tab": "Інцидентності",
+    "edge_label": "E{index}"
+  },
+  "traversal_tab": {
+    "empty_graph": "Граф порожній",
+    "select_start_vertex": "Оберіть початкову вершину",
+    "no_reachable_vertices": "Жодної досяжної вершини не знайдено.",
+    "no_components_found": "Жодної компоненти звʼязності не знайдено.",
+    "components_found": "Знайдено {count} компонент(и) звʼязності: {components}",
+    "no_cycles_found": "Жодного циклу не знайдено.",
+    "cycles_found": "Знайдено {count} цикл(ів): {cycles}",
+    "select_algorithm": "Оберіть алгоритм обходу.",
+    "stopped": "Зупинено",
+    "traversal_order": "Порядок обходу: {node}",
+    "result_vertices": "Отримані вершини: {vertices}",
+    "component_result": "Компонента {index}: {vertices}",
+    "cycle_result": "Цикл {index}: {vertices}",
+    "traversal_completed": "Обхід завершено"
   }
 }

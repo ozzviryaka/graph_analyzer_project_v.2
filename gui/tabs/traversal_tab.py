@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTextEdit
 from gui.widgets.traversal_tab_widgets.traversal_control_widget import TraversalControlWidget
 from core.algorithms.traversal.traversal_algorithms import GraphTraversal
 from PyQt5.QtCore import QTimer
+from locales.locale_manager import LocaleManager
 
 class TraversalTab(QWidget):
     """
@@ -38,14 +39,14 @@ class TraversalTab(QWidget):
         nodes_iter = list(self.graph.nodes())
         if not nodes_iter:
             self.text_output.clear()
-            msg = 'Граф порожній'
+            msg = LocaleManager.get_locale("traversal_tab", "empty_graph")
             self.set_status(msg)
             self.append_text(msg)
             return
         # Вибір початкової вершини з комбобоксу
         start_id = self.traversal_widget.start_vertex_combo.currentText()
         if not start_id:
-            msg = 'Оберіть початкову вершину'
+            msg = LocaleManager.get_locale("traversal_tab", "select_start_vertex")
             self.set_status(msg)
             self.append_text(msg)
             return
@@ -59,7 +60,7 @@ class TraversalTab(QWidget):
             self.order_to_show = list(result)
             self.result_nodes = self.order_to_show.copy()
             if not self.result_nodes:
-                msg = 'Жодної досяжної вершини не знайдено.'
+                msg = LocaleManager.get_locale("traversal_tab", "no_reachable_vertices")
                 self.set_status(msg)
                 self.append_text(msg)
         elif method.startswith('DFS'):
@@ -67,7 +68,7 @@ class TraversalTab(QWidget):
             self.order_to_show = list(result)
             self.result_nodes = self.order_to_show.copy()
             if not self.result_nodes:
-                msg = 'Жодної досяжної вершини не знайдено.'
+                msg = LocaleManager.get_locale("traversal_tab", "no_reachable_vertices")
                 self.set_status(msg)
                 self.append_text(msg)
         elif method.startswith('Dijkstra'):
@@ -75,7 +76,7 @@ class TraversalTab(QWidget):
             self.order_to_show = list(result)
             self.result_nodes = self.order_to_show.copy()
             if not self.result_nodes:
-                msg = 'Жодної досяжної вершини не знайдено.'
+                msg = LocaleManager.get_locale("traversal_tab", "no_reachable_vertices")
                 self.set_status(msg)
                 self.append_text(msg)
         elif 'Компоненти' in method:
@@ -83,11 +84,14 @@ class TraversalTab(QWidget):
             self.order_to_show = [v for comp in comps for v in comp]
             self.result_nodes = comps
             if not comps or all(len(comp) == 0 for comp in comps):
-                msg = 'Жодної компоненти звʼязності не знайдено.'
+                msg = LocaleManager.get_locale("traversal_tab", "no_components_found")
                 self.set_status(msg)
                 self.append_text(msg)
             else:
-                msg = f'Знайдено {len(comps)} компонент(и) звʼязності: ' + ', '.join(str(comp) for comp in comps)
+                msg = LocaleManager.get_locale("traversal_tab", "components_found").format(
+                    count=len(comps), 
+                    components=', '.join(str(comp) for comp in comps)
+                )
                 self.set_status(msg)
                 self.append_text(msg)
         elif 'циклів' in method:
@@ -96,17 +100,20 @@ class TraversalTab(QWidget):
             self.result_nodes = cycles
             self.cycles = cycles
             if not cycles:
-                msg = 'Жодного циклу не знайдено.'
+                msg = LocaleManager.get_locale("traversal_tab", "no_cycles_found")
                 self.set_status(msg)
                 self.append_text(msg)
             else:
-                msg = f'Знайдено {len(cycles)} цикл(ів): ' + ', '.join(str(cycle) for cycle in cycles)
+                msg = LocaleManager.get_locale("traversal_tab", "cycles_found").format(
+                    count=len(cycles),
+                    cycles=', '.join(str(cycle) for cycle in cycles)
+                )
                 self.set_status(msg)
                 self.append_text(msg)
         else:
             self.order_to_show = []
             self.result_nodes = []
-            msg = 'Оберіть алгоритм обходу.'
+            msg = LocaleManager.get_locale("traversal_tab", "select_algorithm")
             self.set_status(msg)
             self.append_text(msg)
         self.current_step = 0
@@ -119,7 +126,7 @@ class TraversalTab(QWidget):
         self.timer.stop()
         self.is_running = False
         self.traversal_widget.canvas.set_highlighted_nodes([])
-        msg = 'Зупинено'
+        msg = LocaleManager.get_locale("traversal_tab", "stopped")
         self.set_status(msg)
         self.append_text(msg)
 
@@ -132,7 +139,7 @@ class TraversalTab(QWidget):
         if self.current_step < len(self.order_to_show):
             highlight = self.order_to_show[:self.current_step+1]
             self.traversal_widget.canvas.set_highlighted_nodes(highlight)
-            msg = f'Порядок обходу: {self.order_to_show[self.current_step]}'
+            msg = LocaleManager.get_locale("traversal_tab", "traversal_order").format(node=self.order_to_show[self.current_step])
             self.set_status(msg)
             self.append_text(msg)
             self.current_step += 1
@@ -142,31 +149,31 @@ class TraversalTab(QWidget):
                self.traversal_widget.method_combo.currentText().startswith('DFS') or \
                self.traversal_widget.method_combo.currentText().startswith('Dijkstra'):
                 self.traversal_widget.canvas.set_highlighted_nodes(self.result_nodes)
-                msg = f'Отримані вершини: {", ".join(map(str, self.result_nodes))}'
+                msg = LocaleManager.get_locale("traversal_tab", "result_vertices").format(vertices=", ".join(map(str, self.result_nodes)))
                 self.set_status(msg)
                 self.append_text(msg)
             elif 'Компоненти' in self.traversal_widget.method_combo.currentText():
                 for i, comp in enumerate(self.result_nodes, 1):
                     self.traversal_widget.canvas.set_highlighted_nodes(comp)
-                    msg = f'Компонента {i}: {", ".join(map(str, comp))}'
+                    msg = LocaleManager.get_locale("traversal_tab", "component_result").format(index=i, vertices=", ".join(map(str, comp)))
                     self.set_status(msg)
                     self.append_text(msg)
             elif 'циклів' in self.traversal_widget.method_combo.currentText():
                 if not self.cycles:
-                    msg = 'Жодного циклу не знайдено.'
+                    msg = LocaleManager.get_locale("traversal_tab", "no_cycles_found")
                     self.set_status(msg)
                     self.append_text(msg)
                 else:
                     for i, cycle in enumerate(self.cycles, 1):
                         self.traversal_widget.canvas.set_highlighted_nodes(cycle)
-                        msg = f'Цикл {i}: {", ".join(map(str, cycle))}'
+                        msg = LocaleManager.get_locale("traversal_tab", "cycle_result").format(index=i, vertices=", ".join(map(str, cycle)))
                         self.set_status(msg)
                         self.append_text(msg)
             self.current_step += 1
         else:
             self.timer.stop()
             self.is_running = False
-            msg = 'Обхід завершено'
+            msg = LocaleManager.get_locale("traversal_tab", "traversal_completed")
             self.set_status(msg)
             self.append_text(msg)
 
