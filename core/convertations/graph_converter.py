@@ -3,6 +3,7 @@ from core.graph_models.undirected_graph import UndirectedGraph
 from core.graph_components.node import Node
 from core.convertations.edge_converter import EdgeConverter
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class GraphConverter:
     """
@@ -49,7 +50,7 @@ class GraphConverter:
                 undirected_edge = EdgeConverter.directed_to_undirected(directed_edge, weighted=True)
                 undirected_graph.add_edge(undirected_edge)
                 added_edges.add(edge_key)
-        logger.info("Спрямований граф конвертовано у неспрямований.")
+        logger.info(LocaleManager.get_locale("graph_converter", "directed_to_undirected_info"))
         return undirected_graph
 
     @staticmethod
@@ -87,5 +88,5 @@ class GraphConverter:
             undirected_edge = UndirectedEdge(node1, node2, weight=weight, data=edge.data)
             directed_edge = EdgeConverter.undirected_to_directed(undirected_edge, source_first=True, weighted=True)
             directed_graph.add_edge(directed_edge)
-        logger.info("Неспрямований граф конвертовано у спрямований.")
+        logger.info(LocaleManager.get_locale("graph_converter", "undirected_to_directed_info"))
         return directed_graph

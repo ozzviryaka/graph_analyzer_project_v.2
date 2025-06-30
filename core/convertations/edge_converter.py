@@ -1,6 +1,7 @@
 from core.graph_components.directed_edge import DirectedEdge
 from core.graph_components.undirected_edge import UndirectedEdge
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class EdgeConverter:
     """
@@ -17,8 +18,8 @@ class EdgeConverter:
         :return: Об'єкт UndirectedEdge
         """
         if not isinstance(directed_edge, DirectedEdge):
-            Logger().error("Передане ребро не є спрямованим.")
-            raise TypeError("Передане ребро не є спрямованим.")
+            Logger().error(LocaleManager.get_locale("edge_converter", "not_directed_error"))
+            raise TypeError(LocaleManager.get_locale("edge_converter", "not_directed_error"))
 
         undirected_edge = UndirectedEdge(
             directed_edge.source,
@@ -27,8 +28,7 @@ class EdgeConverter:
             data=directed_edge.data
         )
         Logger().info(
-            f"Конвертовано спрямоване ребро ({directed_edge.source.id} -> {directed_edge.target.id}) у неспрямоване."
-        )
+            LocaleManager.get_locale("edge_converter", "directed_to_undirected_info").format(source_id=directed_edge.source, target_id=directed_edge.target))
         return undirected_edge
 
     @staticmethod
@@ -42,8 +42,8 @@ class EdgeConverter:
         :return: Об'єкт DirectedEdge
         """
         if not isinstance(undirected_edge, UndirectedEdge):
-            Logger().error("Передане ребро не є неспрямованим.")
-            raise TypeError("Передане ребро не є неспрямованим.")
+            Logger().error(LocaleManager.get_locale("edge_converter", "not_undirected_error"))
+            raise TypeError(LocaleManager.get_locale("edge_converter", "not_undirected_error"))
 
         source = undirected_edge.source if source_first else undirected_edge.target
         target = undirected_edge.target if source_first else undirected_edge.source
@@ -55,6 +55,6 @@ class EdgeConverter:
             data=undirected_edge.data
         )
         Logger().info(
-            f"Конвертовано неспрямоване ребро ({undirected_edge.source.id} -- {undirected_edge.target.id}) у спрямоване ({source.id} -> {target.id})."
-        )
+            LocaleManager.get_locale("edge_converter", "undirected_to_directed_info").format(source_id=undirected_edge.source, target_id=undirected_edge.target,new_source_id=source, new_target_id=target))
+        
         return directed_edge

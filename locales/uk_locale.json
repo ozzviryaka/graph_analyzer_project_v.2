@@ -140,5 +140,15 @@
     "degree_centralization": "Ступінь централізації",
     "yes": "Так",
     "no": "Ні"
+  },
+  "edge_converter": {
+    "not_directed_error": "Передане ребро не є спрямованим.",
+    "directed_to_undirected_info": "Конвертовано спрямоване ребро ({source_id} -> {target_id}) у неспрямоване.",
+    "not_undirected_error": "Передане ребро не є неспрямованим.",
+    "undirected_to_directed_info": "Конвертовано неспрямоване ребро ({source_id} -- {target_id}) у спрямоване ({new_source_id} -> {new_target_id})."
+  },
+  "graph_converter": {
+    "directed_to_undirected_info": "Спрямований граф конвертовано у неспрямований.",
+    "undirected_to_directed_info": "Неспрямований граф конвертовано у спрямований."
   }
 }
