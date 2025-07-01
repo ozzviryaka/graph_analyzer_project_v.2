@@ -55,7 +55,7 @@ class TraversalTab(QWidget):
         self.result_nodes = []
         self.order_to_show = []
         self.cycles = []
-        if method.startswith('BFS'):
+        if method.startswith(LocaleManager.get_locale("traversal_control_widget", "bfs_method")):
             result = GraphTraversal.bfs(self.graph, start_id)
             self.order_to_show = list(result)
             self.result_nodes = self.order_to_show.copy()
@@ -63,7 +63,7 @@ class TraversalTab(QWidget):
                 msg = LocaleManager.get_locale("traversal_tab", "no_reachable_vertices")
                 self.set_status(msg)
                 self.append_text(msg)
-        elif method.startswith('DFS'):
+        elif method.startswith(LocaleManager.get_locale("traversal_control_widget", "dfs_method")):
             result = GraphTraversal.dfs(self.graph, start_id)
             self.order_to_show = list(result)
             self.result_nodes = self.order_to_show.copy()
@@ -71,7 +71,7 @@ class TraversalTab(QWidget):
                 msg = LocaleManager.get_locale("traversal_tab", "no_reachable_vertices")
                 self.set_status(msg)
                 self.append_text(msg)
-        elif method.startswith('Dijkstra'):
+        elif method.startswith(LocaleManager.get_locale("traversal_control_widget", "dijkstra_method")):
             result = GraphTraversal.dijkstra(self.graph, start_id)
             self.order_to_show = list(result)
             self.result_nodes = self.order_to_show.copy()
@@ -79,7 +79,7 @@ class TraversalTab(QWidget):
                 msg = LocaleManager.get_locale("traversal_tab", "no_reachable_vertices")
                 self.set_status(msg)
                 self.append_text(msg)
-        elif 'Компоненти' in method:
+        elif LocaleManager.get_locale("traversal_control_widget", "connected_components_method") in method:
             comps = GraphTraversal.connected_components(self.graph)
             self.order_to_show = [v for comp in comps for v in comp]
             self.result_nodes = comps
@@ -94,7 +94,7 @@ class TraversalTab(QWidget):
                 )
                 self.set_status(msg)
                 self.append_text(msg)
-        elif 'циклів' in method:
+        elif LocaleManager.get_locale("traversal_control_widget", "cycle_detection_method") in method:
             order, cycles = GraphTraversal.has_cycle(self.graph)
             self.order_to_show = order
             self.result_nodes = cycles
@@ -152,13 +152,13 @@ class TraversalTab(QWidget):
                 msg = LocaleManager.get_locale("traversal_tab", "result_vertices").format(vertices=", ".join(map(str, self.result_nodes)))
                 self.set_status(msg)
                 self.append_text(msg)
-            elif 'Компоненти' in self.traversal_widget.method_combo.currentText():
+            elif LocaleManager.get_locale("traversal_control_widget", "connected_components_method") in self.traversal_widget.method_combo.currentText():
                 for i, comp in enumerate(self.result_nodes, 1):
                     self.traversal_widget.canvas.set_highlighted_nodes(comp)
                     msg = LocaleManager.get_locale("traversal_tab", "component_result").format(index=i, vertices=", ".join(map(str, comp)))
                     self.set_status(msg)
                     self.append_text(msg)
-            elif 'циклів' in self.traversal_widget.method_combo.currentText():
+            elif LocaleManager.get_locale("traversal_control_widget", "cycle_detection_method") in self.traversal_widget.method_combo.currentText():
                 if not self.cycles:
                     msg = LocaleManager.get_locale("traversal_tab", "no_cycles_found")
                     self.set_status(msg)
