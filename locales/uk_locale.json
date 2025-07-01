@@ -397,5 +397,23 @@
   "graph_info_export_widget": {
     "export_txt_button": "Експортувати у .txt",
     "save_txt_dialog_title": "Зберегти як .txt"
+  },
+  "adjacency_matrix_export_widget": {
+    "export_csv_button": "Експортувати у CSV",
+    "export_png_button": "Експортувати у PNG",
+    "error_title": "Помилка",
+    "success_title": "Успіх",
+    "empty_matrix_error": "Матриця порожня або некоректна!",
+    "save_csv_dialog_title": "Зберегти як CSV",
+    "adjacency_matrix_saved": "Матриця суміжності збережена у CSV!"
+  },
+  "incidence_matrix_export_widget": {
+    "export_csv_button": "Експортувати у CSV",
+    "export_png_button": "Експортувати у PNG",
+    "error_title": "Помилка",
+    "success_title": "Успіх",
+    "empty_matrix_error": "Матриця порожня або некоректна!",
+    "save_csv_dialog_title": "Зберегти як CSV",
+    "incidence_matrix_saved": "Матриця інцидентості збережена у CSV!"
   }
 }

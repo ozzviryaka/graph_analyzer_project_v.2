@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QPushButton, QFileDialog, QMessageBox
 from typing import List, Optional
 from data_utils.incidence_matrix_exporter import IncidenceMatrixExporter
+from locales.locale_manager import LocaleManager
 import pprint
 
 class IncidenceMatrixExportWidget(QWidget):
@@ -16,8 +17,8 @@ class IncidenceMatrixExportWidget(QWidget):
 
     def init_ui(self):
         layout = QHBoxLayout()
-        self.csv_btn = QPushButton('Експортувати у CSV')
-        # self.png_btn = QPushButton('Експортувати у PNG')
+        self.csv_btn = QPushButton(LocaleManager.get_locale("incidence_matrix_export_widget", "export_csv_button"))
+        # self.png_btn = QPushButton(LocaleManager.get_locale("incidence_matrix_export_widget", "export_png_button"))
         self.csv_btn.clicked.connect(self.export_csv)
         # self.png_btn.clicked.connect(self.export_png)
         layout.addWidget(self.csv_btn)
@@ -26,12 +27,14 @@ class IncidenceMatrixExportWidget(QWidget):
 
     def export_csv(self):
         if not self.matrix or not isinstance(self.matrix, list) or not all(isinstance(row, list) for row in self.matrix):
-            QMessageBox.critical(self, 'Помилка', 'Матриця порожня або некоректна!')
+            QMessageBox.critical(self, LocaleManager.get_locale("incidence_matrix_export_widget", "error_title"), 
+                               LocaleManager.get_locale("incidence_matrix_export_widget", "empty_matrix_error"))
             return
-        file_path, _ = QFileDialog.getSaveFileName(self, 'Зберегти як CSV', '', 'CSV files (*.csv)')
+        file_path, _ = QFileDialog.getSaveFileName(self, LocaleManager.get_locale("incidence_matrix_export_widget", "save_csv_dialog_title"), '', 'CSV files (*.csv)')
         if file_path:
             try:
                 IncidenceMatrixExporter.export(self.matrix, file_path, self.row_names, self.col_names)
-                QMessageBox.information(self, 'Успіх', 'Матриця інцидентості збережена у CSV!')
+                QMessageBox.information(self, LocaleManager.get_locale("incidence_matrix_export_widget", "success_title"), 
+                                      LocaleManager.get_locale("incidence_matrix_export_widget", "incidence_matrix_saved"))
             except Exception as e:
-                QMessageBox.critical(self, 'Помилка', str(e))
+                QMessageBox.critical(self, LocaleManager.get_locale("incidence_matrix_export_widget", "error_title"), str(e))
