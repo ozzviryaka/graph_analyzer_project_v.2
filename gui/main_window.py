@@ -11,20 +11,21 @@ from gui.themes.classic.dark_theme import DarkTheme
 from gui.themes.theme_manager import ThemeManager
 from gui.additionals.tab_shortcut_event_filter import TabShortcutEventFilter
 from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        Logger().info("Запущено програму")
+        Logger().info(LocaleManager.get_locale("main_window", "app_started"))
         ThemeManager.load_theme()  # Завантажити тему з settings.json
         # ThemeManager.apply_theme(DarkTheme)  # Видалено, тепер тема зберігається
-        self.setWindowTitle("G_A_P_V.2")
+        self.setWindowTitle(LocaleManager.get_locale("main_window", "app_title"))
         self.setWindowIcon(QIcon("res/icon.png"))
         self.setMinimumSize(1100, 700)
         # --- Менеджмент графів ---
         self.graphs = []
         g = UndirectedGraph()
-        g.name = "Граф 1"
+        g.name = LocaleManager.get_locale("main_window", "default_graph_name")
         g.directed = False
         self.graphs.append(g)
         self.graph = g
