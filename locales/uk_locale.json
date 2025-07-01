@@ -426,5 +426,13 @@
     "dijkstra_method": "Дейкстра",
     "connected_components_method": "Компоненти звʼязності",
     "cycle_detection_method": "Пошук циклів"
+  },
+  "graph_settings_widget": {
+    "select_graph": "Вибрати граф",
+    "graph_directed": "Орієнтований граф",
+    "graph_weighted": "Ваговий граф",
+    "auto_name_vertices": "Автоматична назва вершин",
+    "select_theme": "Вибрати тему",
+    "instruction": "Інструкція"
   }
 }

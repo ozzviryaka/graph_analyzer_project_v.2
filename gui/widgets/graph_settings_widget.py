@@ -5,6 +5,7 @@ from core.convertations.graph_converter import GraphConverter
 from gui.dialogs.graph_select_dialog import GraphSelectDialog
 from gui.dialogs.instruction_dialog import InstructionDialog
 from gui.dialogs.theme_select_dialog import ThemeSelectDialog
+from locales.locale_manager import LocaleManager
 
 class GraphSettingsWidget(QWidget):
     """
@@ -17,14 +18,14 @@ class GraphSettingsWidget(QWidget):
         self.graphs = None  # буде встановлено з MainWindow
         layout = QHBoxLayout()
         # Кнопка вибору графа
-        self.select_graph_btn = QPushButton("Вибрати граф")
+        self.select_graph_btn = QPushButton(LocaleManager.get_locale("graph_settings_widget", "select_graph"))
         self.select_graph_btn.setCursor(Qt.PointingHandCursor)
         # self.select_graph_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")  # REMOVE custom style
         self.select_graph_btn.clicked.connect(self.open_graph_select_dialog)
         layout.addWidget(self.select_graph_btn)
         # Тумблер орієнтованості
         self.directed_switch = ToggleSwitch(checked=hasattr(graph, 'is_directed') and graph.is_directed())
-        self.directed_label = QLabel("Орієнтований граф")
+        self.directed_label = QLabel(LocaleManager.get_locale("graph_settings_widget", "graph_directed"))
         self.directed_label.setCursor(Qt.PointingHandCursor)
         self.directed_switch.toggled.connect(self.toggle_directed)
         self.directed_label.mousePressEvent = lambda event: self.directed_switch.setChecked(not self.directed_switch.isChecked())
@@ -32,7 +33,7 @@ class GraphSettingsWidget(QWidget):
         layout.addWidget(self.directed_switch)
         # Тумблер ваговості
         self.weighted_switch = ToggleSwitch(checked=getattr(graph, 'weighted', True))
-        self.weighted_label = QLabel("Ваговий граф")
+        self.weighted_label = QLabel(LocaleManager.get_locale("graph_settings_widget", "graph_weighted"))
         self.weighted_label.setCursor(Qt.PointingHandCursor)
         self.weighted_switch.toggled.connect(self.toggle_weighted)
         self.weighted_label.mousePressEvent = lambda event: self.weighted_switch.setChecked(not self.weighted_switch.isChecked())
@@ -40,21 +41,21 @@ class GraphSettingsWidget(QWidget):
         layout.addWidget(self.weighted_switch)
         # Тумблер автоматичної назви вершини
         self.auto_vertex_name_switch = ToggleSwitch(checked=True)
-        self.auto_vertex_name_label = QLabel("Автоматична назва вершини")
+        self.auto_vertex_name_label = QLabel(LocaleManager.get_locale("graph_settings_widget", "auto_name_vertices"))
         self.auto_vertex_name_label.setCursor(Qt.PointingHandCursor)
         self.auto_vertex_name_switch.toggled.connect(self.on_auto_vertex_name_toggled)
         self.auto_vertex_name_label.mousePressEvent = lambda event: self.auto_vertex_name_switch.setChecked(not self.auto_vertex_name_switch.isChecked())
         layout.addWidget(self.auto_vertex_name_label)
         layout.addWidget(self.auto_vertex_name_switch)
         # Кнопка вибору теми
-        self.theme_btn = QPushButton("Вибрати тему")
+        self.theme_btn = QPushButton(LocaleManager.get_locale("graph_settings_widget", "select_theme"))
         self.theme_btn.setCursor(Qt.PointingHandCursor)
         self.theme_btn.clicked.connect(self.show_theme_dialog)
         layout.addWidget(self.theme_btn)
         layout.addStretch()
         self.setLayout(layout)
         # Кнопка інструкції
-        self.instruction_btn = QPushButton("Інструкція")
+        self.instruction_btn = QPushButton(LocaleManager.get_locale("graph_settings_widget", "instruction"))
         self.instruction_btn.setCursor(Qt.PointingHandCursor)
         self.instruction_btn.clicked.connect(self.show_instruction_dialog)
         layout.addWidget(self.instruction_btn)
