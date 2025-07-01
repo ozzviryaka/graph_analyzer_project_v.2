@@ -195,6 +195,9 @@
     "import_success": "Сесію успішно імпортовано з файлу: {filepath}",
     "import_error": "Помилка при імпорті сесії: {error}"
   },
+  "txt_exporter": {
+    "export_error": "Помилка при експорті у .txt: {error}"
+  },
   "graph_canvas": {
     "undo_tooltip": "Скасувати останню дію (Undo, Ctrl+Z)",
     "redo_tooltip": "Повернути дію (Redo, Ctrl+Y)"

@@ -1,4 +1,6 @@
 from PyQt5.QtWidgets import QTextEdit
+from utils.logger import Logger
+from locales.locale_manager import LocaleManager
 
 class TxtExporter:
     """
@@ -18,5 +20,5 @@ class TxtExporter:
                 f.write(data)
             return True
         except Exception as e:
-            print(f"Помилка при експорті у .txt: {e}")
+            Logger().error(LocaleManager.get_locale("txt_exporter", "export_error").format(error=str(e)))
             return False
