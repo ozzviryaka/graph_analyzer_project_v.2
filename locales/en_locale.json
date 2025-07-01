@@ -248,9 +248,10 @@
     "ok_button": "OK"
   },
   "theme_select_dialog": {
-    "window_title": "Theme Selection",
+    "window_title": "Theme and Language Selection",
     "style_label": "Select theme style:",
     "color_label": "Select theme color:",
+    "language_label": "Select language:",
     "modern": "Modern",
     "classic": "Classic",
     "dark": "Dark",
@@ -259,6 +260,8 @@
     "blue": "Blue",
     "red": "Red",
     "yellow": "Yellow",
+    "ukrainian": "Українська",
+    "english": "English",
     "ok_button": "OK"
   },
   "vertex_edit_dialog": {

@@ -149,7 +149,18 @@ class GraphSettingsWidget(QWidget):
 
     def show_theme_dialog(self):
         dlg = ThemeSelectDialog(self)
+        dlg.language_changed.connect(self._on_language_changed)
         dlg.exec_()
+
+    def _on_language_changed(self):
+        """Обробник зміни мови"""
+        # Знайти головне вікно та оновити інтерфейс
+        main_window = self
+        while main_window.parent():
+            main_window = main_window.parent()
+        
+        if hasattr(main_window, 'refresh_ui_text'):
+            main_window.refresh_ui_text()
 
     def set_auto_vertex_name(self, value: bool):
         self.auto_vertex_name_switch.blockSignals(True)

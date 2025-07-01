@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QComboBox, QPushButton
+from PyQt5.QtCore import pyqtSignal
 from gui.themes.classic.dark_theme import DarkTheme
 from gui.themes.classic.light_theme import LightTheme
 from gui.themes.classic.green_theme import GreenTheme
@@ -15,27 +16,50 @@ from gui.themes.modern.modern_yellow_theme import ModernYellowTheme
 from locales.locale_manager import LocaleManager
 
 class ThemeSelectDialog(QDialog):
+    language_changed = pyqtSignal()  # Сигнал для повідомлення про зміну мови
+    
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle(LocaleManager.get_locale("theme_select_dialog", "window_title"))
-        self.setFixedSize(250, 200)
+        self.setFixedSize(300, 280)
         layout = QVBoxLayout()
+        
+        # Вибір стилю теми
         layout.addWidget(QLabel(LocaleManager.get_locale("theme_select_dialog", "style_label")))
         self.style_combo = QComboBox()
         self.style_combo.addItems([LocaleManager.get_locale("theme_select_dialog", "modern"), LocaleManager.get_locale("theme_select_dialog", "classic")])
         layout.addWidget(self.style_combo)
+        
+        # Вибір кольору теми
         layout.addWidget(QLabel(LocaleManager.get_locale("theme_select_dialog", "color_label")))
         self.color_combo = QComboBox()
         self.color_combo.addItems([
             LocaleManager.get_locale("theme_select_dialog", "dark"), LocaleManager.get_locale("theme_select_dialog", "light"), LocaleManager.get_locale("theme_select_dialog", "green"), LocaleManager.get_locale("theme_select_dialog", "blue"), LocaleManager.get_locale("theme_select_dialog", "red"), LocaleManager.get_locale("theme_select_dialog", "yellow")
         ])
         layout.addWidget(self.color_combo)
+        
+        # Вибір мови
+        layout.addWidget(QLabel(LocaleManager.get_locale("theme_select_dialog", "language_label")))
+        self.language_combo = QComboBox()
+        self.language_combo.addItems([
+            LocaleManager.get_locale("theme_select_dialog", "ukrainian"),
+            LocaleManager.get_locale("theme_select_dialog", "english")
+        ])
+        layout.addWidget(self.language_combo)
+        
+        # Кнопка OK
         ok_btn = QPushButton(LocaleManager.get_locale("theme_select_dialog", "ok_button"))
-        ok_btn.clicked.connect(self.apply_theme)
+        ok_btn.clicked.connect(self.apply_changes)
         layout.addWidget(ok_btn)
+        
         self.setLayout(layout)
         self.style_combo.currentIndexChanged.connect(self.update_color_combo)
         self.update_color_combo()
+        
+        # Встановити поточні значення у комбобоксах
+        self._set_current_values()
+
+    def _set_current_values(self):
         # Встановити поточну тему у комбобоксах
         current = ThemeManager.current_theme()
         modern_map = {
@@ -47,6 +71,13 @@ class ThemeSelectDialog(QDialog):
         idxs = modern_map.get(current) or classic_map.get(current) or (0, 0)
         self.style_combo.setCurrentIndex(idxs[0])
         self.color_combo.setCurrentIndex(idxs[1])
+        
+        # Встановити поточну мову
+        current_locale = LocaleManager.get_current_locale_code()
+        if current_locale == "uk":
+            self.language_combo.setCurrentIndex(0)
+        else:
+            self.language_combo.setCurrentIndex(1)
 
     def update_color_combo(self):
         style = self.style_combo.currentIndex()
@@ -56,7 +87,8 @@ class ThemeSelectDialog(QDialog):
         else:
             self.color_combo.addItems([LocaleManager.get_locale("theme_select_dialog", "dark"), LocaleManager.get_locale("theme_select_dialog", "light"), LocaleManager.get_locale("theme_select_dialog", "green"), LocaleManager.get_locale("theme_select_dialog", "blue"), LocaleManager.get_locale("theme_select_dialog", "red"), LocaleManager.get_locale("theme_select_dialog", "yellow")])
 
-    def apply_theme(self):
+    def apply_changes(self):
+        # Застосувати тему
         style = self.style_combo.currentIndex()
         color = self.color_combo.currentIndex()
         if style == 0:
@@ -64,6 +96,17 @@ class ThemeSelectDialog(QDialog):
         else:
             theme_list = [DarkTheme, LightTheme, GreenTheme, BlueTheme, RedTheme, YellowTheme]
         ThemeManager.apply_theme(theme_list[color])
+        
+        # Застосувати мову
+        language_index = self.language_combo.currentIndex()
+        current_locale = LocaleManager.get_current_locale_code()
+        new_locale = "uk" if language_index == 0 else "en"
+        
+        if current_locale != new_locale:
+            available_locales = LocaleManager.get_available_locales()
+            LocaleManager.set_locale(available_locales[new_locale])
+            self.language_changed.emit()  # Сигналізувати про зміну мови
+        
         self.accept()
 
     def keyPressEvent(self, event):

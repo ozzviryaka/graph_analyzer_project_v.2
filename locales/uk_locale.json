@@ -248,9 +248,10 @@
     "ok_button": "OK"
   },
   "theme_select_dialog": {
-    "window_title": "Вибір теми",
+    "window_title": "Вибір теми та мови",
     "style_label": "Оберіть стиль теми:",
     "color_label": "Оберіть колір теми:",
+    "language_label": "Оберіть мову:",
     "modern": "Сучасна",
     "classic": "Класична",
     "dark": "Темна",
@@ -259,6 +260,8 @@
     "blue": "Синя",
     "red": "Червона",
     "yellow": "Жовта",
+    "ukrainian": "Українська",
+    "english": "English",
     "ok_button": "OK"
   },
   "vertex_edit_dialog": {

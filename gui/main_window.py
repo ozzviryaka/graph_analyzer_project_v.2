@@ -84,3 +84,23 @@ class MainWindow(QMainWindow):
     def on_auto_vertex_name_changed(self, checked):
         if hasattr(self.tabs.combined_tab.canvas_widget, 'set_auto_vertex_name'):
             self.tabs.combined_tab.canvas_widget.set_auto_vertex_name(checked)
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        # Оновити заголовок вікна
+        self.setWindowTitle(LocaleManager.get_locale("main_window", "app_title"))
+        
+        # Оновити назву графа за замовчуванням для нових графів
+        for graph in self.graphs:
+            if hasattr(graph, 'name') and graph.name in ["Граф 1", "Graph 1"]:
+                graph.name = LocaleManager.get_locale("main_window", "default_graph_name")
+        
+        # Оновити віджети
+        if hasattr(self.settings_widget, 'refresh_ui_text'):
+            self.settings_widget.refresh_ui_text()
+        
+        if hasattr(self.tabs, 'refresh_ui_text'):
+            self.tabs.refresh_ui_text()
+        
+        # Перемалювати інтерфейс
+        self.update()
