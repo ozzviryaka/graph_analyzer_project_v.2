@@ -415,5 +415,16 @@
     "empty_matrix_error": "Матриця порожня або некоректна!",
     "save_csv_dialog_title": "Зберегти як CSV",
     "incidence_matrix_saved": "Матриця інцидентості збережена у CSV!"
+  },
+  "traversal_control_widget": {
+    "method_label": "Метод:",
+    "start_vertex_label": "Початкова вершина:",
+    "start_button": "Запустити",
+    "stop_button": "Стоп",
+    "bfs_method": "Пошук у ширину(BFS)",
+    "dfs_method": "Пошук у глибину(DFS)",
+    "dijkstra_method": "Дейкстра",
+    "connected_components_method": "Компоненти звʼязності",
+    "cycle_detection_method": "Пошук циклів"
   }
 }
