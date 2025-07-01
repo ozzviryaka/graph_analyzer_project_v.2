@@ -307,5 +307,82 @@
   "theme_manager": {
     "theme_change_info": "Зміна теми на: {theme_name}",
     "theme_save_error": "Не вдалося зберегти тему: {error}"
+  },
+  "analysis_output_controls": {
+    "export_txt_button": "Експортувати у .txt",
+    "clear_results_button": "Очистити результати",
+    "save_dialog_title": "Зберегти як .txt"
+  },
+  "flow_algorithms_widget": {
+    "source_label": "ID джерела (source):",
+    "sink_label": "ID стоку (sink):",
+    "ford_fulkerson_button": "Ford-Fulkerson (max flow)",
+    "min_cut_button": "Min-Cut",
+    "error_title": "Помилка",
+    "select_source_sink": "Оберіть ID джерела та стоку.",
+    "max_flow_result": "Максимальний потік: {flow}",
+    "min_cut_result": "Мінімальний розріз: {cut}\nРебра розрізу:\n{edges}",
+    "error_result": "Помилка: {error}"
+  },
+  "shortest_paths_widget": {
+    "start_vertex_label": "ID початкової вершини:",
+    "end_vertex_label": "ID кінцевої вершини:",
+    "dijkstra_all_button": "Дейкстра (від однієї до всіх)",
+    "bellman_all_button": "Беллман-Форд (від однієї до всіх)",
+    "floyd_all_button": "Флойд-Уоршелл (всі до всіх)",
+    "dijkstra_path_button": "Дейкстра (шлях між двома)",
+    "bellman_path_button": "Беллман-Форд (шлях між двома)",
+    "floyd_path_button": "Флойд-Уоршелл (шлях між двома)",
+    "floyd_all_paths_button": "Флойд-Уоршелл (всі найкоротші шляхи)",
+    "error_title": "Помилка",
+    "select_start_vertex": "Оберіть початкову вершину.",
+    "select_start_end_vertices": "Оберіть початкову та кінцеву вершини.",
+    "dijkstra_distances": "Найкоротші відстані (Дейкстра):",
+    "bellman_distances": "Найкоротші відстані (Беллман-Форд):",
+    "floyd_matrix": "Матриця найкоротших відстаней (Флойд-Уоршелл):",
+    "floyd_all_paths": "Всі найкоротші шляхи (Флойд-Уоршелл):",
+    "dijkstra_path": "Шлях (Дейкстра): {path}\nДовжина: {length}",
+    "bellman_path": "Шлях (Беллман-Форд): {path}\nДовжина: {length}",
+    "floyd_path": "Шлях (Флойд-Уоршелл): {path}\nДовжина: {length}",
+    "path_not_found": "Шлях не знайдено.",
+    "path_not_exists": "{from} -> {to}: шлях не існує",
+    "path_result": "{from} -> {to}: {path} (довжина {length})",
+    "vertex_not_found": "Помилка: обрана вершина відсутня у графі.",
+    "error_result": "Помилка: {error}"
+  },
+  "spanning_tree_widget": {
+    "prim_button": "Остовне дерево (Прим)",
+    "kruskal_button": "Остовне дерево (Краскал)",
+    "prim_result": "Остовне дерево (Прим):\n{edges}\nЗагальна вага: {weight}",
+    "kruskal_result": "Остовне дерево (Краскал):\n{edges}\nЗагальна вага: {weight}",
+    "no_spanning_tree": "Остовне дерево не знайдено (граф не зв'язний або некоректний).",
+    "error_result": "Помилка: {error}"
+  },
+  "special_paths_widget": {
+    "start_vertex_label": "ID початкової вершини:",
+    "end_vertex_label": "ID кінцевої вершини:",
+    "simple_path_button": "Простий шлях (DFS)",
+    "longest_path_button": "Найдовший простий шлях",
+    "hamiltonian_path_button": "Гамільтонів шлях",
+    "eulerian_path_button": "Ейлерів шлях",
+    "error_title": "Помилка",
+    "select_start_end_vertices": "Оберіть початкову та кінцеву вершини.",
+    "simple_path_result": "Простий шлях: {path}",
+    "longest_path_result": "Найдовший простий шлях: {path} (довжина {length})",
+    "hamiltonian_path_result": "Гамільтонів шлях: {path}",
+    "eulerian_path_result": "Ейлерів шлях: {path}",
+    "path_not_found": "Шлях не знайдено.",
+    "eulerian_path_not_found": "Ейлерів шлях не знайдено.",
+    "error_result": "Помилка: {error}"
+  },
+  "traversal_widget": {
+    "start_vertex_label": "ID стартової вершини:",
+    "bfs_button": "Обхід у ширину (BFS)",
+    "dfs_button": "Обхід у глибину (DFS)",
+    "error_title": "Помилка",
+    "select_start_vertex": "Оберіть стартову вершину.",
+    "bfs_result": "BFS порядок обходу: {order}",
+    "dfs_result": "DFS порядок обходу: {order}",
+    "error_result": "Помилка: {error}"
   }
 }

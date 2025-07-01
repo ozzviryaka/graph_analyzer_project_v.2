@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QComboBox, QLabel
 from PyQt5.QtCore import Qt
 from core.algorithms.flow.ford_fulkerson import FordFulkerson
 from core.algorithms.flow.min_cut import MinCut
+from locales.locale_manager import LocaleManager
 
 class FlowAlgorithmsWidget(QWidget):
     """
@@ -19,15 +20,15 @@ class FlowAlgorithmsWidget(QWidget):
         self.sink_combo.setCursor(Qt.PointingHandCursor)
         self.source_combo.setEditable(False)
         self.sink_combo.setEditable(False)
-        layout.addWidget(QLabel("ID джерела (source):"))
+        layout.addWidget(QLabel(LocaleManager.get_locale("flow_algorithms_widget", "source_label")))
         layout.addWidget(self.source_combo)
-        layout.addWidget(QLabel("ID стоку (sink):"))
+        layout.addWidget(QLabel(LocaleManager.get_locale("flow_algorithms_widget", "sink_label")))
         layout.addWidget(self.sink_combo)
         # Дві кнопки для запуску алгоритмів
-        self.run_ff_btn = QPushButton("Ford-Fulkerson (max flow)")
+        self.run_ff_btn = QPushButton(LocaleManager.get_locale("flow_algorithms_widget", "ford_fulkerson_button"))
         self.run_ff_btn.setCursor(Qt.PointingHandCursor)
         self.run_ff_btn.clicked.connect(self.run_ford_fulkerson)
-        self.run_mc_btn = QPushButton("Min-Cut")
+        self.run_mc_btn = QPushButton(LocaleManager.get_locale("flow_algorithms_widget", "min_cut_button"))
         self.run_mc_btn.setCursor(Qt.PointingHandCursor)
         self.run_mc_btn.clicked.connect(self.run_min_cut)
         layout.addWidget(self.run_ff_btn)
@@ -46,28 +47,28 @@ class FlowAlgorithmsWidget(QWidget):
         source = self.source_combo.currentText().strip()
         sink = self.sink_combo.currentText().strip()
         if not source or not sink:
-            QMessageBox.warning(self, "Помилка", "Оберіть ID джерела та стоку.")
+            QMessageBox.warning(self, LocaleManager.get_locale("flow_algorithms_widget", "error_title"), LocaleManager.get_locale("flow_algorithms_widget", "select_source_sink"))
             return
         try:
             algo = FordFulkerson(self.graph)
             max_flow = algo.max_flow(source, sink)
-            self.output_textedit.setPlainText(f"Максимальний потік: {max_flow}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("flow_algorithms_widget", "max_flow_result").format(flow=max_flow))
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("flow_algorithms_widget", "error_result").format(error=str(e)))
 
     def run_min_cut(self):
         source = self.source_combo.currentText().strip()
         sink = self.sink_combo.currentText().strip()
         if not source or not sink:
-            QMessageBox.warning(self, "Помилка", "Оберіть ID джерела та стоку.")
+            QMessageBox.warning(self, LocaleManager.get_locale("flow_algorithms_widget", "error_title"), LocaleManager.get_locale("flow_algorithms_widget", "select_source_sink"))
             return
         try:
             algo = MinCut(self.graph)
             min_cut, cut_edges = algo.min_cut(source, sink)
             cut_str = "\n".join([f"{u} -> {v} (c={c})" for u, v, c in cut_edges])
-            self.output_textedit.setPlainText(f"Мінімальний розріз: {min_cut}\nРебра розрізу:\n{cut_str}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("flow_algorithms_widget", "min_cut_result").format(cut=min_cut, edges=cut_str))
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("flow_algorithms_widget", "error_result").format(error=str(e)))
 
     def set_graph(self, graph):
         self.graph = graph

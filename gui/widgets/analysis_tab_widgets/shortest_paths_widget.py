@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt
 from core.algorithms.shortest_paths.dijkstra import Dijkstra
 from core.algorithms.shortest_paths.bellman_ford import BellmanFord
 from core.algorithms.shortest_paths.floyd_warshall import FloydWarshall
+from locales.locale_manager import LocaleManager
 
 class ShortestPathsWidget(QWidget):
     """
@@ -14,33 +15,33 @@ class ShortestPathsWidget(QWidget):
         self.output_textedit = output_textedit
         layout = QVBoxLayout()
         # Вибір вершин
-        layout.addWidget(QLabel("ID початкової вершини:"))
+        layout.addWidget(QLabel(LocaleManager.get_locale("shortest_paths_widget", "start_vertex_label")))
         self.start_combo = QComboBox()
         self.start_combo.setCursor(Qt.PointingHandCursor)
         self.start_combo.setEditable(False)
         layout.addWidget(self.start_combo)
-        layout.addWidget(QLabel("ID кінцевої вершини:"))
+        layout.addWidget(QLabel(LocaleManager.get_locale("shortest_paths_widget", "end_vertex_label")))
         self.end_combo = QComboBox()
         self.end_combo.setCursor(Qt.PointingHandCursor)
         self.end_combo.setEditable(False)
         layout.addWidget(self.end_combo)
         # Кнопки для запуску алгоритмів
-        self.dijkstra_btn = QPushButton("Дейкстра (від однієї до всіх)")
+        self.dijkstra_btn = QPushButton(LocaleManager.get_locale("shortest_paths_widget", "dijkstra_all_button"))
         self.dijkstra_btn.setCursor(Qt.PointingHandCursor)
         self.dijkstra_btn.clicked.connect(self.run_dijkstra)
-        self.bellman_btn = QPushButton("Беллман-Форд (від однієї до всіх)")
+        self.bellman_btn = QPushButton(LocaleManager.get_locale("shortest_paths_widget", "bellman_all_button"))
         self.bellman_btn.setCursor(Qt.PointingHandCursor)
         self.bellman_btn.clicked.connect(self.run_bellman)
-        self.floyd_btn = QPushButton("Флойд-Уоршелл (всі до всіх)")
+        self.floyd_btn = QPushButton(LocaleManager.get_locale("shortest_paths_widget", "floyd_all_button"))
         self.floyd_btn.setCursor(Qt.PointingHandCursor)
         self.floyd_btn.clicked.connect(self.run_floyd)
-        self.dijkstra_path_btn = QPushButton("Дейкстра (шлях між двома)")
+        self.dijkstra_path_btn = QPushButton(LocaleManager.get_locale("shortest_paths_widget", "dijkstra_path_button"))
         self.dijkstra_path_btn.setCursor(Qt.PointingHandCursor)
         self.dijkstra_path_btn.clicked.connect(self.run_dijkstra_path)
-        self.bellman_path_btn = QPushButton("Беллман-Форд (шлях між двома)")
+        self.bellman_path_btn = QPushButton(LocaleManager.get_locale("shortest_paths_widget", "bellman_path_button"))
         self.bellman_path_btn.setCursor(Qt.PointingHandCursor)
         self.bellman_path_btn.clicked.connect(self.run_bellman_path)
-        self.floyd_path_btn = QPushButton("Флойд-Уоршелл (шлях між двома)")
+        self.floyd_path_btn = QPushButton(LocaleManager.get_locale("shortest_paths_widget", "floyd_path_button"))
         self.floyd_path_btn.setCursor(Qt.PointingHandCursor)
         self.floyd_path_btn.clicked.connect(self.run_floyd_path)
         # self.floyd_all_btn = QPushButton("Флойд-Уоршелл (всі найкоротші шляхи)")
@@ -67,45 +68,45 @@ class ShortestPathsWidget(QWidget):
     def run_dijkstra(self):
         start = self.start_combo.currentText().strip()
         if not start:
-            QMessageBox.warning(self, "Помилка", "Оберіть початкову вершину.")
+            QMessageBox.warning(self, LocaleManager.get_locale("shortest_paths_widget", "error_title"), LocaleManager.get_locale("shortest_paths_widget", "select_start_vertex"))
             return
         try:
             algo = Dijkstra(self.graph)
             result = algo.shortest_path(start)
-            text = "Найкоротші відстані (Дейкстра):\n" + "\n".join([f"{k}: {v[0]}" for k, v in result.items()])
+            text = LocaleManager.get_locale("shortest_paths_widget", "dijkstra_distances") + "\n" + "\n".join([f"{k}: {v[0]}" for k, v in result.items()])
             self.output_textedit.setPlainText(text)
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "error_result").format(error=str(e)))
 
     def run_bellman(self):
         start = self.start_combo.currentText().strip()
         if not start:
-            QMessageBox.warning(self, "Помилка", "Оберіть початкову вершину.")
+            QMessageBox.warning(self, LocaleManager.get_locale("shortest_paths_widget", "error_title"), LocaleManager.get_locale("shortest_paths_widget", "select_start_vertex"))
             return
         try:
             algo = BellmanFord(self.graph)
             distances, previous = algo.shortest_path(start)
-            text = "Найкоротші відстані (Беллман-Форд):\n" + "\n".join([f"{k}: {v}" for k, v in distances.items()])
+            text = LocaleManager.get_locale("shortest_paths_widget", "bellman_distances") + "\n" + "\n".join([f"{k}: {v}" for k, v in distances.items()])
             self.output_textedit.setPlainText(text)
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "error_result").format(error=str(e)))
 
     def run_floyd(self):
         try:
             algo = FloydWarshall(self.graph)
             dist, _ = algo.shortest_paths()
-            text = "Матриця найкоротших відстаней (Флойд-Уоршелл):\n"
+            text = LocaleManager.get_locale("shortest_paths_widget", "floyd_matrix") + "\n"
             for row in dist:
                 text += " ".join([str(x) if x != float('inf') else '∞' for x in row]) + "\n"
             self.output_textedit.setPlainText(text)
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "error_result").format(error=str(e)))
 
     def run_dijkstra_path(self):
         start = self.start_combo.currentText().strip()
         end = self.end_combo.currentText().strip()
         if not start or not end:
-            QMessageBox.warning(self, "Помилка", "Оберіть початкову та кінцеву вершини.")
+            QMessageBox.warning(self, LocaleManager.get_locale("shortest_paths_widget", "error_title"), LocaleManager.get_locale("shortest_paths_widget", "select_start_end_vertices"))
             return
         try:
             algo = Dijkstra(self.graph)
@@ -119,17 +120,17 @@ class ShortestPathsWidget(QWidget):
             if current == start:
                 path.append(start)
                 path.reverse()
-                self.output_textedit.setPlainText(f"Шлях (Дейкстра): {' -> '.join(path)}\nДовжина: {result[end][0]}")
+                self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "dijkstra_path").format(path=' -> '.join(path), length=result[end][0]))
             else:
-                self.output_textedit.setPlainText("Шлях не знайдено.")
+                self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "path_not_found"))
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "error_result").format(error=str(e)))
 
     def run_bellman_path(self):
         start = self.start_combo.currentText().strip()
         end = self.end_combo.currentText().strip()
         if not start or not end:
-            QMessageBox.warning(self, "Помилка", "Оберіть початкову та кінцеву вершини.")
+            QMessageBox.warning(self, LocaleManager.get_locale("shortest_paths_widget", "error_title"), LocaleManager.get_locale("shortest_paths_widget", "select_start_end_vertices"))
             return
         try:
             algo = BellmanFord(self.graph)
@@ -143,17 +144,17 @@ class ShortestPathsWidget(QWidget):
             if current == start:
                 path.append(start)
                 path.reverse()
-                self.output_textedit.setPlainText(f"Шлях (Беллман-Форд): {' -> '.join(path)}\nДовжина: {distances[end]}")
+                self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "bellman_path").format(path=' -> '.join(path), length=distances[end]))
             else:
-                self.output_textedit.setPlainText("Шлях не знайдено.")
+                self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "path_not_found"))
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "error_result").format(error=str(e)))
 
     def run_floyd_path(self):
         start = self.start_combo.currentText().strip()
         end = self.end_combo.currentText().strip()
         if not start or not end:
-            QMessageBox.warning(self, "Помилка", "Оберіть початкову та кінцеву вершини.")
+            QMessageBox.warning(self, LocaleManager.get_locale("shortest_paths_widget", "error_title"), LocaleManager.get_locale("shortest_paths_widget", "select_start_end_vertices"))
             return
         try:
             algo = FloydWarshall(self.graph)
@@ -161,11 +162,11 @@ class ShortestPathsWidget(QWidget):
             node_ids = [str(node.id) for node in self.graph.nodes()]
             idx_map = {str(node.id): i for i, node in enumerate(self.graph.nodes())}
             if start not in idx_map or end not in idx_map:
-                self.output_textedit.setPlainText("Помилка: обрана вершина відсутня у графі.")
+                self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "vertex_not_found"))
                 return
             i, j = idx_map[start], idx_map[end]
             if dist[i][j] == float('inf'):
-                self.output_textedit.setPlainText("Шлях не знайдено.")
+                self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "path_not_found"))
                 return
             # Відновлення шляху
             path = [start]
@@ -173,13 +174,13 @@ class ShortestPathsWidget(QWidget):
             while current != end:
                 next_step = next_node[idx_map[current]][j]
                 if next_step is None or next_step == current:
-                    self.output_textedit.setPlainText("Шлях не знайдено.")
+                    self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "path_not_found"))
                     return
                 path.append(next_step)
                 current = next_step
-            self.output_textedit.setPlainText(f"Шлях (Флойд-Уоршелл): {' -> '.join(path)}\nДовжина: {dist[i][j]}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "floyd_path").format(path=' -> '.join(path), length=dist[i][j]))
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "error_result").format(error=str(e)))
 
     def run_floyd_all(self):
         try:
@@ -187,13 +188,13 @@ class ShortestPathsWidget(QWidget):
             dist, next_node = algo.shortest_paths()
             node_ids = [str(node.id) for node in self.graph.nodes()]
             n = len(node_ids)
-            text = "Всі найкоротші шляхи (Флойд-Уоршелл):\n"
+            text = LocaleManager.get_locale("shortest_paths_widget", "floyd_all_paths") + "\n"
             for i in range(n):
                 for j in range(n):
                     if i == j:
                         continue
                     if dist[i][j] == float('inf'):
-                        text += f"{node_ids[i]} -> {node_ids[j]}: шлях не існує\n"
+                        text += LocaleManager.get_locale("shortest_paths_widget", "path_not_exists").format(from_node=node_ids[i], to_node=node_ids[j]) + "\n"
                         continue
                     # Відновлення шляху
                     path = [node_ids[i]]
@@ -203,10 +204,15 @@ class ShortestPathsWidget(QWidget):
                         if cur is None:
                             break
                         path.append(cur)
-                    text += f"{node_ids[i]} -> {node_ids[j]}: {' -> '.join(path)} (довжина {dist[i][j]})\n"
+                    text += LocaleManager.get_locale("shortest_paths_widget", "path_result").format(
+                        from_node=node_ids[i], 
+                        to_node=node_ids[j], 
+                        path=' -> '.join(path), 
+                        length=dist[i][j]
+                    ) + "\n"
             self.output_textedit.setPlainText(text)
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("shortest_paths_widget", "error_result").format(error=str(e)))
 
     def set_graph(self, graph):
         self.graph = graph

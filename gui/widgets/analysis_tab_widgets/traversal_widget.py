@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QLabel, QComboBox
 from PyQt5.QtCore import Qt
 from core.algorithms.traversal.bfs import BFS
 from core.algorithms.traversal.dfs import DFS
+from locales.locale_manager import LocaleManager
 
 class TraversalWidget(QWidget):
     """
@@ -13,16 +14,16 @@ class TraversalWidget(QWidget):
         self.output_textedit = output_textedit
         layout = QVBoxLayout()
         # Вибір стартової вершини
-        layout.addWidget(QLabel("ID стартової вершини:"))
+        layout.addWidget(QLabel(LocaleManager.get_locale("traversal_widget", "start_vertex_label")))
         self.start_combo = QComboBox()
         self.start_combo.setCursor(Qt.PointingHandCursor)
         self.start_combo.setEditable(False)
         layout.addWidget(self.start_combo)
         # Кнопки для запуску обходу
-        self.bfs_btn = QPushButton("Обхід у ширину (BFS)")
+        self.bfs_btn = QPushButton(LocaleManager.get_locale("traversal_widget", "bfs_button"))
         self.bfs_btn.setCursor(Qt.PointingHandCursor)
         self.bfs_btn.clicked.connect(self.run_bfs)
-        self.dfs_btn = QPushButton("Обхід у глибину (DFS)")
+        self.dfs_btn = QPushButton(LocaleManager.get_locale("traversal_widget", "dfs_button"))
         self.dfs_btn.setCursor(Qt.PointingHandCursor)
         self.dfs_btn.clicked.connect(self.run_dfs)
         layout.addWidget(self.bfs_btn)
@@ -38,26 +39,26 @@ class TraversalWidget(QWidget):
     def run_bfs(self):
         start = self.start_combo.currentText().strip()
         if not start:
-            QMessageBox.warning(self, "Помилка", "Оберіть стартову вершину.")
+            QMessageBox.warning(self, LocaleManager.get_locale("traversal_widget", "error_title"), LocaleManager.get_locale("traversal_widget", "select_start_vertex"))
             return
         try:
             algo = BFS(self.graph)
             order = algo.traverse(start)
-            self.output_textedit.setPlainText(f"BFS порядок обходу: {' -> '.join(map(str, order))}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("traversal_widget", "bfs_result").format(order=' -> '.join(map(str, order))))
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("traversal_widget", "error_result").format(error=str(e)))
 
     def run_dfs(self):
         start = self.start_combo.currentText().strip()
         if not start:
-            QMessageBox.warning(self, "Помилка", "Оберіть стартову вершину.")
+            QMessageBox.warning(self, LocaleManager.get_locale("traversal_widget", "error_title"), LocaleManager.get_locale("traversal_widget", "select_start_vertex"))
             return
         try:
             algo = DFS(self.graph)
             order = algo.traverse(start)
-            self.output_textedit.setPlainText(f"DFS порядок обходу: {' -> '.join(map(str, order))}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("traversal_widget", "dfs_result").format(order=' -> '.join(map(str, order))))
         except Exception as e:
-            self.output_textedit.setPlainText(f"Помилка: {e}")
+            self.output_textedit.setPlainText(LocaleManager.get_locale("traversal_widget", "error_result").format(error=str(e)))
 
     def set_graph(self, graph):
         self.graph = graph

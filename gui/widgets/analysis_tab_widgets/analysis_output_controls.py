@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QPushButton
 from PyQt5.QtCore import Qt
 from utils.txt_exporter import TxtExporter
+from locales.locale_manager import LocaleManager
 
 class AnalysisOutputControls(QWidget):
     """
@@ -10,10 +11,10 @@ class AnalysisOutputControls(QWidget):
         super().__init__(parent)
         self.output_textedit = output_textedit
         layout = QHBoxLayout()
-        self.export_btn = QPushButton("Експортувати у .txt")
+        self.export_btn = QPushButton(LocaleManager.get_locale("analysis_output_controls", "export_txt_button"))
         self.export_btn.setCursor(Qt.PointingHandCursor)
         self.export_btn.clicked.connect(self.export_txt)
-        self.clear_btn = QPushButton("Очистити результати")
+        self.clear_btn = QPushButton(LocaleManager.get_locale("analysis_output_controls", "clear_results_button"))
         self.clear_btn.setCursor(Qt.PointingHandCursor)
         self.clear_btn.clicked.connect(self.clear_output)
         layout.addWidget(self.export_btn)
@@ -22,7 +23,7 @@ class AnalysisOutputControls(QWidget):
 
     def export_txt(self):
         from PyQt5.QtWidgets import QFileDialog
-        filepath, _ = QFileDialog.getSaveFileName(self, "Зберегти як .txt", "", "Text Files (*.txt)")
+        filepath, _ = QFileDialog.getSaveFileName(self, LocaleManager.get_locale("analysis_output_controls", "save_dialog_title"), "", "Text Files (*.txt)")
         if filepath:
             TxtExporter.export(self.output_textedit, filepath)
 
