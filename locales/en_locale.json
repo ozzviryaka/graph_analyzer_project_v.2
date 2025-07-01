@@ -1,0 +1,446 @@
+{
+  "main": {
+    "app_start": "======================================Application Start======================================\n\n",
+    "app_end": "=================================Application Termination================================\n\n"
+  },
+  "main_window": {
+    "app_started": "======================================Application Started====================================\n\n",
+    "app_title": "G_A_P_V.2",
+    "default_graph_name": "Graph 1"
+  },
+  "ford_fulkerson": {
+    "directed_error": "Ford-Fulkerson algorithm works only with directed graphs.",
+    "weight_error": "All edges must have non-negative weights for Ford-Fulkerson algorithm.",
+    "init_info": "FordFulkerson initialization: graph is directed, all edge weights are correct.",
+    "max_flow_log_info": "Maximum flow between {source_id} and {sink_id}: {max_flow}"
+  },
+  "min_cut": {
+    "directed_error": "Minimum cut algorithm works only with directed graphs.",
+    "weight_error": "All edges must have non-negative weights for minimum cut algorithm.",
+    "init_info": "MinCut initialization: graph is directed, all edge weights are correct.",
+    "min_cut_start": "Finding minimum cut between {source_id} and {sink_id} started.",
+    "min_cut_found_path": "Found path with flow {path_flow}. Current max_flow: {max_flow}",
+    "min_cut_end": "Minimum cut: {max_flow}, number of edges in cut: {len_cut_edges}"
+  },
+  "bellman_ford": {
+    "weight_error": "All edges must have weights for Bellman-Ford algorithm.",
+    "init_info": "BellmanFord initialization: all edge weights are correct.",
+    "bellman_ford_start": "Finding shortest paths from vertex {start_id} started.",
+    "update_path": "Updated path to {v}: distance {d}, predecessor {u}",
+    "enable_negative_cycles": "Graph contains negative cycle.",
+    "bellman_ford_end": "Shortest paths search completed."
+  },
+  "dijkstra": {
+    "weight_error": "All edges must have non-negative weights for Dijkstra algorithm.",
+    "init_info": "Dijkstra initialization: all edge weights are correct.",
+    "dijkstra_start": "Finding shortest paths from vertex {start_id} started.",
+    "update_path": "Updated path to {v_id}: distance {alt}, predecessor {u_id}",
+    "dijkstra_end": "Shortest paths search completed."
+  },
+  "floyd_warshall": {
+    "weight_error": "All edges must have non-negative weights for Floyd-Warshall algorithm.",
+    "init_info": "FloydWarshall initialization: all edge weights are correct.",
+    "floyd_warshall_start": "Floyd-Warshall algorithm execution started.",
+    "update_path": "Updated path {from_node} → {to_node} via {via_node}: distance {distance}",
+    "floyd_warshall_end": "Floyd-Warshall algorithm completed."
+  },
+  "kruskal": {
+    "directed_error": "Kruskal algorithm works only with undirected graphs.",
+    "weight_error": "All edges must have non-negative weights for Kruskal algorithm.",
+    "init_info": "Kruskal initialization: graph is undirected, all edge weights are correct.",
+    "kruskal_start": "Finding minimum spanning tree started.",
+    "update_path": "Added edge ({u}, {v}) with weight {edge_weight} to MST.",
+    "connected_warn": "Graph is not connected — MST does not exist for all vertices.",
+    "kruskal_end": "Completed. MST weight: {total_weight}, number of edges: {len_mst_edges}"
+  },
+  "prim": {
+    "directed_error": "Prim algorithm works only with undirected graphs.",
+    "weight_error": "All edges must have non-negative weights for Prim algorithm.",
+    "init_info": "Prim initialization: graph is undirected, all edge weights are correct.",
+    "prim_start": "Finding minimum spanning tree (MST) started.",
+    "update_path": "Added edge ({edge_source_id}, {edge_target_id}) with weight {weight} to MST.",
+    "connected_warn": "Graph is not connected — MST does not exist for all vertices.",
+    "prim_end": "Completed. MST weight: {total_weight}, number of edges: {len_mst_edges}"
+  },
+  "eulerian_path_finder": {
+    "methods_error": "Graph must have nodes, edges and neighbors methods.",
+    "components_error": "Graph must contain at least one vertex and edge.",
+    "init_info": "EulerianPathFinder initialization: graph is correct.",
+    "eulerian_start": "Eulerian path search started.",
+    "enable_eulerian_warn": "Eulerian path does not exist in the graph.",
+    "enable_eulerian_not_all_edges_used_warn": "Not all edges are used — Eulerian path does not exist.",
+    "eulerian_end": "Eulerian path found: {path_str}"
+  },
+  "hamiltonian_path_finder": {
+    "methods_error": "Graph must have nodes, edges and neighbors methods.",
+    "enable_node_error": "Graph contains no vertices.",
+    "init_info": "HamiltonianPathFinder initialization: graph is correct.",
+    "hamiltonian_start": "Hamiltonian path search between {start_id} and {end_id} started.",
+    "start_end_error": "Start or end vertex is not present in the graph.",
+    "hamiltonian_end": "Hamiltonian path found: {path_str}",
+    "enable_path_warn": "Hamiltonian path between {start_id} and {end_id} does not exist."
+  },
+  "longest_path_finder": {
+    "methods_error": "Graph must have nodes, edges and neighbors methods.",
+    "enable_node_error": "Graph contains no vertices.",
+    "init_info": "LongestPathFinder initialization: graph is correct.",
+    "longest_start": "Longest simple path search between {start_id} and {end_id} started.",
+    "start_end_error": "Start or end vertex is not present in the graph.",
+    "longest_end": "Longest simple path found: {path_str} (length {len_longest_path})",
+    "enable_path_warn": "Longest simple path between {start_id} and {end_id} does not exist."
+  },
+  "simple_path_finder": {
+    "methods_error": "Graph must have nodes, edges and neighbors methods.",
+    "enable_node_error": "Graph contains no vertices.",
+    "init_info": "SimplePathFinder initialization: graph is correct.",
+    "simple_start": "Simple path search between {start_id} and {end_id} started.",
+    "start_end_error": "Start or end vertex is not present in the graph.",
+    "simple_end": "Simple path found: {path_str}",
+    "enable_path_warn": "Simple path between {start_id} and {end_id} does not exist."
+  },
+  "bfs": {
+    "methods_error": "Graph must have nodes and neighbors methods.",
+    "nodes_error": "Graph contains no vertices.",
+    "init_info": "BFS initialization: graph is correct.",
+    "bfs_start": "BFS starting from vertex {start_id}.",
+    "start_error": "Start vertex is not present in the graph.",
+    "bfs_end": "BFS completed. Traversal order: {path_str}"
+  },
+  "dfs": {
+    "methods_error": "Graph must have nodes and neighbors methods.",
+    "nodes_error": "Graph contains no vertices.",
+    "init_info": "DFS initialization: graph is correct.",
+    "dfs_start": "DFS starting from vertex {start_id}.",
+    "start_error": "Start vertex is not present in the graph.",
+    "dfs_end": "DFS completed. Traversal order: {path_str}"
+  },
+  "traversal_algorithms": {
+    "bfs_start": "BFS starts from vertex {start_id}",
+    "bfs_update": "BFS visited vertex {node_id}",
+    "bfs_end": "BFS completed. Order: {order}",
+    "dfs_start": "DFS starts from vertex {start_id}",
+    "dfs_update": "DFS visited vertex {node_id}",
+    "dfs_end": "DFS completed. Order: {order}",
+    "dijkstra_start": "Dijkstra starts from vertex {start_id}",
+    "dijkstra_update": "Dijkstra visited vertex {node_id} (distance {dist})",
+    "dijkstra_end": "Dijkstra completed. Order: {order}",
+    "comp_start": "Connected components search starts",
+    "comp_update": "Found component: {comp}",
+    "comp_end": "Connected components search completed. Total components: {len_components}",
+    "cycle_start": "Cycle detection starts",
+    "cycle_update": "Found cycle: {cycle}",
+    "cycle_end": "Cycle detection completed. Order: {order}, Number of cycles: {len_cycles}"
+  },
+  "graph_info": {
+    "num_nodes": "Number of vertices",
+    "num_edges": "Number of edges",
+    "min_degree": "Minimum degree",
+    "max_degree": "Maximum degree",
+    "avg_degree": "Average degree",
+    "is_connected": "Connected graph",
+    "structural_redundancy": "Structural redundancy",
+    "degree_inequality": "Connection distribution inequality",
+    "structural_compactness": "Structural compactness",
+    "relative_compactness": "Relative compactness indicator",
+    "degree_centralization": "Degree centralization",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "edge_converter": {
+    "not_directed_error": "Passed edge is not directed.",
+    "directed_to_undirected_info": "Converted directed edge ({source_id} -> {target_id}) to undirected.",
+    "not_undirected_error": "Passed edge is not undirected.",
+    "undirected_to_directed_info": "Converted undirected edge ({source_id} -- {target_id}) to directed ({new_source_id} -> {new_target_id})."
+  },
+  "graph_converter": {
+    "directed_to_undirected_info": "Directed graph converted to undirected.",
+    "undirected_to_directed_info": "Undirected graph converted to directed."
+  },
+  "base_edge": {
+    "repr_format": "{class_name}(source={source}, target={target}, data={data})"
+  },
+  "node": {
+    "created_info": "Created node: id={node_id}, data={data}, position={pos}",
+    "repr_format": "Node(id={node_id}, data={data}, position={pos})"
+  },
+  "directed_edge": {
+    "created_info": "Created directed edge: source={source_id}, target={target_id}, weight={weight}, data={data}"
+  },
+  "undirected_edge": {
+    "created_info": "Created undirected edge: node1={node1_id}, node2={node2_id}, weight={weight}, data={data}"
+  },
+  "directed_graph": {
+    "nodes_not_in_graph_error": "Both edge nodes must be added to the graph before adding the edge."
+  },
+  "undirected_graph": {
+    "nodes_not_in_graph_error": "Both edge nodes must be added to the graph before adding the edge."
+  },
+  "graph_loader": {
+    "success_load": "Graph successfully loaded from file {filepath}",
+    "error_load": "Error loading graph: {error}"
+  },
+  "graph_saver": {
+    "success_save": "Graph successfully saved to file {filepath}",
+    "error_save": "Error saving graph: {error}"
+  },
+  "session_exporter": {
+    "export_start": "Starting session export to file: {filepath}",
+    "export_success": "Session successfully exported to file: {filepath}",
+    "export_error": "Error exporting session: {error}"
+  },
+  "session_importer": {
+    "import_start": "Starting session import from file: {filepath}",
+    "class_not_found_warning": "Graph class {class_name} not found in graph_class_map",
+    "edge_nodes_not_found_warning": "Nodes not found for edge: {edge_info}",
+    "import_success": "Session successfully imported from file: {filepath}",
+    "import_error": "Error importing session: {error}"
+  },
+  "txt_exporter": {
+    "export_error": "Error exporting to .txt: {error}"
+  },
+  "graph_canvas": {
+    "undo_tooltip": "Undo last action (Undo, Ctrl+Z)",
+    "redo_tooltip": "Redo action (Redo, Ctrl+Y)"
+  },
+  "edge_edit_dialog": {
+    "window_title": "Add/Edit Edge",
+    "weight_label": "Edge weight:",
+    "additional_data_label": "Additional data (key-value):",
+    "key_label": "Key:",
+    "value_label": "Value:",
+    "ok_button": "OK",
+    "cancel_button": "Cancel"
+  },
+  "graph_select_dialog": {
+    "window_title": "Graph Selection",
+    "select_graph_label": "Select graph to work with:",
+    "new_graph_button": "New Graph",
+    "delete_graph_button": "Delete Graph",
+    "select_button": "Select",
+    "export_session_button": "Export Session",
+    "import_session_button": "Import Session",
+    "directed": "Directed",
+    "undirected": "Undirected",
+    "weighted": "Weighted",
+    "unweighted": "Unweighted",
+    "graph_type_title": "Graph Type",
+    "graph_type_label": "Select graph type:",
+    "weight_title": "Weight",
+    "weight_label": "Is graph weighted?",
+    "auto_name_title": "Automatic vertex naming",
+    "auto_name_label": "Use automatic names for vertices?",
+    "graph_name_title": "Graph Name",
+    "graph_name_label": "Enter graph name:",
+    "yes": "Yes",
+    "no": "No",
+    "delete_warning_title": "Delete",
+    "delete_active_graph": "Cannot delete active graph. Please select another first.",
+    "delete_no_selection": "Select a graph to delete.",
+    "select_warning_title": "Selection",
+    "select_no_selection": "Select a graph from the list.",
+    "export_session_title": "Export Session",
+    "import_session_title": "Import Session",
+    "session_files": "Session Files (*.json)"
+  },
+  "instruction_dialog": {
+    "window_title": "Instructions",
+    "instruction_text": "\u2139  Instructions: creating and editing graphs\n\n--- BASIC ACTIONS ---\n- Add vertex: Left-click on empty space in the field\n- Delete vertex: Right-click on vertex\n- Move vertex: Left-click on vertex and drag with mouse\n- Select vertex: Left-click on vertex (highlights for edge addition)\n\n- Add edge: select vertex, then Left-click+Ctrl on another vertex\n- Delete edge: Right-click on middle of edge\n- Edit edge weight/data: double Left-click on middle of edge (only for weighted graph)\n- Select edge: Left-click on middle of edge (for some actions)\n\n--- SETTINGS ---\n- Directedness, weight, auto vertex naming: toggles above canvas\n- Automatic naming: if disabled — vertex creation dialog will appear for name input\n\n--- IMPORT/EXPORT ---\n- Export to .json/.txt: corresponding buttons below canvas\n- Import from .json: button below canvas\n\n--- GRAPH SELECTION ---\n- 'Select Graph' button below canvas opens window for selecting, creating, renaming, deleting or copying graphs.\n- You can work with multiple graphs within one session.\n\n--- ANALYSIS ---\n- Tabs below canvas: shortest paths, spanning trees, special paths, traversal, flows\n- For algorithms, select vertices from lists\n\n--- ADDITIONAL ---\n- Instructions: this button\n- All actions are accompanied by tooltips and error messages\n\nStart by adding vertices!",
+    "ok_button": "OK"
+  },
+  "theme_select_dialog": {
+    "window_title": "Theme Selection",
+    "style_label": "Select theme style:",
+    "color_label": "Select theme color:",
+    "modern": "Modern",
+    "classic": "Classic",
+    "dark": "Dark",
+    "light": "Light",
+    "green": "Green",
+    "blue": "Blue",
+    "red": "Red",
+    "yellow": "Yellow",
+    "ok_button": "OK"
+  },
+  "vertex_edit_dialog": {
+    "window_title": "Edit Vertex",
+    "vertex_name_label": "Vertex name:",
+    "additional_data_label": "Additional vertex data (key-value):",
+    "key_label": "Key:",
+    "value_label": "Value:",
+    "ok_button": "OK",
+    "cancel_button": "Cancel",
+    "vertex_data_info": "Vertex data{node_info} after editing: {data}"
+  },
+  "common_dialogs": {
+    "ok_text": "ok",
+    "select_text": "select"
+  },
+  "graph_analysis_tab": {
+    "title": "<h2>Graph Analysis</h2>",
+    "traversal_option": "Graph traversal (BFS/DFS)",
+    "spanning_tree_option": "Spanning trees (Prim/Kruskal)",
+    "flow_algorithms_option": "Flow algorithms (Ford-Fulkerson/Min-Cut)",
+    "shortest_paths_option": "Shortest paths (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+    "special_paths_option": "Special paths (simple/longest/Hamiltonian/Eulerian)"
+  },
+  "graph_tabs_widget": {
+    "graph_info_tab": "Graph and Information",
+    "matrices_tab": "Matrices",
+    "analysis_tab": "Graph Analysis",
+    "traversal_tab": "Graph Traversal"
+  },
+  "matrix_tabs_widget": {
+    "adjacency_matrix_title": "Adjacency Matrix",
+    "incidence_matrix_title": "Incidence Matrix",
+    "adjacency_tab": "Adjacency",
+    "incidence_tab": "Incidence",
+    "edge_label": "E{index}"
+  },
+  "traversal_tab": {
+    "empty_graph": "Graph is empty",
+    "select_start_vertex": "Select start vertex",
+    "no_reachable_vertices": "No reachable vertices found.",
+    "no_components_found": "No connected components found.",
+    "components_found": "Found {count} connected component(s): {components}",
+    "no_cycles_found": "No cycles found.",
+    "cycles_found": "Found {count} cycle(s): {cycles}",
+    "select_algorithm": "Select traversal algorithm.",
+    "stopped": "Stopped",
+    "traversal_order": "Traversal order: {node}",
+    "result_vertices": "Result vertices: {vertices}",
+    "component_result": "Component {index}: {vertices}",
+    "cycle_result": "Cycle {index}: {vertices}",
+    "traversal_completed": "Traversal completed"
+  },
+  "theme_manager": {
+    "theme_change_info": "Changing theme to: {theme_name}",
+    "theme_save_error": "Failed to save theme: {error}"
+  },
+  "analysis_output_controls": {
+    "export_txt_button": "Export to .txt",
+    "clear_results_button": "Clear results",
+    "save_dialog_title": "Save as .txt"
+  },
+  "flow_algorithms_widget": {
+    "source_label": "Source ID:",
+    "sink_label": "Sink ID:",
+    "ford_fulkerson_button": "Ford-Fulkerson (max flow)",
+    "min_cut_button": "Min-Cut",
+    "error_title": "Error",
+    "select_source_sink": "Select source and sink IDs.",
+    "max_flow_result": "Maximum flow: {flow}",
+    "min_cut_result": "Minimum cut: {cut}\nCut edges:\n{edges}",
+    "error_result": "Error: {error}"
+  },
+  "shortest_paths_widget": {
+    "start_vertex_label": "Start vertex ID:",
+    "end_vertex_label": "End vertex ID:",
+    "dijkstra_all_button": "Dijkstra (single source to all)",
+    "bellman_all_button": "Bellman-Ford (single source to all)",
+    "floyd_all_button": "Floyd-Warshall (all to all)",
+    "dijkstra_path_button": "Dijkstra (path between two)",
+    "bellman_path_button": "Bellman-Ford (path between two)",
+    "floyd_path_button": "Floyd-Warshall (path between two)",
+    "floyd_all_paths_button": "Floyd-Warshall (all shortest paths)",
+    "error_title": "Error",
+    "select_start_vertex": "Select start vertex.",
+    "select_start_end_vertices": "Select start and end vertices.",
+    "dijkstra_distances": "Shortest distances (Dijkstra):",
+    "bellman_distances": "Shortest distances (Bellman-Ford):",
+    "floyd_matrix": "Shortest distances matrix (Floyd-Warshall):",
+    "floyd_all_paths": "All shortest paths (Floyd-Warshall):",
+    "dijkstra_path": "Path (Dijkstra): {path}\nLength: {length}",
+    "bellman_path": "Path (Bellman-Ford): {path}\nLength: {length}",
+    "floyd_path": "Path (Floyd-Warshall): {path}\nLength: {length}",
+    "path_not_found": "Path not found.",
+    "path_not_exists": "{from} -> {to}: path does not exist",
+    "path_result": "{from} -> {to}: {path} (length {length})",
+    "vertex_not_found": "Error: selected vertex is not present in the graph.",
+    "error_result": "Error: {error}"
+  },
+  "spanning_tree_widget": {
+    "prim_button": "Spanning tree (Prim)",
+    "kruskal_button": "Spanning tree (Kruskal)",
+    "prim_result": "Spanning tree (Prim):\n{edges}\nTotal weight: {weight}",
+    "kruskal_result": "Spanning tree (Kruskal):\n{edges}\nTotal weight: {weight}",
+    "no_spanning_tree": "Spanning tree not found (graph is not connected or incorrect).",
+    "error_result": "Error: {error}"
+  },
+  "special_paths_widget": {
+    "start_vertex_label": "Start vertex ID:",
+    "end_vertex_label": "End vertex ID:",
+    "simple_path_button": "Simple path (DFS)",
+    "longest_path_button": "Longest simple path",
+    "hamiltonian_path_button": "Hamiltonian path",
+    "eulerian_path_button": "Eulerian path",
+    "error_title": "Error",
+    "select_start_end_vertices": "Select start and end vertices.",
+    "simple_path_result": "Simple path: {path}",
+    "longest_path_result": "Longest simple path: {path} (length {length})",
+    "hamiltonian_path_result": "Hamiltonian path: {path}",
+    "eulerian_path_result": "Eulerian path: {path}",
+    "path_not_found": "Path not found.",
+    "eulerian_path_not_found": "Eulerian path not found.",
+    "error_result": "Error: {error}"
+  },
+  "traversal_widget": {
+    "start_vertex_label": "Start vertex ID:",
+    "bfs_button": "Breadth-first search (BFS)",
+    "dfs_button": "Depth-first search (DFS)",
+    "error_title": "Error",
+    "select_start_vertex": "Select start vertex.",
+    "bfs_result": "BFS traversal order: {order}",
+    "dfs_result": "DFS traversal order: {order}",
+    "error_result": "Error: {error}"
+  },
+  "graph_canvas_widget": {
+    "open_graph_dialog_title": "Open graph from .json"
+  },
+  "graph_import_export_widget": {
+    "export_json_button": "Export to .json",
+    "import_json_button": "Import from .json",
+    "save_graph_dialog_title": "Save graph as .json",
+    "open_graph_dialog_title": "Open graph from .json"
+  },
+  "graph_info_export_widget": {
+    "export_txt_button": "Export to .txt",
+    "save_txt_dialog_title": "Save as .txt"
+  },
+  "adjacency_matrix_export_widget": {
+    "export_csv_button": "Export to CSV",
+    "export_png_button": "Export to PNG",
+    "error_title": "Error",
+    "success_title": "Success",
+    "empty_matrix_error": "Matrix is empty or incorrect!",
+    "save_csv_dialog_title": "Save as CSV",
+    "adjacency_matrix_saved": "Adjacency matrix saved to CSV!"
+  },
+  "incidence_matrix_export_widget": {
+    "export_csv_button": "Export to CSV",
+    "export_png_button": "Export to PNG",
+    "error_title": "Error",
+    "success_title": "Success",
+    "empty_matrix_error": "Matrix is empty or incorrect!",
+    "save_csv_dialog_title": "Save as CSV",
+    "incidence_matrix_saved": "Incidence matrix saved to CSV!"
+  },
+  "traversal_control_widget": {
+    "method_label": "Method:",
+    "start_vertex_label": "Start vertex:",
+    "start_button": "Start",
+    "stop_button": "Stop",
+    "bfs_method": "Breadth-first search (BFS)",
+    "dfs_method": "Depth-first search (DFS)",
+    "dijkstra_method": "Dijkstra",
+    "connected_components_method": "Connected components",
+    "cycle_detection_method": "Cycle detection"
+  },
+  "graph_settings_widget": {
+    "select_graph": "Select graph",
+    "graph_directed": "Directed graph",
+    "graph_weighted": "Weighted graph",
+    "auto_name_vertices": "Automatic vertex naming",
+    "select_theme": "Select theme",
+    "instruction": "Instructions"
+  }
+}
