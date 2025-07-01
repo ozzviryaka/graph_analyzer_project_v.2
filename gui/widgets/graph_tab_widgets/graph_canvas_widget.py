@@ -7,6 +7,7 @@ from gui.widgets.graph_tab_widgets.graph_import_export_widget import GraphImport
 from gui.dialogs.graph_select_dialog import GraphSelectDialog
 from gui.dialogs.instruction_dialog import InstructionDialog
 from utils.undo_redo_event_filter import UndoRedoEventFilter
+from locales.locale_manager import LocaleManager
 
 class GraphCanvasWidget(QWidget):
     """
@@ -66,7 +67,7 @@ class GraphCanvasWidget(QWidget):
         # Додаємо undo для імпорту графа
         from utils.undo_redo_manager import UndoRedoManager
         from copy import deepcopy
-        filepath, _ = QFileDialog.getOpenFileName(self, "Відкрити граф з .json", "", "JSON Files (*.json)")
+        filepath, _ = QFileDialog.getOpenFileName(self, LocaleManager.get_locale("graph_canvas_widget", "open_graph_dialog_title"), "", "JSON Files (*.json)")
         if filepath:
             old_graph_state = deepcopy(self.canvas.graph)
             new_graph = GraphLoader.load(filepath)

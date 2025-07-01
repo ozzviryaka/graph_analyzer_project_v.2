@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QTextEdit, QFileD
 from PyQt5.QtCore import Qt
 from utils.txt_exporter import TxtExporter
 from core.algorithms.graph_info import GraphInfo
+from locales.locale_manager import LocaleManager
 
 class GraphInfoExportWidget(QWidget):
     """
@@ -13,7 +14,7 @@ class GraphInfoExportWidget(QWidget):
         self.text_edit = QTextEdit()
         self.text_edit.setReadOnly(True)
         self.text_edit.setStyleSheet("")
-        self.export_btn = QPushButton("Експортувати у .txt")
+        self.export_btn = QPushButton(LocaleManager.get_locale("graph_info_export_widget", "export_txt_button"))
         self.export_btn.setCursor(Qt.PointingHandCursor)
         # self.export_btn.setStyleSheet("background-color: #444; color: #fff; border-radius: 6px; padding: 6px; font-size: 14px;")  # REMOVE custom style
         self.export_btn.clicked.connect(self.export_txt)
@@ -35,6 +36,6 @@ class GraphInfoExportWidget(QWidget):
         self.update_info()
 
     def export_txt(self):
-        filepath, _ = QFileDialog.getSaveFileName(self, "Зберегти як .txt", "", "Text Files (*.txt)")
+        filepath, _ = QFileDialog.getSaveFileName(self, LocaleManager.get_locale("graph_info_export_widget", "save_txt_dialog_title"), "", "Text Files (*.txt)")
         if filepath:
             TxtExporter.export(self.text_edit, filepath)

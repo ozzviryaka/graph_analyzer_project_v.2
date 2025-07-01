@@ -384,5 +384,18 @@
     "bfs_result": "BFS порядок обходу: {order}",
     "dfs_result": "DFS порядок обходу: {order}",
     "error_result": "Помилка: {error}"
+  },
+  "graph_canvas_widget": {
+    "open_graph_dialog_title": "Відкрити граф з .json"
+  },
+  "graph_import_export_widget": {
+    "export_json_button": "Експортувати у .json",
+    "import_json_button": "Імпортувати з .json",
+    "save_graph_dialog_title": "Зберегти граф як .json",
+    "open_graph_dialog_title": "Відкрити граф з .json"
+  },
+  "graph_info_export_widget": {
+    "export_txt_button": "Експортувати у .txt",
+    "save_txt_dialog_title": "Зберегти як .txt"
   }
 }
