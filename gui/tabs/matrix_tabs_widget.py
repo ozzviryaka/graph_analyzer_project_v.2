@@ -97,6 +97,27 @@ class MatrixTabsWidget(QWidget):
         self.tabs.setTabText(0, LocaleManager.get_locale("matrix_tabs_widget", "adjacency_tab"))
         self.tabs.setTabText(1, LocaleManager.get_locale("matrix_tabs_widget", "incidence_tab"))
         
+        # Оновлюємо заголовки матриць
+        adj_layout = self.adj_widget.layout()
+        if adj_layout:
+            title_label = adj_layout.itemAt(0).widget()
+            if hasattr(title_label, 'setText'):
+                title_label.setText(f"<b>{LocaleManager.get_locale('matrix_tabs_widget', 'adjacency_matrix_title')}</b>")
+        
+        inc_layout = self.inc_widget.layout()
+        if inc_layout:
+            title_label = inc_layout.itemAt(0).widget()
+            if hasattr(title_label, 'setText'):
+                title_label.setText(f"<b>{LocaleManager.get_locale('matrix_tabs_widget', 'incidence_matrix_title')}</b>")
+        
+        # Оновлюємо мітки колонок для матриці інцидентності
+        if hasattr(self.inc_widget, 'table') and hasattr(self.inc_export_widget, 'col_names'):
+            col_count = self.inc_widget.table.columnCount()
+            if col_count > 0:
+                new_col_labels = [LocaleManager.get_locale("matrix_tabs_widget", "edge_label").format(index=i+1) for i in range(col_count)]
+                self.inc_widget.table.setHorizontalHeaderLabels(new_col_labels)
+                self.inc_export_widget.col_names = new_col_labels
+        
         # Оновлюємо текст в експорт віджетах
         if hasattr(self.adj_export_widget, 'refresh_ui_text'):
             self.adj_export_widget.refresh_ui_text()

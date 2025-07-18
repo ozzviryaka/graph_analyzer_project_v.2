@@ -36,6 +36,13 @@ class MatrixWidget(QWidget):
 
     def refresh_ui_text(self):
         """Оновлює текст інтерфейсу після зміни мови"""
-        # MatrixWidget не містить локалізованого тексту, тому метод порожній
-        # Але він може бути перевизначений у дочірніх класах
-        pass
+        # Оновлюємо заголовок, якщо він є
+        layout = self.layout()
+        if layout and layout.count() > 0:
+            first_item = layout.itemAt(0).widget()
+            if hasattr(first_item, 'setText') and hasattr(first_item, 'text'):
+                # Це QLabel з заголовком
+                current_text = first_item.text()
+                if current_text and '<b>' in current_text:
+                    # Заголовок потрібно оновити в батьківському класі
+                    pass
