@@ -248,10 +248,9 @@
     "ok_button": "OK"
   },
   "theme_select_dialog": {
-    "window_title": "Вибір теми та мови",
+    "window_title": "Вибір теми",
     "style_label": "Оберіть стиль теми:",
     "color_label": "Оберіть колір теми:",
-    "language_label": "Оберіть мову:",
     "modern": "Сучасна",
     "classic": "Класична",
     "dark": "Темна",
@@ -260,8 +259,6 @@
     "blue": "Синя",
     "red": "Червона",
     "yellow": "Жовта",
-    "ukrainian": "Українська",
-    "english": "English",
     "ok_button": "OK"
   },
   "vertex_edit_dialog": {
@@ -444,6 +441,15 @@
     "graph_weighted": "Ваговий граф",
     "auto_name_vertices": "Автоматична назва вершин",
     "select_theme": "Вибрати тему",
+    "select_language": "Мова",
     "instruction": "Інструкція"
+  },
+  "language_select_dialog": {
+    "title": "Вибір мови",
+    "select_language_label": "Оберіть мову:",
+    "ukrainian_language": "Українська",
+    "english_language": "English",
+    "ok_button": "OK",
+    "cancel_button": "Скасувати"
   }
 }

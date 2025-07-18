@@ -102,3 +102,19 @@ class LocaleManager:
     def reload_locale(cls):
         if cls._current_path:
             cls.load_locale(cls._current_path)
+
+    @classmethod
+    def get_current_language(cls) -> str:
+        """
+        Повертає код поточної мови (uk або en).
+        """
+        return cls.get_current_locale_code()
+
+    @classmethod
+    def set_language(cls, language_code: str):
+        """
+        Встановлює мову за кодом (uk або en).
+        """
+        available_locales = cls.get_available_locales()
+        if language_code in available_locales:
+            cls.set_locale(available_locales[language_code])

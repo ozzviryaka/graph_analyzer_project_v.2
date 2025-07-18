@@ -5,6 +5,7 @@ from core.convertations.graph_converter import GraphConverter
 from gui.dialogs.graph_select_dialog import GraphSelectDialog
 from gui.dialogs.instruction_dialog import InstructionDialog
 from gui.dialogs.theme_select_dialog import ThemeSelectDialog
+from gui.dialogs.language_select_dialog import LanguageSelectDialog
 from locales.locale_manager import LocaleManager
 
 class GraphSettingsWidget(QWidget):
@@ -52,6 +53,12 @@ class GraphSettingsWidget(QWidget):
         self.theme_btn.setCursor(Qt.PointingHandCursor)
         self.theme_btn.clicked.connect(self.show_theme_dialog)
         layout.addWidget(self.theme_btn)
+        
+        # Кнопка вибору мови
+        self.language_btn = QPushButton(LocaleManager.get_locale("graph_settings_widget", "select_language"))
+        self.language_btn.setCursor(Qt.PointingHandCursor)
+        self.language_btn.clicked.connect(self.show_language_dialog)
+        layout.addWidget(self.language_btn)
         layout.addStretch()
         self.setLayout(layout)
         # Кнопка інструкції
@@ -149,6 +156,10 @@ class GraphSettingsWidget(QWidget):
 
     def show_theme_dialog(self):
         dlg = ThemeSelectDialog(self)
+        dlg.exec_()
+
+    def show_language_dialog(self):
+        dlg = LanguageSelectDialog(self)
         dlg.language_changed.connect(self._on_language_changed)
         dlg.exec_()
 
@@ -174,4 +185,5 @@ class GraphSettingsWidget(QWidget):
         self.weighted_label.setText(LocaleManager.get_locale("graph_settings_widget", "graph_weighted"))
         self.auto_vertex_name_label.setText(LocaleManager.get_locale("graph_settings_widget", "auto_name_vertices"))
         self.theme_btn.setText(LocaleManager.get_locale("graph_settings_widget", "select_theme"))
+        self.language_btn.setText(LocaleManager.get_locale("graph_settings_widget", "select_language"))
         self.instruction_btn.setText(LocaleManager.get_locale("graph_settings_widget", "instruction"))

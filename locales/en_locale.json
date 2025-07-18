@@ -248,10 +248,9 @@
     "ok_button": "OK"
   },
   "theme_select_dialog": {
-    "window_title": "Theme and Language Selection",
+    "window_title": "Theme Selection",
     "style_label": "Select theme style:",
     "color_label": "Select theme color:",
-    "language_label": "Select language:",
     "modern": "Modern",
     "classic": "Classic",
     "dark": "Dark",
@@ -260,8 +259,6 @@
     "blue": "Blue",
     "red": "Red",
     "yellow": "Yellow",
-    "ukrainian": "Українська",
-    "english": "English",
     "ok_button": "OK"
   },
   "vertex_edit_dialog": {
@@ -444,6 +441,15 @@
     "graph_weighted": "Weighted graph",
     "auto_name_vertices": "Automatic vertex naming",
     "select_theme": "Select theme",
+    "select_language": "Language",
     "instruction": "Instructions"
+  },
+  "language_select_dialog": {
+    "title": "Language Selection",
+    "select_language_label": "Select language:",
+    "ukrainian_language": "Українська",
+    "english_language": "English",
+    "ok_button": "OK",
+    "cancel_button": "Cancel"
   }
 }
