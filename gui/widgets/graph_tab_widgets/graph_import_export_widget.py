@@ -40,3 +40,8 @@ class GraphImportExportWidget(QWidget):
 
     def set_graph(self, graph):
         self.graph = graph
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        self.export_btn.setText(LocaleManager.get_locale("graph_import_export_widget", "export_json_button"))
+        self.import_btn.setText(LocaleManager.get_locale("graph_import_export_widget", "import_json_button"))

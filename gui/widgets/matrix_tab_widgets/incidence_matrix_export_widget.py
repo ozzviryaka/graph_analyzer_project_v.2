@@ -38,3 +38,7 @@ class IncidenceMatrixExportWidget(QWidget):
                                       LocaleManager.get_locale("incidence_matrix_export_widget", "incidence_matrix_saved"))
             except Exception as e:
                 QMessageBox.critical(self, LocaleManager.get_locale("incidence_matrix_export_widget", "error_title"), str(e))
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        self.csv_btn.setText(LocaleManager.get_locale("incidence_matrix_export_widget", "export_csv_button"))

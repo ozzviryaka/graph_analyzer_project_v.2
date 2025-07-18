@@ -90,3 +90,9 @@ class GraphCanvasWidget(QWidget):
                     if hasattr(self.canvas, 'on_graph_changed') and self.canvas.on_graph_changed:
                         self.canvas.on_graph_changed(self.canvas.graph)
                 self.canvas.undo_redo_manager.push(redo, undo)
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        # Оновлюємо текст у дочірніх віджетах
+        if hasattr(self.import_export_widget, 'refresh_ui_text'):
+            self.import_export_widget.refresh_ui_text()

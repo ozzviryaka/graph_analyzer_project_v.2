@@ -201,3 +201,8 @@ class TraversalTab(QWidget):
             self.history.append((self.current_step, list(self.traversal_widget.canvas._highlighted_nodes)))
             self.current_step, highlighted = self.future.pop()
             self.traversal_widget.canvas.set_highlighted_nodes(highlighted)
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        if hasattr(self.traversal_widget, 'refresh_ui_text'):
+            self.traversal_widget.refresh_ui_text()

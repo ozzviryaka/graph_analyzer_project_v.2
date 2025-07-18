@@ -217,3 +217,25 @@ class ShortestPathsWidget(QWidget):
     def set_graph(self, graph):
         self.graph = graph
         self.update_nodes()
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        self.dijkstra_btn.setText(LocaleManager.get_locale("shortest_paths_widget", "dijkstra_all_button"))
+        self.bellman_btn.setText(LocaleManager.get_locale("shortest_paths_widget", "bellman_all_button"))
+        self.floyd_btn.setText(LocaleManager.get_locale("shortest_paths_widget", "floyd_all_button"))
+        self.dijkstra_path_btn.setText(LocaleManager.get_locale("shortest_paths_widget", "dijkstra_path_button"))
+        self.bellman_path_btn.setText(LocaleManager.get_locale("shortest_paths_widget", "bellman_path_button"))
+        self.floyd_path_btn.setText(LocaleManager.get_locale("shortest_paths_widget", "floyd_path_button"))
+        
+        # Оновлюємо мітки в layout
+        layout = self.layout()
+        if layout:
+            # Оновлюємо мітку початкової вершини
+            start_label = layout.itemAt(0).widget()
+            if hasattr(start_label, 'setText'):
+                start_label.setText(LocaleManager.get_locale("shortest_paths_widget", "start_vertex_label"))
+            
+            # Оновлюємо мітку кінцевої вершини
+            end_label = layout.itemAt(2).widget()
+            if hasattr(end_label, 'setText'):
+                end_label.setText(LocaleManager.get_locale("shortest_paths_widget", "end_vertex_label"))

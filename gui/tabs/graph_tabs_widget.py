@@ -54,3 +54,21 @@ class GraphTabsWidget(QWidget):
         """
         if hasattr(self.analysis_tab, 'update_nodes'):
             self.analysis_tab.update_nodes()
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        # Оновлюємо назви вкладок
+        self.tabs.setTabText(0, LocaleManager.get_locale("graph_tabs_widget", "graph_info_tab"))
+        self.tabs.setTabText(1, LocaleManager.get_locale("graph_tabs_widget", "matrices_tab"))
+        self.tabs.setTabText(2, LocaleManager.get_locale("graph_tabs_widget", "analysis_tab"))
+        self.tabs.setTabText(3, LocaleManager.get_locale("graph_tabs_widget", "traversal_tab"))
+        
+        # Оновлюємо текст в дочірніх віджетах
+        if hasattr(self.combined_tab, 'refresh_ui_text'):
+            self.combined_tab.refresh_ui_text()
+        if hasattr(self.matrix_tab, 'refresh_ui_text'):
+            self.matrix_tab.refresh_ui_text()
+        if hasattr(self.analysis_tab, 'refresh_ui_text'):
+            self.analysis_tab.refresh_ui_text()
+        if hasattr(self.traversal_tab, 'refresh_ui_text'):
+            self.traversal_tab.refresh_ui_text()

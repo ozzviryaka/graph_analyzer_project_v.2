@@ -115,3 +115,23 @@ class SpecialPathsWidget(QWidget):
                 self.output_textedit.setPlainText(LocaleManager.get_locale("special_paths_widget", "eulerian_path_not_found"))
         except Exception as e:
             self.output_textedit.setPlainText(LocaleManager.get_locale("special_paths_widget", "error_result").format(error=str(e)))
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        self.simple_btn.setText(LocaleManager.get_locale("special_paths_widget", "simple_path_button"))
+        self.longest_btn.setText(LocaleManager.get_locale("special_paths_widget", "longest_path_button"))
+        self.hamiltonian_btn.setText(LocaleManager.get_locale("special_paths_widget", "hamiltonian_path_button"))
+        self.eulerian_btn.setText(LocaleManager.get_locale("special_paths_widget", "eulerian_path_button"))
+        
+        # Оновлюємо мітки в layout
+        layout = self.layout()
+        if layout:
+            # Оновлюємо мітку початкової вершини
+            start_label = layout.itemAt(0).widget()
+            if hasattr(start_label, 'setText'):
+                start_label.setText(LocaleManager.get_locale("special_paths_widget", "start_vertex_label"))
+            
+            # Оновлюємо мітку кінцевої вершини
+            end_label = layout.itemAt(2).widget()
+            if hasattr(end_label, 'setText'):
+                end_label.setText(LocaleManager.get_locale("special_paths_widget", "end_vertex_label"))

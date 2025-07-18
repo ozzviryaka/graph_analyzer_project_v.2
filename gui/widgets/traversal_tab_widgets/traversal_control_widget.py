@@ -61,3 +61,38 @@ class TraversalControlWidget(QWidget):
         vbox.addWidget(self.canvas)
         # vbox.addWidget(self.status_label)  # Видалено статус-лейбл
         self.setLayout(vbox)
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        # Оновлюємо елементи в комбобоксі методів
+        current_method = self.method_combo.currentIndex()
+        self.method_combo.blockSignals(True)
+        self.method_combo.clear()
+        self.method_combo.addItems([
+            LocaleManager.get_locale("traversal_control_widget", "bfs_method"),
+            LocaleManager.get_locale("traversal_control_widget", "dfs_method"),
+            LocaleManager.get_locale("traversal_control_widget", "dijkstra_method"),
+            LocaleManager.get_locale("traversal_control_widget", "connected_components_method"),
+            LocaleManager.get_locale("traversal_control_widget", "cycle_detection_method")
+        ])
+        self.method_combo.setCurrentIndex(current_method)
+        self.method_combo.blockSignals(False)
+        
+        # Оновлюємо текст кнопок
+        self.start_btn.setText(LocaleManager.get_locale("traversal_control_widget", "start_button"))
+        self.stop_btn.setText(LocaleManager.get_locale("traversal_control_widget", "stop_button"))
+        
+        # Оновлюємо мітки (потрібно знайти їх в layout)
+        layout = self.layout()
+        if layout:
+            hbox = layout.itemAt(0).layout()
+            if hbox:
+                # Оновлюємо мітку методу
+                method_label = hbox.itemAt(0).widget()
+                if isinstance(method_label, QLabel):
+                    method_label.setText(LocaleManager.get_locale("traversal_control_widget", "method_label"))
+                
+                # Оновлюємо мітку початкової вершини
+                vertex_label = hbox.itemAt(2).widget()
+                if isinstance(vertex_label, QLabel):
+                    vertex_label.setText(LocaleManager.get_locale("traversal_control_widget", "start_vertex_label"))

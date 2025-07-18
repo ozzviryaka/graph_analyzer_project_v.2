@@ -66,3 +66,34 @@ class GraphAnalysisTab(QWidget):
         for widget in self.widgets:
             if hasattr(widget, 'set_graph'):
                 widget.set_graph(graph)
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        # Оновлюємо елементи в комбобоксі алгоритмів
+        current_index = self.alg_combo.currentIndex()
+        self.alg_combo.blockSignals(True)
+        self.alg_combo.clear()
+        self.alg_combo.addItems([
+            LocaleManager.get_locale("graph_analysis_tab", "traversal_option"),
+            LocaleManager.get_locale("graph_analysis_tab", "spanning_tree_option"),
+            LocaleManager.get_locale("graph_analysis_tab", "flow_algorithms_option"),
+            LocaleManager.get_locale("graph_analysis_tab", "shortest_paths_option"),
+            LocaleManager.get_locale("graph_analysis_tab", "special_paths_option")
+        ])
+        self.alg_combo.setCurrentIndex(current_index)
+        self.alg_combo.blockSignals(False)
+        
+        # Оновлюємо текст в дочірніх віджетах
+        for widget in self.widgets:
+            if hasattr(widget, 'refresh_ui_text'):
+                widget.refresh_ui_text()
+        
+        if hasattr(self.analysis_controls, 'refresh_ui_text'):
+            self.analysis_controls.refresh_ui_text()
+        
+        # Оновлюємо мітку заголовка
+        layout = self.layout()
+        if layout:
+            title_label = layout.itemAt(0).widget()
+            if hasattr(title_label, 'setText'):
+                title_label.setText(LocaleManager.get_locale("graph_analysis_tab", "title"))

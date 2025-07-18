@@ -90,3 +90,15 @@ class MatrixTabsWidget(QWidget):
         self.inc_export_widget.matrix = inc_matrix
         self.inc_export_widget.row_names = inc_row_labels
         self.inc_export_widget.col_names = inc_col_labels
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        # Оновлюємо назви вкладок
+        self.tabs.setTabText(0, LocaleManager.get_locale("matrix_tabs_widget", "adjacency_tab"))
+        self.tabs.setTabText(1, LocaleManager.get_locale("matrix_tabs_widget", "incidence_tab"))
+        
+        # Оновлюємо текст в експорт віджетах
+        if hasattr(self.adj_export_widget, 'refresh_ui_text'):
+            self.adj_export_widget.refresh_ui_text()
+        if hasattr(self.inc_export_widget, 'refresh_ui_text'):
+            self.inc_export_widget.refresh_ui_text()

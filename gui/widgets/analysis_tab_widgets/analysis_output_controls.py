@@ -29,3 +29,8 @@ class AnalysisOutputControls(QWidget):
 
     def clear_output(self):
         self.output_textedit.clear()
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        self.export_btn.setText(LocaleManager.get_locale("analysis_output_controls", "export_txt_button"))
+        self.clear_btn.setText(LocaleManager.get_locale("analysis_output_controls", "clear_results_button"))

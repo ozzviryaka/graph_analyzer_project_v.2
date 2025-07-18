@@ -166,3 +166,12 @@ class GraphSettingsWidget(QWidget):
         self.auto_vertex_name_switch.blockSignals(True)
         self.auto_vertex_name_switch.setChecked(value)
         self.auto_vertex_name_switch.blockSignals(False)
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        self.select_graph_btn.setText(LocaleManager.get_locale("graph_settings_widget", "select_graph"))
+        self.directed_label.setText(LocaleManager.get_locale("graph_settings_widget", "graph_directed"))
+        self.weighted_label.setText(LocaleManager.get_locale("graph_settings_widget", "graph_weighted"))
+        self.auto_vertex_name_label.setText(LocaleManager.get_locale("graph_settings_widget", "auto_name_vertices"))
+        self.theme_btn.setText(LocaleManager.get_locale("graph_settings_widget", "select_theme"))
+        self.instruction_btn.setText(LocaleManager.get_locale("graph_settings_widget", "instruction"))

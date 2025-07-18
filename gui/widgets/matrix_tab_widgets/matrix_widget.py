@@ -33,3 +33,9 @@ class MatrixWidget(QWidget):
         # self.table.setStyleSheet("")
         layout.addWidget(self.table)
         self.setLayout(layout)
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        # MatrixWidget не містить локалізованого тексту, тому метод порожній
+        # Але він може бути перевизначений у дочірніх класах
+        pass

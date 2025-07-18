@@ -73,3 +73,21 @@ class FlowAlgorithmsWidget(QWidget):
     def set_graph(self, graph):
         self.graph = graph
         self.update_nodes()
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        self.run_ff_btn.setText(LocaleManager.get_locale("flow_algorithms_widget", "ford_fulkerson_button"))
+        self.run_mc_btn.setText(LocaleManager.get_locale("flow_algorithms_widget", "min_cut_button"))
+        
+        # Оновлюємо мітки в layout
+        layout = self.layout()
+        if layout:
+            # Оновлюємо мітку джерела
+            source_label = layout.itemAt(0).widget()
+            if hasattr(source_label, 'setText'):
+                source_label.setText(LocaleManager.get_locale("flow_algorithms_widget", "source_label"))
+            
+            # Оновлюємо мітку стоку
+            sink_label = layout.itemAt(2).widget()
+            if hasattr(sink_label, 'setText'):
+                sink_label.setText(LocaleManager.get_locale("flow_algorithms_widget", "sink_label"))

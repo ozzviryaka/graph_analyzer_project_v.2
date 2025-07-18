@@ -24,3 +24,10 @@ class GraphCombinedTab(QWidget):
     def set_graph(self, graph):
         self.canvas_widget.import_export_widget.set_graph(graph)
         self.info_widget.set_graph(graph)
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        if hasattr(self.canvas_widget, 'refresh_ui_text'):
+            self.canvas_widget.refresh_ui_text()
+        if hasattr(self.info_widget, 'refresh_ui_text'):
+            self.info_widget.refresh_ui_text()

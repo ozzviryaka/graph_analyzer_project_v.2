@@ -39,3 +39,7 @@ class GraphInfoExportWidget(QWidget):
         filepath, _ = QFileDialog.getSaveFileName(self, LocaleManager.get_locale("graph_info_export_widget", "save_txt_dialog_title"), "", "Text Files (*.txt)")
         if filepath:
             TxtExporter.export(self.text_edit, filepath)
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        self.export_btn.setText(LocaleManager.get_locale("graph_info_export_widget", "export_txt_button"))

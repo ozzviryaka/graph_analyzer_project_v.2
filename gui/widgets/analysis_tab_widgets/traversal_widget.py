@@ -63,3 +63,16 @@ class TraversalWidget(QWidget):
     def set_graph(self, graph):
         self.graph = graph
         self.update_nodes()
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        self.bfs_btn.setText(LocaleManager.get_locale("traversal_widget", "bfs_button"))
+        self.dfs_btn.setText(LocaleManager.get_locale("traversal_widget", "dfs_button"))
+        
+        # Оновлюємо мітку (потрібно знайти її в layout)
+        layout = self.layout()
+        if layout:
+            # Оновлюємо мітку початкової вершини
+            start_label = layout.itemAt(0).widget()
+            if hasattr(start_label, 'setText'):
+                start_label.setText(LocaleManager.get_locale("traversal_widget", "start_vertex_label"))

@@ -50,3 +50,8 @@ class SpanningTreeWidget(QWidget):
 
     def set_graph(self, graph):
         self.graph = graph
+
+    def refresh_ui_text(self):
+        """Оновлює текст інтерфейсу після зміни мови"""
+        self.prim_btn.setText(LocaleManager.get_locale("spanning_tree_widget", "prim_button"))
+        self.kruskal_btn.setText(LocaleManager.get_locale("spanning_tree_widget", "kruskal_button"))
