@@ -43,3 +43,5 @@ class GraphInfoExportWidget(QWidget):
     def refresh_ui_text(self):
         """Оновлює текст інтерфейсу після зміни мови"""
         self.export_btn.setText(LocaleManager.get_locale("graph_info_export_widget", "export_txt_button"))
+        # Оновлюємо інформацію про граф в текстовому полі
+        self.update_info()
