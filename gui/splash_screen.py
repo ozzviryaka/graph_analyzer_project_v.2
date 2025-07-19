@@ -51,7 +51,7 @@ class SplashScreen(QSplashScreen):
         
         # Ініціалізуємо змінні для відображення
         self.current_progress = 0
-        self.current_text = LocaleManager.get_locale("splash", "splash_initializing") or "Initializing..."
+        self.current_text = LocaleManager.get_locale("splash", "splash_initializing")
         
         self.init_loading_thread()
         
@@ -88,7 +88,7 @@ class SplashScreen(QSplashScreen):
         title_font = QFont("Arial", 24, QFont.Bold)
         painter.setFont(title_font)
         title_rect = QRect(0, 80, self.width(), 40)
-        app_title = LocaleManager.get_locale("splash", "app_title") or "GAP - Graph Analyzer Project"
+        app_title = LocaleManager.get_locale("splash", "app_title")
         painter.drawText(title_rect, Qt.AlignCenter, app_title)
         
         # Малюємо версію
@@ -96,14 +96,14 @@ class SplashScreen(QSplashScreen):
         painter.setFont(version_font)
         painter.setPen(QColor(204, 204, 204))
         version_rect = QRect(0, 120, self.width(), 20)
-        painter.drawText(version_rect, Qt.AlignCenter, "v2.0")
+        painter.drawText(version_rect, Qt.AlignCenter, "v2.5.1")
         
         # Малюємо опис
         desc_font = QFont("Arial", 10)
         painter.setFont(desc_font)
         painter.setPen(QColor(170, 170, 170))
         desc_rect = QRect(0, 150, self.width(), 20)
-        app_description = LocaleManager.get_locale("splash", "app_description") or "Розширений аналізатор графів з візуалізацією"
+        app_description = LocaleManager.get_locale("splash", "app_description")
         painter.drawText(desc_rect, Qt.AlignCenter, app_description)
         
         # Малюємо текст завантаження
