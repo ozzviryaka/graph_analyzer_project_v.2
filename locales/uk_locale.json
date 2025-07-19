@@ -459,6 +459,8 @@
     "splash_loading_algorithms": "Завантаження алгоритмів...",
     "splash_loading_interface": "Завантаження інтерфейсу...",
     "splash_loading_themes": "Завантаження тем...",
-    "splash_loading_complete": "Завантаження завершено!"
+    "splash_loading_complete": "Завантаження завершено!",
+    "app_title": "GAP - Graph Analyzer Project",
+    "app_description": "Розширений аналізатор графів з візуалізацією"
   }
 }

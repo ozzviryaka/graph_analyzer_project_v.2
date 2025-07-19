@@ -88,7 +88,8 @@ class SplashScreen(QSplashScreen):
         title_font = QFont("Arial", 24, QFont.Bold)
         painter.setFont(title_font)
         title_rect = QRect(0, 80, self.width(), 40)
-        painter.drawText(title_rect, Qt.AlignCenter, "Graph Analyzer")
+        app_title = LocaleManager.get_locale("splash", "app_title") or "GAP - Graph Analyzer Project"
+        painter.drawText(title_rect, Qt.AlignCenter, app_title)
         
         # Малюємо версію
         version_font = QFont("Arial", 12)
@@ -102,7 +103,8 @@ class SplashScreen(QSplashScreen):
         painter.setFont(desc_font)
         painter.setPen(QColor(170, 170, 170))
         desc_rect = QRect(0, 150, self.width(), 20)
-        painter.drawText(desc_rect, Qt.AlignCenter, "Розширений аналізатор графів з візуалізацією")
+        app_description = LocaleManager.get_locale("splash", "app_description") or "Розширений аналізатор графів з візуалізацією"
+        painter.drawText(desc_rect, Qt.AlignCenter, app_description)
         
         # Малюємо текст завантаження
         loading_font = QFont("Arial", 11)

@@ -459,6 +459,8 @@
     "splash_loading_algorithms": "Loading algorithms...",
     "splash_loading_interface": "Loading interface...",
     "splash_loading_themes": "Loading themes...",
-    "splash_loading_complete": "Loading complete!"
+    "splash_loading_complete": "Loading complete!",
+    "app_title": "GAP - Graph Analyzer Project",
+    "app_description": "Advanced graph analyzer with visualization"
   }
 }
