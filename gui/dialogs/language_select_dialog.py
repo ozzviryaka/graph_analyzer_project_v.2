@@ -12,7 +12,7 @@ class LanguageSelectDialog(QDialog):
         super().__init__(parent)
         self.setWindowTitle(LocaleManager.get_locale("language_select_dialog", "title"))
         self.setModal(True)
-        self.setFixedSize(300, 200)
+        self.setFixedSize(300, 250)  # Збільшуємо висоту для третьої мови
         
         # Основний layout
         layout = QVBoxLayout()
@@ -35,12 +35,19 @@ class LanguageSelectDialog(QDialog):
         self.language_group.addButton(self.english_radio, 1)
         layout.addWidget(self.english_radio)
         
+        # Французька мова
+        self.french_radio = QRadioButton(LocaleManager.get_locale("language_select_dialog", "french_language"))
+        self.language_group.addButton(self.french_radio, 2)
+        layout.addWidget(self.french_radio)
+        
         # Встановлюємо поточну мову
         current_language = LocaleManager.get_current_language()
         if current_language == "uk":
             self.ukrainian_radio.setChecked(True)
         elif current_language == "en":
             self.english_radio.setChecked(True)
+        elif current_language == "fr":
+            self.french_radio.setChecked(True)
         
         # Кнопки OK та Cancel
         button_layout = QHBoxLayout()
@@ -63,6 +70,8 @@ class LanguageSelectDialog(QDialog):
             new_language = "uk"
         elif self.english_radio.isChecked():
             new_language = "en"
+        elif self.french_radio.isChecked():
+            new_language = "fr"
         else:
             new_language = "uk"  # За замовчуванням
         
@@ -88,6 +97,7 @@ class LanguageSelectDialog(QDialog):
         # Оновлюємо радіокнопки
         self.ukrainian_radio.setText(LocaleManager.get_locale("language_select_dialog", "ukrainian_language"))
         self.english_radio.setText(LocaleManager.get_locale("language_select_dialog", "english_language"))
+        self.french_radio.setText(LocaleManager.get_locale("language_select_dialog", "french_language"))
         
         # Оновлюємо кнопки
         self.ok_button.setText(LocaleManager.get_locale("language_select_dialog", "ok_button"))

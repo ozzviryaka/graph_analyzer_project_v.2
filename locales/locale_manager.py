@@ -68,7 +68,7 @@ class LocaleManager:
     @classmethod
     def get_current_locale_code(cls) -> str:
         """
-        Повертає код поточної мови (uk або en).
+        Повертає код поточної мови (uk, en або fr).
         """
         if cls._current_path:
             filename = os.path.basename(cls._current_path)
@@ -76,6 +76,8 @@ class LocaleManager:
                 return "uk"
             elif filename.startswith("en_"):
                 return "en"
+            elif filename.startswith("fr_"):
+                return "fr"
         return "uk"  # за замовчуванням
 
     @classmethod
@@ -85,7 +87,8 @@ class LocaleManager:
         """
         return {
             "uk": "uk_locale.json",
-            "en": "en_locale.json"
+            "en": "en_locale.json",
+            "fr": "fr_locale.json"
         }
 
     @classmethod
@@ -106,14 +109,14 @@ class LocaleManager:
     @classmethod
     def get_current_language(cls) -> str:
         """
-        Повертає код поточної мови (uk або en).
+        Повертає код поточної мови (uk, en або fr).
         """
         return cls.get_current_locale_code()
 
     @classmethod
     def set_language(cls, language_code: str):
         """
-        Встановлює мову за кодом (uk або en).
+        Встановлює мову за кодом (uk, en або fr).
         """
         available_locales = cls.get_available_locales()
         if language_code in available_locales:

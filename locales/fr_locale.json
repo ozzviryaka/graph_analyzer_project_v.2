@@ -1,0 +1,467 @@
+{
+  "main": {
+    "app_start": "======================================Démarrage de l'application======================================\n\n",
+    "app_end": "=================================Arrêt de l'application================================\n\n"
+  },
+  "main_window": {
+    "app_started": "======================================Application démarrée====================================\n\n",
+    "app_title": "G_A_P_V.2",
+    "default_graph_name": "Graphe 1"
+  },
+  "ford_fulkerson": {
+    "directed_error": "L'algorithme de Ford-Fulkerson ne fonctionne qu'avec les graphes orientés.",
+    "weight_error": "Toutes les arêtes doivent avoir des poids non négatifs pour l'algorithme de Ford-Fulkerson.",
+    "init_info": "Initialisation FordFulkerson : le graphe est orienté, tous les poids d'arêtes sont corrects.",
+    "max_flow_log_info": "Flux maximum entre {source_id} et {sink_id} : {max_flow}"
+  },
+  "min_cut": {
+    "directed_error": "L'algorithme de coupe minimale ne fonctionne qu'avec les graphes orientés.",
+    "weight_error": "Toutes les arêtes doivent avoir des poids non négatifs pour l'algorithme de coupe minimale.",
+    "init_info": "Initialisation MinCut : le graphe est orienté, tous les poids d'arêtes sont corrects.",
+    "min_cut_start": "Recherche de coupe minimale entre {source_id} et {sink_id} commencée.",
+    "min_cut_found_path": "Chemin trouvé avec flux {path_flow}. Flux max actuel : {max_flow}",
+    "min_cut_end": "Coupe minimale : {max_flow}, nombre d'arêtes dans la coupe : {len_cut_edges}"
+  },
+  "bellman_ford": {
+    "weight_error": "Toutes les arêtes doivent avoir des poids pour l'algorithme de Bellman-Ford.",
+    "init_info": "Initialisation BellmanFord : tous les poids d'arêtes sont corrects.",
+    "bellman_ford_start": "Recherche des chemins les plus courts depuis le sommet {start_id} commencée.",
+    "update_path": "Chemin mis à jour vers {v} : distance {d}, prédécesseur {u}",
+    "enable_negative_cycles": "Le graphe contient un cycle négatif.",
+    "bellman_ford_end": "Recherche des chemins les plus courts terminée."
+  },
+  "dijkstra": {
+    "weight_error": "Toutes les arêtes doivent avoir des poids non négatifs pour l'algorithme de Dijkstra.",
+    "init_info": "Initialisation Dijkstra : tous les poids d'arêtes sont corrects.",
+    "dijkstra_start": "Recherche des chemins les plus courts depuis le sommet {start_id} commencée.",
+    "update_path": "Chemin mis à jour vers {v_id} : distance {alt}, prédécesseur {u_id}",
+    "dijkstra_end": "Recherche des chemins les plus courts terminée."
+  },
+  "floyd_warshall": {
+    "weight_error": "Toutes les arêtes doivent avoir des poids non négatifs pour l'algorithme de Floyd-Warshall.",
+    "init_info": "Initialisation FloydWarshall : tous les poids d'arêtes sont corrects.",
+    "floyd_warshall_start": "Exécution de l'algorithme Floyd-Warshall commencée.",
+    "update_path": "Chemin mis à jour {from_node} → {to_node} via {via_node} : distance {distance}",
+    "floyd_warshall_end": "Algorithme Floyd-Warshall terminé."
+  },
+  "kruskal": {
+    "directed_error": "L'algorithme de Kruskal ne fonctionne qu'avec les graphes non orientés.",
+    "weight_error": "Toutes les arêtes doivent avoir des poids non négatifs pour l'algorithme de Kruskal.",
+    "init_info": "Initialisation Kruskal : le graphe est non orienté, tous les poids d'arêtes sont corrects.",
+    "kruskal_start": "Recherche de l'arbre couvrant minimal commencée.",
+    "update_path": "Arête ({u}, {v}) avec poids {edge_weight} ajoutée à l'ACM.",
+    "connected_warn": "Le graphe n'est pas connexe — l'ACM n'existe pas pour tous les sommets.",
+    "kruskal_end": "Terminé. Poids de l'ACM : {total_weight}, nombre d'arêtes : {len_mst_edges}"
+  },
+  "prim": {
+    "directed_error": "L'algorithme de Prim ne fonctionne qu'avec les graphes non orientés.",
+    "weight_error": "Toutes les arêtes doivent avoir des poids non négatifs pour l'algorithme de Prim.",
+    "init_info": "Initialisation Prim : le graphe est non orienté, tous les poids d'arêtes sont corrects.",
+    "prim_start": "Recherche de l'arbre couvrant minimal (ACM) commencée.",
+    "update_path": "Arête ({edge_source_id}, {edge_target_id}) avec poids {weight} ajoutée à l'ACM.",
+    "connected_warn": "Le graphe n'est pas connexe — l'ACM n'existe pas pour tous les sommets.",
+    "prim_end": "Terminé. Poids de l'ACM : {total_weight}, nombre d'arêtes : {len_mst_edges}"
+  },
+  "eulerian_path_finder": {
+    "methods_error": "Le graphe doit avoir les méthodes nodes, edges et neighbors.",
+    "components_error": "Le graphe doit contenir au moins un sommet et une arête.",
+    "init_info": "Initialisation EulerianPathFinder : le graphe est correct.",
+    "eulerian_start": "Recherche de chemin eulérien commencée.",
+    "enable_eulerian_warn": "Le chemin eulérien n'existe pas dans le graphe.",
+    "enable_eulerian_not_all_edges_used_warn": "Toutes les arêtes ne sont pas utilisées — le chemin eulérien n'existe pas.",
+    "eulerian_end": "Chemin eulérien trouvé : {path_str}"
+  },
+  "hamiltonian_path_finder": {
+    "methods_error": "Le graphe doit avoir les méthodes nodes, edges et neighbors.",
+    "enable_node_error": "Le graphe ne contient aucun sommet.",
+    "init_info": "Initialisation HamiltonianPathFinder : le graphe est correct.",
+    "hamiltonian_start": "Recherche de chemin hamiltonien entre {start_id} et {end_id} commencée.",
+    "start_end_error": "Le sommet de départ ou d'arrivée n'est pas présent dans le graphe.",
+    "hamiltonian_end": "Chemin hamiltonien trouvé : {path_str}",
+    "enable_path_warn": "Le chemin hamiltonien entre {start_id} et {end_id} n'existe pas."
+  },
+  "longest_path_finder": {
+    "methods_error": "Le graphe doit avoir les méthodes nodes, edges et neighbors.",
+    "enable_node_error": "Le graphe ne contient aucun sommet.",
+    "init_info": "Initialisation LongestPathFinder : le graphe est correct.",
+    "longest_start": "Recherche du chemin simple le plus long entre {start_id} et {end_id} commencée.",
+    "start_end_error": "Le sommet de départ ou d'arrivée n'est pas présent dans le graphe.",
+    "longest_end": "Chemin simple le plus long trouvé : {path_str} (longueur {len_longest_path})",
+    "enable_path_warn": "Le chemin simple le plus long entre {start_id} et {end_id} n'existe pas."
+  },
+  "simple_path_finder": {
+    "methods_error": "Le graphe doit avoir les méthodes nodes, edges et neighbors.",
+    "enable_node_error": "Le graphe ne contient aucun sommet.",
+    "init_info": "Initialisation SimplePathFinder : le graphe est correct.",
+    "simple_start": "Recherche de chemin simple entre {start_id} et {end_id} commencée.",
+    "start_end_error": "Le sommet de départ ou d'arrivée n'est pas présent dans le graphe.",
+    "simple_end": "Chemin simple trouvé : {path_str}",
+    "enable_path_warn": "Le chemin simple entre {start_id} et {end_id} n'existe pas."
+  },
+  "bfs": {
+    "methods_error": "Le graphe doit avoir les méthodes nodes et neighbors.",
+    "nodes_error": "Le graphe ne contient aucun sommet.",
+    "init_info": "Initialisation BFS : le graphe est correct.",
+    "bfs_start": "BFS commençant depuis le sommet {start_id}.",
+    "start_error": "Le sommet de départ n'est pas présent dans le graphe.",
+    "bfs_end": "BFS terminé. Ordre de parcours : {path_str}"
+  },
+  "dfs": {
+    "methods_error": "Le graphe doit avoir les méthodes nodes et neighbors.",
+    "nodes_error": "Le graphe ne contient aucun sommet.",
+    "init_info": "Initialisation DFS : le graphe est correct.",
+    "dfs_start": "DFS commençant depuis le sommet {start_id}.",
+    "start_error": "Le sommet de départ n'est pas présent dans le graphe.",
+    "dfs_end": "DFS terminé. Ordre de parcours : {path_str}"
+  },
+  "traversal_algorithms": {
+    "bfs_start": "BFS commence depuis le sommet {start_id}",
+    "bfs_update": "BFS a visité le sommet {node_id}",
+    "bfs_end": "BFS terminé. Ordre : {order}",
+    "dfs_start": "DFS commence depuis le sommet {start_id}",
+    "dfs_update": "DFS a visité le sommet {node_id}",
+    "dfs_end": "DFS terminé. Ordre : {order}",
+    "dijkstra_start": "Dijkstra commence depuis le sommet {start_id}",
+    "dijkstra_update": "Dijkstra a visité le sommet {node_id} (distance {dist})",
+    "dijkstra_end": "Dijkstra terminé. Ordre : {order}",
+    "comp_start": "Recherche des composantes connexes commence",
+    "comp_update": "Composante trouvée : {comp}",
+    "comp_end": "Recherche des composantes connexes terminée. Total des composantes : {len_components}",
+    "cycle_start": "Détection de cycle commence",
+    "cycle_update": "Cycle trouvé : {cycle}",
+    "cycle_end": "Détection de cycle terminée. Ordre : {order}, Nombre de cycles : {len_cycles}"
+  },
+  "graph_info": {
+    "num_nodes": "Nombre de sommets",
+    "num_edges": "Nombre d'arêtes",
+    "min_degree": "Degré minimal",
+    "max_degree": "Degré maximal",
+    "avg_degree": "Degré moyen",
+    "is_connected": "Graphe connexe",
+    "structural_redundancy": "Redondance structurelle",
+    "degree_inequality": "Inégalité de distribution des connexions",
+    "structural_compactness": "Compacité structurelle",
+    "relative_compactness": "Indicateur de compacité relative",
+    "degree_centralization": "Centralisation de degré",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "edge_converter": {
+    "not_directed_error": "L'arête passée n'est pas orientée.",
+    "directed_to_undirected_info": "Arête orientée ({source_id} -> {target_id}) convertie en non orientée.",
+    "not_undirected_error": "L'arête passée n'est pas non orientée.",
+    "undirected_to_directed_info": "Arête non orientée ({source_id} -- {target_id}) convertie en orientée ({new_source_id} -> {new_target_id})."
+  },
+  "graph_converter": {
+    "directed_to_undirected_info": "Graphe orienté converti en non orienté.",
+    "undirected_to_directed_info": "Graphe non orienté converti en orienté."
+  },
+  "base_edge": {
+    "repr_format": "{class_name}(source={source}, target={target}, data={data})"
+  },
+  "node": {
+    "created_info": "Sommet créé : id={node_id}, data={data}, position={pos}",
+    "repr_format": "Node(id={node_id}, data={data}, position={pos})"
+  },
+  "directed_edge": {
+    "created_info": "Arête orientée créée : source={source_id}, target={target_id}, weight={weight}, data={data}"
+  },
+  "undirected_edge": {
+    "created_info": "Arête non orientée créée : node1={node1_id}, node2={node2_id}, weight={weight}, data={data}"
+  },
+  "directed_graph": {
+    "nodes_not_in_graph_error": "Les deux sommets de l'arête doivent être ajoutés au graphe avant d'ajouter l'arête."
+  },
+  "undirected_graph": {
+    "nodes_not_in_graph_error": "Les deux sommets de l'arête doivent être ajoutés au graphe avant d'ajouter l'arête."
+  },
+  "graph_loader": {
+    "success_load": "Graphe chargé avec succès depuis le fichier {filepath}",
+    "error_load": "Erreur lors du chargement du graphe : {error}"
+  },
+  "graph_saver": {
+    "success_save": "Graphe sauvegardé avec succès dans le fichier {filepath}",
+    "error_save": "Erreur lors de la sauvegarde du graphe : {error}"
+  },
+  "session_exporter": {
+    "export_start": "Début de l'export de session vers le fichier : {filepath}",
+    "export_success": "Session exportée avec succès vers le fichier : {filepath}",
+    "export_error": "Erreur lors de l'export de session : {error}"
+  },
+  "session_importer": {
+    "import_start": "Début de l'import de session depuis le fichier : {filepath}",
+    "class_not_found_warning": "Classe de graphe {class_name} non trouvée dans graph_class_map",
+    "edge_nodes_not_found_warning": "Sommets non trouvés pour l'arête : {edge_info}",
+    "import_success": "Session importée avec succès depuis le fichier : {filepath}",
+    "import_error": "Erreur lors de l'import de session : {error}"
+  },
+  "txt_exporter": {
+    "export_error": "Erreur lors de l'export vers .txt : {error}"
+  },
+  "graph_canvas": {
+    "undo_tooltip": "Annuler la dernière action (Annuler, Ctrl+Z)",
+    "redo_tooltip": "Refaire l'action (Refaire, Ctrl+Y)"
+  },
+  "edge_edit_dialog": {
+    "window_title": "Ajouter/Modifier Arête",
+    "weight_label": "Poids de l'arête :",
+    "additional_data_label": "Données supplémentaires (clé-valeur) :",
+    "key_label": "Clé :",
+    "value_label": "Valeur :",
+    "ok_button": "OK",
+    "cancel_button": "Annuler"
+  },
+  "graph_select_dialog": {
+    "window_title": "Sélection de Graphe",
+    "select_graph_label": "Sélectionner le graphe à utiliser :",
+    "new_graph_button": "Nouveau Graphe",
+    "delete_graph_button": "Supprimer Graphe",
+    "select_button": "Sélectionner",
+    "export_session_button": "Exporter Session",
+    "import_session_button": "Importer Session",
+    "directed": "Orienté",
+    "undirected": "Non orienté",
+    "weighted": "Pondéré",
+    "unweighted": "Non pondéré",
+    "graph_type_title": "Type de Graphe",
+    "graph_type_label": "Sélectionner le type de graphe :",
+    "weight_title": "Poids",
+    "weight_label": "Le graphe est-il pondéré ?",
+    "auto_name_title": "Nommage automatique des sommets",
+    "auto_name_label": "Utiliser des noms automatiques pour les sommets ?",
+    "graph_name_title": "Nom du Graphe",
+    "graph_name_label": "Entrer le nom du graphe :",
+    "yes": "Oui",
+    "no": "Non",
+    "delete_warning_title": "Supprimer",
+    "delete_active_graph": "Impossible de supprimer le graphe actif. Veuillez d'abord en sélectionner un autre.",
+    "delete_no_selection": "Sélectionner un graphe à supprimer.",
+    "select_warning_title": "Sélection",
+    "select_no_selection": "Sélectionner un graphe dans la liste.",
+    "export_session_title": "Exporter Session",
+    "import_session_title": "Importer Session",
+    "session_files": "Fichiers de Session (*.json)"
+  },
+  "instruction_dialog": {
+    "window_title": "Instructions",
+    "instruction_text": "\u2139  Instructions : création et édition de graphes\n\n--- ACTIONS DE BASE ---\n- Ajouter sommet : Clic gauche sur un espace vide dans le champ\n- Supprimer sommet : Clic droit sur le sommet\n- Déplacer sommet : Clic gauche sur le sommet et glisser avec la souris\n- Sélectionner sommet : Clic gauche sur le sommet (surligne pour ajout d'arête)\n\n- Ajouter arête : sélectionner un sommet, puis Clic gauche+Ctrl sur un autre sommet\n- Supprimer arête : Clic droit sur le milieu de l'arête\n- Modifier poids/données d'arête : double Clic gauche sur le milieu de l'arête (uniquement pour graphe pondéré)\n- Sélectionner arête : Clic gauche sur le milieu de l'arête (pour certaines actions)\n\n--- PARAMÈTRES ---\n- Orientation, poids, nommage automatique des sommets : boutons bascule au-dessus du canevas\n- Nommage automatique : si désactivé — une boîte de dialogue de création de sommet apparaîtra pour saisir le nom\n\n--- IMPORT/EXPORT ---\n- Exporter vers .json/.txt : boutons correspondants sous le canevas\n- Importer depuis .json : bouton sous le canevas\n\n--- SÉLECTION DE GRAPHE ---\n- Le bouton 'Sélectionner Graphe' sous le canevas ouvre une fenêtre pour sélectionner, créer, renommer, supprimer ou copier des graphes.\n- Vous pouvez travailler avec plusieurs graphes dans une même session.\n\n--- ANALYSE ---\n- Onglets sous le canevas : chemins les plus courts, arbres couvrants, chemins spéciaux, parcours, flux\n- Pour les algorithmes, sélectionner les sommets dans les listes\n\n--- SUPPLÉMENTAIRE ---\n- Instructions : ce bouton\n- Toutes les actions sont accompagnées d'infobulles et de messages d'erreur\n\nCommencez par ajouter des sommets !",
+    "ok_button": "OK"
+  },
+  "theme_select_dialog": {
+    "window_title": "Sélection de Thème",
+    "style_label": "Sélectionner le style de thème :",
+    "color_label": "Sélectionner la couleur de thème :",
+    "modern": "Moderne",
+    "classic": "Classique",
+    "dark": "Sombre",
+    "light": "Clair",
+    "green": "Vert",
+    "blue": "Bleu",
+    "red": "Rouge",
+    "yellow": "Jaune",
+    "ok_button": "OK"
+  },
+  "vertex_edit_dialog": {
+    "window_title": "Modifier Sommet",
+    "vertex_name_label": "Nom du sommet :",
+    "additional_data_label": "Données supplémentaires du sommet (clé-valeur) :",
+    "key_label": "Clé :",
+    "value_label": "Valeur :",
+    "ok_button": "OK",
+    "cancel_button": "Annuler",
+    "vertex_data_info": "Données du sommet{node_info} après modification : {data}"
+  },
+  "common_dialogs": {
+    "ok_text": "ok",
+    "select_text": "sélectionner"
+  },
+  "graph_analysis_tab": {
+    "title": "<h2>Analyse de Graphe</h2>",
+    "traversal_option": "Parcours de graphe (BFS/DFS)",
+    "spanning_tree_option": "Arbres couvrants (Prim/Kruskal)",
+    "flow_algorithms_option": "Algorithmes de flux (Ford-Fulkerson/Coupe-Min)",
+    "shortest_paths_option": "Chemins les plus courts (Dijkstra/Bellman-Ford/Floyd-Warshall)",
+    "special_paths_option": "Chemins spéciaux (simple/plus long/hamiltonien/eulérien)"
+  },
+  "graph_tabs_widget": {
+    "graph_info_tab": "Graphe et Informations",
+    "matrices_tab": "Matrices",
+    "analysis_tab": "Analyse de Graphe",
+    "traversal_tab": "Parcours de Graphe"
+  },
+  "matrix_tabs_widget": {
+    "adjacency_matrix_title": "Matrice d'Adjacence",
+    "incidence_matrix_title": "Matrice d'Incidence",
+    "adjacency_tab": "Adjacence",
+    "incidence_tab": "Incidence",
+    "edge_label": "A{index}"
+  },
+  "traversal_tab": {
+    "empty_graph": "Le graphe est vide",
+    "select_start_vertex": "Sélectionner le sommet de départ",
+    "no_reachable_vertices": "Aucun sommet accessible trouvé.",
+    "no_components_found": "Aucune composante connexe trouvée.",
+    "components_found": "Trouvé {count} composante(s) connexe(s) : {components}",
+    "no_cycles_found": "Aucun cycle trouvé.",
+    "cycles_found": "Trouvé {count} cycle(s) : {cycles}",
+    "select_algorithm": "Sélectionner l'algorithme de parcours.",
+    "stopped": "Arrêté",
+    "traversal_order": "Ordre de parcours : {node}",
+    "result_vertices": "Sommets résultats : {vertices}",
+    "component_result": "Composante {index} : {vertices}",
+    "cycle_result": "Cycle {index} : {vertices}",
+    "traversal_completed": "Parcours terminé"
+  },
+  "theme_manager": {
+    "theme_change_info": "Changement de thème vers : {theme_name}",
+    "theme_save_error": "Échec de la sauvegarde du thème : {error}"
+  },
+  "analysis_output_controls": {
+    "export_txt_button": "Exporter vers .txt",
+    "clear_results_button": "Effacer les résultats",
+    "save_dialog_title": "Sauvegarder comme .txt"
+  },
+  "flow_algorithms_widget": {
+    "source_label": "ID Source :",
+    "sink_label": "ID Puits :",
+    "ford_fulkerson_button": "Ford-Fulkerson (flux max)",
+    "min_cut_button": "Coupe-Min",
+    "error_title": "Erreur",
+    "select_source_sink": "Sélectionner les IDs source et puits.",
+    "max_flow_result": "Flux maximum : {flow}",
+    "min_cut_result": "Coupe minimale : {cut}\nArêtes de coupe :\n{edges}",
+    "error_result": "Erreur : {error}"
+  },
+  "shortest_paths_widget": {
+    "start_vertex_label": "ID Sommet de départ :",
+    "end_vertex_label": "ID Sommet d'arrivée :",
+    "dijkstra_all_button": "Dijkstra (source unique vers tous)",
+    "bellman_all_button": "Bellman-Ford (source unique vers tous)",
+    "floyd_all_button": "Floyd-Warshall (tous vers tous)",
+    "dijkstra_path_button": "Dijkstra (chemin entre deux)",
+    "bellman_path_button": "Bellman-Ford (chemin entre deux)",
+    "floyd_path_button": "Floyd-Warshall (chemin entre deux)",
+    "floyd_all_paths_button": "Floyd-Warshall (tous les chemins les plus courts)",
+    "error_title": "Erreur",
+    "select_start_vertex": "Sélectionner le sommet de départ.",
+    "select_start_end_vertices": "Sélectionner les sommets de départ et d'arrivée.",
+    "dijkstra_distances": "Distances les plus courtes (Dijkstra) :",
+    "bellman_distances": "Distances les plus courtes (Bellman-Ford) :",
+    "floyd_matrix": "Matrice des distances les plus courtes (Floyd-Warshall) :",
+    "floyd_all_paths": "Tous les chemins les plus courts (Floyd-Warshall) :",
+    "dijkstra_path": "Chemin (Dijkstra) : {path}\nLongueur : {length}",
+    "bellman_path": "Chemin (Bellman-Ford) : {path}\nLongueur : {length}",
+    "floyd_path": "Chemin (Floyd-Warshall) : {path}\nLongueur : {length}",
+    "path_not_found": "Chemin non trouvé.",
+    "path_not_exists": "{from} -> {to} : le chemin n'existe pas",
+    "path_result": "{from} -> {to} : {path} (longueur {length})",
+    "vertex_not_found": "Erreur : le sommet sélectionné n'est pas présent dans le graphe.",
+    "error_result": "Erreur : {error}"
+  },
+  "spanning_tree_widget": {
+    "prim_button": "Arbre couvrant (Prim)",
+    "kruskal_button": "Arbre couvrant (Kruskal)",
+    "prim_result": "Arbre couvrant (Prim) :\n{edges}\nPoids total : {weight}",
+    "kruskal_result": "Arbre couvrant (Kruskal) :\n{edges}\nPoids total : {weight}",
+    "no_spanning_tree": "Arbre couvrant non trouvé (graphe non connexe ou incorrect).",
+    "error_result": "Erreur : {error}"
+  },
+  "special_paths_widget": {
+    "start_vertex_label": "ID Sommet de départ :",
+    "end_vertex_label": "ID Sommet d'arrivée :",
+    "simple_path_button": "Chemin simple (DFS)",
+    "longest_path_button": "Chemin simple le plus long",
+    "hamiltonian_path_button": "Chemin hamiltonien",
+    "eulerian_path_button": "Chemin eulérien",
+    "error_title": "Erreur",
+    "select_start_end_vertices": "Sélectionner les sommets de départ et d'arrivée.",
+    "simple_path_result": "Chemin simple : {path}",
+    "longest_path_result": "Chemin simple le plus long : {path} (longueur {length})",
+    "hamiltonian_path_result": "Chemin hamiltonien : {path}",
+    "eulerian_path_result": "Chemin eulérien : {path}",
+    "path_not_found": "Chemin non trouvé.",
+    "eulerian_path_not_found": "Chemin eulérien non trouvé.",
+    "error_result": "Erreur : {error}"
+  },
+  "traversal_widget": {
+    "start_vertex_label": "ID Sommet de départ :",
+    "bfs_button": "Parcours en largeur (BFS)",
+    "dfs_button": "Parcours en profondeur (DFS)",
+    "error_title": "Erreur",
+    "select_start_vertex": "Sélectionner le sommet de départ.",
+    "bfs_result": "Ordre de parcours BFS : {order}",
+    "dfs_result": "Ordre de parcours DFS : {order}",
+    "error_result": "Erreur : {error}"
+  },
+  "graph_canvas_widget": {
+    "open_graph_dialog_title": "Ouvrir graphe depuis .json"
+  },
+  "graph_import_export_widget": {
+    "export_json_button": "Exporter vers .json",
+    "import_json_button": "Importer depuis .json",
+    "save_graph_dialog_title": "Sauvegarder graphe comme .json",
+    "open_graph_dialog_title": "Ouvrir graphe depuis .json"
+  },
+  "graph_info_export_widget": {
+    "export_txt_button": "Exporter vers .txt",
+    "save_txt_dialog_title": "Sauvegarder comme .txt"
+  },
+  "adjacency_matrix_export_widget": {
+    "export_csv_button": "Exporter vers CSV",
+    "export_png_button": "Exporter vers PNG",
+    "error_title": "Erreur",
+    "success_title": "Succès",
+    "empty_matrix_error": "La matrice est vide ou incorrecte !",
+    "save_csv_dialog_title": "Sauvegarder comme CSV",
+    "adjacency_matrix_saved": "Matrice d'adjacence sauvegardée en CSV !"
+  },
+  "incidence_matrix_export_widget": {
+    "export_csv_button": "Exporter vers CSV",
+    "export_png_button": "Exporter vers PNG",
+    "error_title": "Erreur",
+    "success_title": "Succès",
+    "empty_matrix_error": "La matrice est vide ou incorrecte !",
+    "save_csv_dialog_title": "Sauvegarder comme CSV",
+    "incidence_matrix_saved": "Matrice d'incidence sauvegardée en CSV !"
+  },
+  "traversal_control_widget": {
+    "method_label": "Méthode :",
+    "start_vertex_label": "Sommet de départ :",
+    "start_button": "Démarrer",
+    "stop_button": "Arrêter",
+    "bfs_method": "Parcours en largeur (BFS)",
+    "dfs_method": "Parcours en profondeur (DFS)",
+    "dijkstra_method": "Dijkstra",
+    "connected_components_method": "Composantes connexes",
+    "cycle_detection_method": "Détection de cycle"
+  },
+  "graph_settings_widget": {
+    "select_graph": "Sélectionner graphe",
+    "graph_directed": "Graphe orienté",
+    "graph_weighted": "Graphe pondéré",
+    "auto_name_vertices": "Nommage automatique des sommets",
+    "select_theme": "Sélectionner thème",
+    "select_language": "Langue",
+    "instruction": "Instructions"
+  },
+  "language_select_dialog": {
+    "title": "Sélection de Langue",
+    "select_language_label": "Sélectionner la langue :",
+    "ukrainian_language": "Українська",
+    "english_language": "English",
+    "french_language": "Français",
+    "ok_button": "OK",
+    "cancel_button": "Annuler"
+  },
+  "splash": {
+    "splash_initializing": "Initialisation...",
+    "splash_loading_locale": "Chargement de la localisation...",
+    "splash_loading_components": "Chargement des composants...",
+    "splash_loading_algorithms": "Chargement des algorithmes...",
+    "splash_loading_interface": "Chargement de l'interface...",
+    "splash_loading_themes": "Chargement des thèmes...",
+    "splash_loading_complete": "Chargement terminé !",
+    "app_title": "GAP - Graph Analyzer Project",
+    "app_description": "Analyseur de graphes avancé avec visualisation"
+  }
+}
