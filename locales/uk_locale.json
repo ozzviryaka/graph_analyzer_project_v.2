@@ -451,5 +451,14 @@
     "english_language": "English",
     "ok_button": "OK",
     "cancel_button": "Скасувати"
+  },
+  "splash": {
+    "splash_initializing": "Ініціалізація...",
+    "splash_loading_locale": "Завантаження локалізації...",
+    "splash_loading_components": "Завантаження компонентів...",
+    "splash_loading_algorithms": "Завантаження алгоритмів...",
+    "splash_loading_interface": "Завантаження інтерфейсу...",
+    "splash_loading_themes": "Завантаження тем...",
+    "splash_loading_complete": "Завантаження завершено!"
   }
 }
