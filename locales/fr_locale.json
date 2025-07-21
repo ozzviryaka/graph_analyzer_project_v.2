@@ -49,18 +49,18 @@
     "weight_error": "Toutes les arêtes doivent avoir des poids non négatifs pour l'algorithme de Kruskal.",
     "init_info": "Initialisation Kruskal : le graphe est non orienté, tous les poids d'arêtes sont corrects.",
     "kruskal_start": "Recherche de l'arbre couvrant minimal commencée.",
-    "update_path": "Arête ({u}, {v}) avec poids {edge_weight} ajoutée à l'ACM.",
-    "connected_warn": "Le graphe n'est pas connexe — l'ACM n'existe pas pour tous les sommets.",
-    "kruskal_end": "Terminé. Poids de l'ACM : {total_weight}, nombre d'arêtes : {len_mst_edges}"
+    "update_path": "Arête ({u}, {v}) avec poids {edge_weight} ajoutée au MST.",
+    "connected_warn": "Le graphe n'est pas connexe — le MST n'existe pas pour tous les sommets.",
+    "kruskal_end": "Terminé. Poids du MST : {total_weight}, nombre d'arêtes : {len_mst_edges}"
   },
   "prim": {
     "directed_error": "L'algorithme de Prim ne fonctionne qu'avec les graphes non orientés.",
     "weight_error": "Toutes les arêtes doivent avoir des poids non négatifs pour l'algorithme de Prim.",
     "init_info": "Initialisation Prim : le graphe est non orienté, tous les poids d'arêtes sont corrects.",
-    "prim_start": "Recherche de l'arbre couvrant minimal (ACM) commencée.",
-    "update_path": "Arête ({edge_source_id}, {edge_target_id}) avec poids {weight} ajoutée à l'ACM.",
-    "connected_warn": "Le graphe n'est pas connexe — l'ACM n'existe pas pour tous les sommets.",
-    "prim_end": "Terminé. Poids de l'ACM : {total_weight}, nombre d'arêtes : {len_mst_edges}"
+    "prim_start": "Recherche de l'arbre couvrant minimal (MST) commencée.",
+    "update_path": "Arête ({edge_source_id}, {edge_target_id}) avec poids {weight} ajoutée au MST.",
+    "connected_warn": "Le graphe n'est pas connexe — le MST n'existe pas pour tous les sommets.",
+    "prim_end": "Terminé. Poids du MST : {total_weight}, nombre d'arêtes : {len_mst_edges}"
   },
   "eulerian_path_finder": {
     "methods_error": "Le graphe doit avoir les méthodes nodes, edges et neighbors.",
@@ -203,7 +203,7 @@
     "redo_tooltip": "Refaire l'action (Refaire, Ctrl+Y)"
   },
   "edge_edit_dialog": {
-    "window_title": "Ajouter/Modifier Arête",
+    "window_title": "Ajouter/Modifier une Arête",
     "weight_label": "Poids de l'arête :",
     "additional_data_label": "Données supplémentaires (clé-valeur) :",
     "key_label": "Clé :",
@@ -244,7 +244,7 @@
   },
   "instruction_dialog": {
     "window_title": "Instructions",
-    "instruction_text": "\u2139  Instructions : création et édition de graphes\n\n--- ACTIONS DE BASE ---\n- Ajouter sommet : Clic gauche sur un espace vide dans le champ\n- Supprimer sommet : Clic droit sur le sommet\n- Déplacer sommet : Clic gauche sur le sommet et glisser avec la souris\n- Sélectionner sommet : Clic gauche sur le sommet (surligne pour ajout d'arête)\n\n- Ajouter arête : sélectionner un sommet, puis Clic gauche+Ctrl sur un autre sommet\n- Supprimer arête : Clic droit sur le milieu de l'arête\n- Modifier poids/données d'arête : double Clic gauche sur le milieu de l'arête (uniquement pour graphe pondéré)\n- Sélectionner arête : Clic gauche sur le milieu de l'arête (pour certaines actions)\n\n--- PARAMÈTRES ---\n- Orientation, poids, nommage automatique des sommets : boutons bascule au-dessus du canevas\n- Nommage automatique : si désactivé — une boîte de dialogue de création de sommet apparaîtra pour saisir le nom\n\n--- IMPORT/EXPORT ---\n- Exporter vers .json/.txt : boutons correspondants sous le canevas\n- Importer depuis .json : bouton sous le canevas\n\n--- SÉLECTION DE GRAPHE ---\n- Le bouton 'Sélectionner Graphe' sous le canevas ouvre une fenêtre pour sélectionner, créer, renommer, supprimer ou copier des graphes.\n- Vous pouvez travailler avec plusieurs graphes dans une même session.\n\n--- ANALYSE ---\n- Onglets sous le canevas : chemins les plus courts, arbres couvrants, chemins spéciaux, parcours, flux\n- Pour les algorithmes, sélectionner les sommets dans les listes\n\n--- SUPPLÉMENTAIRE ---\n- Instructions : ce bouton\n- Toutes les actions sont accompagnées d'infobulles et de messages d'erreur\n\nCommencez par ajouter des sommets !",
+    "instruction_text": "ℹ️  Instructions : Création et édition de graphes\n\n--- ACTIONS DE BASE ---\n• Ajouter un sommet : Clic gauche sur un espace vide du canevas\n• Supprimer un sommet : Clic droit sur le sommet\n• Déplacer un sommet : Clic gauche sur le sommet et glisser avec la souris\n• Sélectionner un sommet : Clic gauche sur le sommet (met en surbrillance pour créer une arête)\n\n• Ajouter une arête : Sélectionner le premier sommet, puis Ctrl+clic gauche sur le second sommet\n• Supprimer une arête : Clic droit sur le milieu d'une arête\n• Modifier le poids/données d'une arête : Double-clic sur le milieu d'une arête (graphes pondérés uniquement)\n• Sélectionner une arête : Clic gauche sur le milieu d'une arête\n\n--- PARAMÈTRES ---\n• Type de graphe (orienté/non orienté) : Commutateur au-dessus du canevas\n• Poids du graphe (pondéré/non pondéré) : Commutateur au-dessus du canevas\n• Nommage automatique des sommets : Commutateur au-dessus du canevas\n• Nommage manuel : Lorsque désactivé, une boîte de dialogue apparaît pour les noms personnalisés\n\n--- IMPORT/EXPORT ---\n• Exporter le graphe : Utilisez les boutons d'export .json/.txt sous le canevas\n• Importer le graphe : Utilisez le bouton 'Importer depuis .json' sous le canevas\n• Sauvegarder la session : Exporter plusieurs graphes et paramètres\n\n--- GESTION DES GRAPHES ---\n• Le bouton 'Sélectionner Graphe' ouvre la fenêtre de gestion des graphes\n• Créer, renommer, supprimer ou dupliquer des graphes\n• Travailler avec plusieurs graphes dans une session\n• Basculer facilement entre les graphes\n\n--- OUTILS D'ANALYSE ---\n• Chemins les plus courts : Algorithmes de Dijkstra, Bellman-Ford, Floyd-Warshall\n• Arbres couvrants : Algorithmes de Prim et Kruskal\n• Chemins spéciaux : Chemins simples, plus longs, hamiltoniens, eulériens\n• Parcours de graphe : BFS, DFS, composantes connexes, détection de cycles\n• Algorithmes de flot : Flot maximum de Ford-Fulkerson, coupe minimale\n• Vue matricielle : Matrices d'adjacence et d'incidence\n\n--- FONCTIONNALITÉS SUPPLÉMENTAIRES ---\n• Thèmes : Personnaliser l'apparence de l'interface\n• Langues : Basculer entre ukrainien, anglais et français\n• Annuler/Refaire : Ctrl+Z / Ctrl+Y pour l'historique des actions\n\n💡 Commencez par ajouter des sommets au canevas !",
     "ok_button": "OK"
   },
   "theme_select_dialog": {
@@ -262,7 +262,7 @@
     "ok_button": "OK"
   },
   "vertex_edit_dialog": {
-    "window_title": "Modifier Sommet",
+    "window_title": "Modifier le Sommet",
     "vertex_name_label": "Nom du sommet :",
     "additional_data_label": "Données supplémentaires du sommet (clé-valeur) :",
     "key_label": "Clé :",
@@ -294,7 +294,7 @@
     "incidence_matrix_title": "Matrice d'Incidence",
     "adjacency_tab": "Adjacence",
     "incidence_tab": "Incidence",
-    "edge_label": "A{index}"
+    "edge_label": "E{index}"
   },
   "traversal_tab": {
     "empty_graph": "Le graphe est vide",
