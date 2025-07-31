@@ -12,8 +12,8 @@ class Logger:
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_message = f"[{timestamp}] [{level}] {message}"
         print(log_message)
-        # with open(self.filepath, "a", encoding="utf-8") as f:
-        #     f.write(log_message + "\n")
+        with open(self.filepath, "a", encoding="utf-8") as f:
+            f.write(log_message + "\n")
 
     def info(self, message):
         self.log(message, "INFO")
